@@ -1,0 +1,75 @@
+{
+  "$schema": "https://docs.rome.tools/schemas/12.1.0/schema.json",
+  "organizeImports": {
+    "enabled": false
+  },
+  "files": {
+    "ignore": [
+      "**/node_modules/**/*.*",
+      "**/dist/**/*.*",
+      "**/.next/**/*.*",
+      "**/.expo/**/*.*",
+      "**/.cache/**/*.*",
+      "**/build/**/*.*",
+      ".vscode/settings.json",
+      ".devcontainer/**/*.*",
+      "**/public/precache.*.*.js",
+      "**/public/sw.js",
+      "**/public/workbox-*.js",
+      "**/public/worker-*.js",
+      "**/public/fallback-*.js",
+      "**/public/precache.*.*.js.map",
+      "**/public/sw.js.map",
+      "**/public/workbox-*.js.map",
+      "**/public/worker-*.js.map",
+      "**/public/fallback-*."
+    ]
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "suspicious": {
+        "noExplicitAny": "off"
+      },
+      "a11y": {
+        "useButtonType": "off",
+        "noSvgWithoutTitle": "off"
+      }
+    }
+  },
+  "formatter": {
+    "enabled": true,
+    "formatWithErrors": false,
+    "indentStyle": "space",
+    "indentSize": 2,
+    "lineWidth": 80,
+    "ignore": [
+      "**/node_modules/**/*.*",
+      "**/dist/**/*.*",
+      "**/.next/**/*.*",
+      "**/.expo/**/*.*",
+      "**/.cache/**/*.*",
+      "**/build/**/*.*",
+      ".vscode/settings.json",
+      ".devcontainer/**/*.*",
+      "**/public/precache.*.*.js",
+      "**/public/sw.js",
+      "**/public/workbox-*.js",
+      "**/public/worker-*.js",
+      "**/public/fallback-*.js",
+      "**/public/precache.*.*.js.map",
+      "**/public/sw.js.map",
+      "**/public/workbox-*.js.map",
+      "**/public/worker-*.js.map",
+      "**/public/fallback-*."
+    ]
+  },
+  "javascript": {
+    "formatter": {
+      "semicolons": "always",
+      "trailingComma": "all",
+      "quoteStyle": "double"
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": "./src/",
+    "paths": {
+      "components/*": ["./src/components/*"],
+      "utils/*": ["./src/utils/*"],
+      "layouts/*": ["./src/layouts/*"],
+      "stores/*": ["./src/stores/*"],
+      "types/*": ["types/*"],
+      "config/*": ["./src/config/*"],
+      "hooks/*": ["./src/hooks/*"]
+    }
+  },
+  "exclude": ["cypress"],
+  "include": [
+    "next-env.d.ts",
+    "../../packages/auth/next-auth.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.cjs",
+    "**/*.mjs"
+  ]
+}

@@ -1,0 +1,40 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 
+  Next js 13 has new way to add google fonts
+  Read here : https://nextjs.org/docs/api-reference/next/font
+*/
+:root {
+  --font-primary: "Poppins";
+}
+
+html {
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  @apply font-primary;
+}
+
+.ladle-main > div {
+  @apply min-h-screen px-10 pt-10;
+}
+
+#ladle-root > div {
+  @apply !min-h-screen;
+}
+
+.ladle-main,
+.frame-content {
+  @apply bg-white p-0;
+}
+
+.ladle-main > .dark,
+#ladle-root > .dark,
+.frame-content > .dark {
+  @apply bg-background-500 text-white;
+}

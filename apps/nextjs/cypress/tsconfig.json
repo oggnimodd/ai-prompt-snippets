@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "section-objects/*": ["./section-objects/*"],
+      "page-objects/*": ["./page-objects/*"]
+    },
+    "target": "es5",
+    "lib": ["es5", "dom"],
+    "types": ["cypress", "node"],
+    "typeRoots": ["./support/commands.ts"]
+  },
+  "include": ["**/*.ts", "**/*.cy.ts", "**/*.spec.ts"]
+}

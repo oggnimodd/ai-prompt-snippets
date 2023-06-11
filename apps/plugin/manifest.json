@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "GPT UI Plugin",
+  "version": "1.0.0",
+  "action": { "default_popup": "popup/index.html" },
+  "content_scripts": [
+    {
+      "matches": ["https://chat.openai.com/*"],
+      "js": ["content-scripts/index.tsx"],
+      "all_frames": false,
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["content-scripts/index.tsx"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "host_permissions": ["<all_urls>"]
+}

@@ -1,0 +1,55 @@
+name: CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  build-and-test:
+    name: Build and Test
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        job: [build, nextjs-e2e-test, ui-components-test, lint]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - uses: pnpm/action-setup@v2.0.1
+        with:
+          version: 7.26.1
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run job ${{ matrix.job }}
+        if: matrix.job == 'lint'
+        run: pnpm lint
+
+      - name: Run job ${{ matrix.job }}
+        if: matrix.job == 'build'
+        run: pnpm build
+
+      - name: Run job ${{ matrix.job }}
+        if: matrix.job == 'nextjs-e2e-test'
+        uses: cypress-io/github-action@v5
+        with:
+          command: pnpm --dir ./apps/nextjs/ cy:e2e
+          start: pnpm --dir ./apps/nextjs/ dev
+          wait-on: "http://localhost:3000"
+
+      - name: Run job ${{ matrix.job }}
+        if: matrix.job == 'ui-components-test'
+        uses: cypress-io/github-action@v5
+        with:
+          command: pnpm --dir ./packages/ui/ test

@@ -1,0 +1,15 @@
+{
+  "name": "@acme/types",
+  "version": "0.1.0",
+  "main": "./index.ts",
+  "types": "./index.ts",
+  "license": "MIT",
+  "scripts": {
+    "type-check": "tsc --noEmit"
+  },
+  "keywords": [],
+  "author": "",
+  "devDependencies": {
+    "typescript": "^4.9.4"
+  }
+}
