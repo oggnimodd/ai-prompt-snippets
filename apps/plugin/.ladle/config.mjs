@@ -1,5 +1,5 @@
 export default {
-  stories: ["src/**/*.stories.{js,jsx,ts,tsx}"],
+  stories: ["components/**/*.stories.{js,jsx,ts,tsx}"],
   addons: {
     a11y: {
       enabled: false,
@@ -41,4 +41,5 @@ export default {
   },
   port: 4545,
   previewPort: 5555,
+  viteConfig: `${process.cwd()}/vite-ladle.config.ts`,
 };

@@ -1,4 +1,4 @@
-@tailwind base;
+/* @tailwind base; */
 @tailwind components;
 @tailwind utilities;
 
@@ -8,4 +8,10 @@ body{
 
 body .dark {
   @apply text-white;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
