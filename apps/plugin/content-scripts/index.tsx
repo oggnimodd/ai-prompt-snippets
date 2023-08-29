@@ -1,28 +1,64 @@
 import Listener from "./listener";
 
-const iframeContainer = document.querySelector(
-  "#__next > .overflow-hidden > .dark + div",
-);
+const newDiv = document.createElement("div");
+const hostname = window.location.hostname;
+let iframeMountPointParent: HTMLElement | null;
 
-if (iframeContainer) {
+if (hostname === "chat.openai.com") {
   // create div tag with 200px width
-  const newDiv = document.createElement("div");
   newDiv.style.width = "250px";
   newDiv.style.height = "100%";
 
-  iframeContainer.append(newDiv);
+  iframeMountPointParent = document.querySelector(
+    "#__next > .overflow-hidden > .dark + div",
+  );
 
-  const extensionUrl = chrome.runtime.getURL("/");
+  if (iframeMountPointParent) {
+    iframeMountPointParent.append(newDiv);
 
-  const iframeUrl = `${extensionUrl}iframe/index.html`;
-  const iframe = document.createElement("iframe");
+    const extensionUrl = chrome.runtime.getURL("/");
 
-  iframe.src = iframeUrl;
-  // @ts-ignore
-  iframe.style = "width: 100%; height: 100%;";
+    const iframeUrl = `${extensionUrl}iframe/index.html`;
+    const iframe = document.createElement("iframe");
 
-  newDiv.append(iframe);
+    iframe.src = iframeUrl;
+    // @ts-ignore
+    iframe.style = "width: 100%; height: 100%;";
 
-  const listener = new Listener(true);
-  listener.listen();
+    newDiv.append(iframe);
+
+    const listener = new Listener(true, "chat-gpt");
+    listener.listen();
+  }
+}
+
+if (hostname === "poe.com") {
+  // create div tag with 200px width
+  newDiv.style.width = "250px";
+  newDiv.style.height = "100%";
+
+  iframeMountPointParent = document.querySelector(
+    "#__next > [class*='SidebarLayout_layoutWrapper']",
+  );
+
+  iframeMountPointParent?.querySelector("aside:last-child")?.remove();
+
+  if (iframeMountPointParent) {
+    iframeMountPointParent.append(newDiv);
+
+    const extensionUrl = chrome.runtime.getURL("/");
+
+    const iframeUrl = `${extensionUrl}iframe/index.html`;
+    const iframe = document.createElement("iframe");
+
+    iframe.src = iframeUrl;
+    // @ts-ignore
+    iframe.style =
+      "width: 100%; height: 100%; border: none!important; outline:none!important;";
+
+    newDiv.append(iframe);
+
+    const listener = new Listener(true, "poe");
+    listener.listen();
+  }
 }
