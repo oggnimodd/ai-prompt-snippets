@@ -1,1 +1,1 @@
-export * from "./MagicInput";
+export * from "./SlateEditor";

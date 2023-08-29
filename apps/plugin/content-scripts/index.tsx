@@ -1,37 +1,28 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import Magic from "./Magic";
+import Listener from "./listener";
 
-let className = "";
+const iframeContainer = document.querySelector(
+  "#__next > .overflow-hidden > .dark + div",
+);
 
-// Hide the default textarea
-const defaultTextArea = document.querySelector(
-  "#prompt-textarea",
-) as HTMLTextAreaElement;
+if (iframeContainer) {
+  // create div tag with 200px width
+  const newDiv = document.createElement("div");
+  newDiv.style.width = "250px";
+  newDiv.style.height = "100%";
 
-const parentElement = defaultTextArea.parentElement;
+  iframeContainer.append(newDiv);
 
-if (defaultTextArea) {
-  className = defaultTextArea.className;
-  defaultTextArea.style.display = "none";
-}
+  const extensionUrl = chrome.runtime.getURL("/");
 
-if (parentElement) {
-  const dummyElement = document.createElement("div");
+  const iframeUrl = `${extensionUrl}iframe/index.html`;
+  const iframe = document.createElement("iframe");
 
-  parentElement.appendChild(dummyElement);
+  iframe.src = iframeUrl;
+  // @ts-ignore
+  iframe.style = "width: 100%; height: 100%;";
 
-  const inputButton = parentElement.querySelector(
-    "button",
-  ) as HTMLButtonElement;
+  newDiv.append(iframe);
 
-  ReactDOM.createRoot(dummyElement).render(
-    <React.StrictMode>
-      <Magic
-        target={defaultTextArea}
-        className={className}
-        inputButton={inputButton}
-      />
-    </React.StrictMode>,
-  );
+  const listener = new Listener(true);
+  listener.listen();
 }

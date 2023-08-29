@@ -2,8 +2,8 @@ import { Button } from "@acme/ui";
 
 const App = () => {
   return (
-    <div>
-      <Button>Test</Button>
+    <div className="flex flex-col">
+      <Button>This is just an example</Button>
     </div>
   );
 };

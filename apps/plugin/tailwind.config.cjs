@@ -6,5 +6,8 @@ module.exports = {
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
     "./layouts/**/*.{js,ts,jsx,tsx}",
+    "./popup/**/*.{js,ts,jsx,tsx}",
+    "./options/**/*.{js,ts,jsx,tsx}",
+    "./iframe/**/*.{js,ts,jsx,tsx}",
   ],
 };

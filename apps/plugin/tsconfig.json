@@ -7,6 +7,9 @@
       "ESNext"
     ],
     "module": "ESNext",
+    "types": [
+      "chrome"
+    ],
     "skipLibCheck": true,
     /* Bundler mode */
     "moduleResolution": "bundler",
@@ -47,7 +50,10 @@
   },
   "include": [
     "popup",
-    "utils"
+    "utils",
+    "options",
+    "iframe",
+    "content-scripts"
   ],
   "references": [
     {

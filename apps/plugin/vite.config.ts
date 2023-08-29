@@ -15,7 +15,21 @@ export default defineConfig({
       web: [/\.jsx?$/],
     },
   },
+  build: {
+    rollupOptions: {
+      input: {
+        iframe: "iframe/index.html",
+      },
+    },
+  },
   define: {
     "process.env": process.env,
+  },
+  server: {
+    strictPort: true,
+    port: 5174,
+    hmr: {
+      clientPort: 5174,
+    },
   },
 });

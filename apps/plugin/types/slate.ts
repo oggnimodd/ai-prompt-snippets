@@ -10,11 +10,6 @@ export type ParagraphElement = {
   children: CustomText[];
 };
 
-export type CodeElement = {
-  type: "code";
-  children: CustomText[];
-};
-
 export type PillElement = {
   type: "pill";
   children: CustomText[];
@@ -26,11 +21,7 @@ export type Commands = {
   children: Array<CustomElement>;
 };
 
-export type CustomElement =
-  | ParagraphElement
-  | CodeElement
-  | PillElement
-  | Commands;
+export type CustomElement = ParagraphElement | PillElement | Commands;
 
 export type FormattedText = { text: string };
 
