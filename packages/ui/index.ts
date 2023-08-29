@@ -13,5 +13,6 @@ export * from "./components/Kbd";
 export * from "./components/Skeleton";
 export * from "./components/NumberIcon";
 export * from "./components/EmptyState";
+export * from "./components/TextArea";
 
 export * from "./hooks";
