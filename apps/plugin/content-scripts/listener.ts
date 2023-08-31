@@ -1,4 +1,4 @@
-type ChatProvider = "chat-gpt" | "poe";
+type ChatProvider = "chat-gpt" | "poe" | "claude";
 
 class Listener {
   private autoSubmit: boolean;
@@ -50,6 +50,26 @@ class Listener {
           if (this.autoSubmit) {
             inputButton.click();
           }
+        }
+
+        if (this.chatprovider === "claude") {
+          const promptField = document.querySelector(
+            "[contenteditable='true'].ProseMirror",
+          ) as HTMLDivElement;
+
+          const paragraph = document.createElement("p");
+          paragraph.innerHTML = event.data;
+          promptField.appendChild(paragraph);
+
+          setTimeout(() => {
+            const inputButton = document.querySelector(
+              "[aria-label='Send Message']",
+            ) as HTMLButtonElement;
+
+            if (this.autoSubmit) {
+              inputButton.click();
+            }
+          }, 100);
         }
       }
     });

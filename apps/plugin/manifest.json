@@ -5,7 +5,11 @@
   "action": { "default_popup": "popup/index.html" },
   "content_scripts": [
     {
-      "matches": ["https://chat.openai.com/*", "https://poe.com/*"],
+      "matches": [
+        "https://chat.openai.com/*",
+        "https://poe.com/*",
+        "https://claude.ai/*"
+      ],
       "js": ["content-scripts/index.tsx"],
       "all_frames": false,
       "run_at": "document_end"

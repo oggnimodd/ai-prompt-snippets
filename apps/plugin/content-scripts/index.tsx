@@ -62,3 +62,32 @@ if (hostname === "poe.com") {
     listener.listen();
   }
 }
+
+if (hostname === "claude.ai") {
+  newDiv.className = "fixed top-0 left-0 z-[9999]";
+  // @ts-ignore
+  newDiv.style = "width:250px;height:100%;padding-top:60px;";
+
+  iframeMountPointParent = document.querySelector("body");
+
+  if (iframeMountPointParent) {
+    iframeMountPointParent.append(newDiv);
+
+    const extensionUrl = chrome.runtime.getURL("/");
+
+    const iframeUrl = `${extensionUrl}iframe/index.html`;
+    const iframe = document.createElement("iframe");
+
+    console.log(iframe);
+
+    iframe.src = iframeUrl;
+    // @ts-ignore
+    iframe.style =
+      "width: 100%; height: 100%; border: none!important; outline:none!important;";
+
+    newDiv.append(iframe);
+
+    const listener = new Listener(true, "claude");
+    listener.listen();
+  }
+}
