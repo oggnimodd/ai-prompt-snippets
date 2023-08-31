@@ -20,13 +20,9 @@
     "@acme/ui": "workspace:^",
     "@ladle/react": "^2.17.2",
     "clsx": "^1.2.1",
-    "downshift": "^7.6.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.15.0",
-    "slate": "^0.94.1",
-    "slate-history": "^0.93.0",
-    "slate-react": "^0.97.2"
+    "react-router-dom": "^6.15.0"
   },
   "devDependencies": {
     "@crxjs/vite-plugin": "2.0.0-beta.17",
