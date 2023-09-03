@@ -7,6 +7,7 @@ export interface PageMessageProps {
   title: string;
   message: string;
   icon?: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 // This component useful for 404 page, 500 page, or offline page
@@ -15,6 +16,7 @@ const PageMessage: React.FC<PageMessageProps> = ({
   title,
   message,
   icon,
+  children,
 }) => {
   return (
     <Container className="flex w-full flex-col items-center justify-center px-5 pt-20 text-center sm:px-20">
@@ -29,6 +31,7 @@ const PageMessage: React.FC<PageMessageProps> = ({
       </h1>
       <span className="mb-2 text-2xl font-bold  text-primary-500">{code}</span>
       <p className="max-w-[600px] text-sm sm:text-base">{message}</p>
+      <div className="mt-3">{children}</div>
     </Container>
   );
 };

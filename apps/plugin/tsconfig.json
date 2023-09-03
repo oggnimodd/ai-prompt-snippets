@@ -1,15 +1,9 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "lib": [
-      "DOM",
-      "DOM.Iterable",
-      "ESNext"
-    ],
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "module": "ESNext",
-    "types": [
-      "chrome"
-    ],
+    "types": ["chrome"],
     "skipLibCheck": true,
     /* Bundler mode */
     "moduleResolution": "bundler",
@@ -25,36 +19,16 @@
     "noFallthroughCasesInSwitch": true,
     "baseUrl": "popup",
     "paths": {
-      "components/*": [
-        "components/*"
-      ],
-      "utils/*": [
-        "utils/*"
-      ],
-      "layouts/*": [
-        "layouts/*"
-      ],
-      "stores/*": [
-        "stores/*"
-      ],
-      "types/*": [
-        "types/*"
-      ],
-      "config/*": [
-        "config/*"
-      ],
-      "hooks/*": [
-        "hooks/*"
-      ]
+      "components/*": ["components/*"],
+      "utils/*": ["utils/*"],
+      "layouts/*": ["layouts/*"],
+      "stores/*": ["stores/*"],
+      "types/*": ["types/*"],
+      "config/*": ["config/*"],
+      "hooks/*": ["hooks/*"]
     }
   },
-  "include": [
-    "popup",
-    "utils",
-    "options",
-    "iframe",
-    "content-scripts"
-  ],
+  "include": ["popup", "utils", "options", "iframe", "content-scripts"],
   "references": [
     {
       "path": "./tsconfig.node.json"

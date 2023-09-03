@@ -18,7 +18,7 @@ const SnippetList: FC<{ snippets: Snippet[]; search: string }> = ({
   }
 
   return (
-    <div className="grid grid-cols-3 gap-4">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {filteredItems.length > 0 &&
         filteredItems.map((item) => {
           return (
