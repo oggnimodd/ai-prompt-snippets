@@ -14,9 +14,7 @@ class Listener {
     window.addEventListener("message", (event) => {
       // For chatgpt
 
-      if (
-        event.origin === "chrome-extension://bmobgkekollfcijfkncdgbbdpmpjflia"
-      ) {
+      if (event.origin === `chrome-extension://${chrome.runtime.id}`) {
         if (this.chatprovider === "chat-gpt") {
           const promptField = document.querySelector(
             "#prompt-textarea",
