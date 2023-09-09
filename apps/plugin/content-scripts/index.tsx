@@ -3,6 +3,10 @@ import Listener from "./listener";
 const newDiv = document.createElement("div");
 const hostname = window.location.hostname;
 let iframeMountPointParent: HTMLElement | null;
+const extensionUrl = chrome.runtime.getURL("/");
+const iframeUrl = `${extensionUrl}iframe/index.html`;
+
+const iframe = document.createElement("iframe");
 
 if (hostname === "chat.openai.com") {
   // create div tag with 200px width
@@ -15,11 +19,6 @@ if (hostname === "chat.openai.com") {
 
   if (iframeMountPointParent) {
     iframeMountPointParent.append(newDiv);
-
-    const extensionUrl = chrome.runtime.getURL("/");
-
-    const iframeUrl = `${extensionUrl}iframe/index.html`;
-    const iframe = document.createElement("iframe");
 
     iframe.src = iframeUrl;
     // @ts-ignore
@@ -38,18 +37,13 @@ if (hostname === "poe.com") {
   newDiv.style.height = "100%";
 
   iframeMountPointParent = document.querySelector(
-    "#__next > [class*='SidebarLayout_layoutWrapper']",
+    "[class*='SidebarLayout_layoutWrapper']",
   );
 
   iframeMountPointParent?.querySelector("aside:last-child")?.remove();
 
   if (iframeMountPointParent) {
     iframeMountPointParent.append(newDiv);
-
-    const extensionUrl = chrome.runtime.getURL("/");
-
-    const iframeUrl = `${extensionUrl}iframe/index.html`;
-    const iframe = document.createElement("iframe");
 
     iframe.src = iframeUrl;
     // @ts-ignore
@@ -72,13 +66,6 @@ if (hostname === "claude.ai") {
 
   if (iframeMountPointParent) {
     iframeMountPointParent.append(newDiv);
-
-    const extensionUrl = chrome.runtime.getURL("/");
-
-    const iframeUrl = `${extensionUrl}iframe/index.html`;
-    const iframe = document.createElement("iframe");
-
-    console.log(iframe);
 
     iframe.src = iframeUrl;
     // @ts-ignore

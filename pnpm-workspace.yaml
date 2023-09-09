@@ -1,6 +1,0 @@
-packages:
-  - apps/nextjs
-  - apps/plugin
-  - packages/config/*
-  - packages/ui
-  - packages/types

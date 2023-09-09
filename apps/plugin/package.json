@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "clean": "rm -rf .dist node_modules",
     "preview": "vite preview",
     "ladle:dev": "ladle serve",
     "ladle:build": "ladle build",
