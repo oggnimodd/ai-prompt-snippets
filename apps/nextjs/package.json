@@ -15,11 +15,7 @@
     "generate-pwa-asset": "node scripts/pwa-asset-generator.mjs"
   },
   "dependencies": {
-    "@acme/tailwind-config": "*",
-    "@acme/types": "*",
-    "@acme/ui": "*",
     "@headlessui/react": "^1.7.11",
-    "@react-aria/ssr": "^3.5.0",
     "@tanstack/react-query": "^4.20.4",
     "axios": "^1.3.3",
     "clsx": "^1.2.1",

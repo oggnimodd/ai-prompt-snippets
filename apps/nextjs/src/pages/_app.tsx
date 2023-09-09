@@ -10,7 +10,6 @@ import React from "react";
 import { ThemeProvider } from "next-themes";
 import Head from "next/head";
 import { PwaMeta } from "components";
-import { SSRProvider as ReactAriaSsrProvider } from "@react-aria/ssr";
 import { Poppins } from "next/font/google";
 
 const poppins = Poppins({
@@ -36,11 +35,9 @@ const MyApp: AppType<{
           attribute="class"
           enableSystem={false}
         >
-          <ReactAriaSsrProvider>
-            <main className={`${poppins.variable} font-primary`}>
-              <Component {...pageProps} />
-            </main>
-          </ReactAriaSsrProvider>
+          <main className={`${poppins.variable} font-primary`}>
+            <Component {...pageProps} />
+          </main>
         </ThemeProvider>
       </Hydrate>
     </QueryClientProvider>
