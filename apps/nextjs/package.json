@@ -10,9 +10,9 @@
     "lint": "SKIP_ENV_VALIDATION=1 next lint",
     "type-check": "tsc --noEmit",
     "with-env": "dotenv -e ../../.env --",
-    "cy:open": "cypress open",
-    "cy:e2e": "cypress run --browser chrome",
-    "generate-pwa-asset": "node scripts/pwa-asset-generator.mjs"
+    "cy:open": "bunx cypress open",
+    "cy:e2e": "bunx  cypress run --browser chrome",
+    "generate-pwa-asset": "bun scripts/pwa-asset-generator.mjs"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.11",
@@ -36,7 +36,7 @@
     "@types/react-dom": "^18.0.9",
     "autoprefixer": "^10.4.13",
     "babel-loader": "^9.1.2",
-    "cypress": "^12.10.0",
+    "cypress": "13.1.0",
     "dotenv-cli": "^6.0.0",
     "postcss": "^8.4.19",
     "pwa-asset-generator": "^6.2.1",

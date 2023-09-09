@@ -18,7 +18,7 @@
   "devDependencies": {
     "@biomejs/biome": "^1.0.0",
     "@biomejs/cli-linux-x64": "^1.0.0",
-    "cypress": "^12.12.0",
+    "cypress": "13.1.0",
     "husky": "^8.0.3",
     "lint-staged": "^13.2.2"
   },
@@ -28,7 +28,7 @@
   "workspaces": [
     "apps/nextjs",
     "apps/plugin",
-    "packages/config/*",
+    "packages/config/tailwind",
     "packages/ui",
     "packages/types"
   ]

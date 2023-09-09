@@ -3,6 +3,6 @@
     "jsx": "react-jsx"
   },
   "extends": "../../tsconfig.json",
-  "include": ["**/*.ts", "**/*.tsx"],
+  "include": ["**/*.ts", "**/*.tsx", "cypress.config.ts"],
   "exclude": ["dist", "build"]
 }
