@@ -6,7 +6,7 @@ import type { LinkProps } from "../Link";
 export interface SidebarLinkProps extends LinkProps {
   onClick?: () => void;
   children: string;
-  isActive: boolean;
+  isActive?: boolean;
   icon: React.ReactNode;
 }
 
