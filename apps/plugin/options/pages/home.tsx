@@ -1,8 +1,9 @@
-import { Button, TextField } from "@acme/ui";
+import { Button, Input } from "@nextui-org/react";
 import { Link } from "react-router-dom";
 import type { Snippet } from "../../snippet/model";
 import { useState } from "react";
 import { SnippetList } from "../components";
+import { Plus } from "lucide-react";
 
 const snippets: Snippet[] = [
   {
@@ -92,28 +93,43 @@ const snippets: Snippet[] = [
 const useSearchSnippet = () => {
   const [search, setSearch] = useState("");
 
-  // Handle input field changes
-  const onSearchChange = (value: string) => {
+  const onSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
     setSearch(value);
   };
 
-  return { search, onSearchChange };
+  const clearSearch = () => {
+    setSearch("");
+  };
+
+  return { search, onSearchChange, clearSearch };
 };
 
 const Index = () => {
-  const { search, onSearchChange } = useSearchSnippet();
+  const { search, onSearchChange, clearSearch } = useSearchSnippet();
 
   return (
     <>
       <div className="my-4 py-3 flex flex-wrap justify-between gap-x-4 gap-y-2 items-end">
-        <TextField
+        <Input
+          onClear={clearSearch}
           onChange={onSearchChange}
-          className="w-full"
           placeholder="Find Snippet"
+          labelPlacement="outside"
+          isClearable
+          classNames={{
+            base: "w-auto self-start",
+          }}
         />
 
-        <Button className="self-auto" component={Link} to="/add">
-          + Add New
+        <Button
+          startContent={<Plus size={18} />}
+          className="self-auto"
+          as={Link}
+          color="primary"
+          to="/add"
+        >
+          Add New
         </Button>
       </div>
       <SnippetList search={search} snippets={snippets} />

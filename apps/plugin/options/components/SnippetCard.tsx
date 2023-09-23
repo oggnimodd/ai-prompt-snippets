@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const SnippetCard: FC<Snippet> = ({ title, prompt }) => {
   return (
-    <div className="bg-background-300 rounded-lg p-4 flex flex-col">
+    <div className="bg-zinc-300 bg-opacity-30 rounded-lg p-4 flex flex-col">
       <span className="font-bold text-xl text-primary-500">{title}</span>
       <p className="line-clamp-3">{prompt}</p>
 

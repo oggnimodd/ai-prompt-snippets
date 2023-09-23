@@ -1,9 +1,9 @@
-import { Button } from "@acme/ui";
+import { Button } from "@nextui-org/react";
 
 const App = () => {
   return (
     <div>
-      <Button>Test</Button>
+      <Button color="secondary">Test</Button>
     </div>
   );
 };

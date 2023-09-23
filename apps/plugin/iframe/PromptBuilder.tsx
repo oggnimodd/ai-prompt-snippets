@@ -1,10 +1,10 @@
-import { Button, TextArea } from "@acme/ui";
+import { Button, Textarea } from "@nextui-org/react";
 import { KeyboardEvent, useRef } from "react";
 
 const TEXTAREA_HIGH_LIMIT = 200;
 
 const PromptBuilder = () => {
-  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+  const textareaRef = useRef<HTMLInputElement | null>(null);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -17,7 +17,7 @@ const PromptBuilder = () => {
     }
   };
 
-  const enter = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+  const enter = (e: KeyboardEvent<HTMLInputElement>) => {
     if (textareaRef.current) {
       textareaRef.current.style.height = "";
       textareaRef.current.style.height = `${Math.min(
@@ -42,16 +42,17 @@ const PromptBuilder = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-y-4">
-      <TextArea
+    <form onSubmit={handleSubmit} className="flex flex-col gap-y-2">
+      <Textarea
         id="prompt-textarea"
         label="Prompt"
+        labelPlacement="outside"
         ref={textareaRef}
         type="text"
         onKeyDown={enter}
-        className="h-44"
+        placeholder="Create a short story about the danger of AI"
       />
-      <Button size="sm" type="submit">
+      <Button color="primary" type="submit">
         Submit
       </Button>
     </form>
