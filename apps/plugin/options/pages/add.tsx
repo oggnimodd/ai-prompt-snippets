@@ -3,9 +3,15 @@ import { Input, Button, Textarea, Select, SelectItem } from "@nextui-org/react";
 import { Plus } from "lucide-react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { nanoid } from "nanoid";
 import { X as CloseIcon } from "lucide-react";
+import {
+  Param,
+  OptionsParam,
+  Snippet,
+  snippetSchema,
+} from "../../snippet/model";
 
 type Option = {
   label: string;
@@ -41,9 +47,18 @@ const OptionCard: React.FC<OptionCardProps> = ({
   );
 };
 
-const OptionsEditor = () => {
+const OptionsEditor: React.FC<{
+  handleParamChange: HandleParamChange;
+}> = ({ handleParamChange }) => {
   const [options, setOptions] = useState<Option[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    handleParamChange(
+      "options",
+      options.map((i) => i.label),
+    );
+  }, [options]);
 
   const addOption = () => {
     const newValue = inputRef.current?.value;
@@ -74,7 +89,7 @@ const OptionsEditor = () => {
 
   return (
     <div className="flex flex-col">
-      <span className="block text-small font-medium text-foreground pb-1.5 will-change-auto origin-top-left transition-all !duration-200 !ease-out motion-reduce:transition-none">
+      <span className="block text-small font-medium text-foreground will-change-auto origin-top-left transition-all !duration-200 !ease-out motion-reduce:transition-none">
         Options
       </span>
       <div className="flex flex-col mb-2 gap-y-2">
@@ -120,12 +135,43 @@ const paramTypes = [
 ];
 
 type ParamType = "string" | "options";
+type HandleParamChange = (
+  property: string,
+  newValue: undefined | string | string[],
+) => void;
 
 const ParamForm: React.FC<{
-  paramId: string;
+  setParams: React.Dispatch<React.SetStateAction<Param[]>>;
+  param: Param;
   deleteSelf: (paramId: string) => void;
-}> = ({ paramId, deleteSelf }) => {
-  const [choosenParamType, setChoosenParamType] = useState<ParamType>("string");
+}> = ({ param, setParams, deleteSelf }) => {
+  const { id: paramId, type } = param;
+  const [choosenParamType, setChoosenParamType] = useState<ParamType>(type);
+
+  const handleParamChange: HandleParamChange = (property, newValue) => {
+    setParams((prev) => {
+      const newParams = [...prev];
+      const index = newParams.findIndex((p) => p.id === paramId);
+
+      newParams[index] = {
+        ...newParams[index],
+        [property]: newValue,
+      };
+
+      if (
+        property === "type" &&
+        newValue === "string" &&
+        param.type === "options"
+      ) {
+        const intermediate = newParams[index] as OptionsParam;
+
+        const { options, ...rest } = intermediate;
+
+        newParams[index] = rest as Param;
+      }
+      return newParams;
+    });
+  };
 
   return (
     <div className="flex flex-col bg-zinc-200 rounded-sm px-5 py-2 gap-y-2">
@@ -134,6 +180,7 @@ const ParamForm: React.FC<{
         label="Name"
         labelPlacement="outside"
         required
+        onChange={(e) => handleParamChange("title", e.target.value)}
       />
 
       <Select
@@ -142,12 +189,13 @@ const ParamForm: React.FC<{
         label="Type"
         labelPlacement="outside"
         disableAnimation
-        onChange={(e) =>
+        onChange={(e) => {
+          handleParamChange("type", e.target.value);
           handleSelectionChange(
             e,
             setChoosenParamType as (value: string) => void,
-          )
-        }
+          );
+        }}
       >
         {paramTypes.map((paramType) => {
           return (
@@ -158,7 +206,9 @@ const ParamForm: React.FC<{
         })}
       </Select>
 
-      {choosenParamType === "options" && <OptionsEditor />}
+      {choosenParamType === "options" && (
+        <OptionsEditor handleParamChange={handleParamChange} />
+      )}
 
       <Button
         onPress={() => {
@@ -190,7 +240,7 @@ type Inputs = z.infer<typeof schema>;
 const Add = () => {
   // Ideally, we should be able to use the same component for  edit mode, and if we are inside edit mode, then we need to read the DB first, and use the data as the default values for the snippet meta and parameters
 
-  const [params, setParams] = useState<string[]>([]);
+  const [params, setParams] = useState<Param[]>([]);
 
   const {
     register,
@@ -201,16 +251,34 @@ const Add = () => {
   });
 
   const onSubmit = (data: Inputs) => {
-    console.log(data);
+    const newSnippet = {
+      ...data,
+      id: nanoid(),
+      parameters: params,
+    } as Snippet;
+
+    const results = snippetSchema.safeParse(newSnippet);
+
+    if (results.success) {
+      // Save data to chrome storage
+      console.log(results.data);
+    }
   };
 
   const addDraft = () => {
     // Add new param
-    setParams([...params, nanoid()]);
+    setParams([
+      ...params,
+      {
+        id: nanoid(),
+        title: "New Param",
+        type: "string",
+      },
+    ]);
   };
 
-  const deleteDraft = (index: string) => {
-    const newParams = params.filter((param) => param !== index);
+  const deleteDraft = (id: string) => {
+    const newParams = params.filter((param) => param.id !== id);
 
     setParams(newParams);
   };
@@ -241,12 +309,13 @@ const Add = () => {
               Parameters
             </span>
             <div className="flex flex-col gap-y-4">
-              {params.map((paramId) => {
+              {params.map((param) => {
                 return (
                   <ParamForm
-                    key={paramId}
+                    setParams={setParams}
+                    key={param.id}
                     deleteSelf={deleteDraft}
-                    paramId={paramId}
+                    param={param}
                   />
                 );
               })}

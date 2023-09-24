@@ -1,18 +1,20 @@
 import { expect, it, test } from "vitest";
 import { snippetSchema, Snippet } from "../snippet/model";
+import { nanoid } from "nanoid";
 
 export const correctSnippetExample: Snippet = {
+  id: nanoid(),
   title: "Word definition",
   prompt: "What is the definition of the word [word] in [language]?",
   parameters: [
     {
+      id: nanoid(),
       title: "word",
-      default: "Example",
       type: "string",
     },
     {
+      id: nanoid(),
       title: "language",
-      default: "English",
       type: "options",
       options: ["English", "Japanese", "Spanish"],
     },
