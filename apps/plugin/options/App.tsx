@@ -1,4 +1,10 @@
 import Routes from "./routes";
+import { getLocalStorageValue } from "../utils/storage";
+
+(async () => {
+  const results = await getLocalStorageValue("snippets");
+  console.log(results);
+})();
 
 const App = () => {
   return (

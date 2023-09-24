@@ -12,7 +12,11 @@ import {
   Snippet,
   snippetSchema,
 } from "../../snippet/model";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import {
+  setOrUpdateLocalStorageValue,
+  getLocalStorageValue,
+} from "../../utils/storage";
 
 type Option = {
   label: string;
@@ -242,6 +246,7 @@ const Add = () => {
   // Ideally, we should be able to use the same component for  edit mode, and if we are inside edit mode, then we need to read the DB first, and use the data as the default values for the snippet meta and parameters
 
   const [params, setParams] = useState<Param[]>([]);
+  const navigate = useNavigate();
 
   const {
     register,
@@ -251,7 +256,7 @@ const Add = () => {
     resolver: zodResolver(schema),
   });
 
-  const onSubmit = (data: Inputs) => {
+  const onSubmit = async (data: Inputs) => {
     const newSnippet = {
       ...data,
       id: nanoid(),
@@ -260,10 +265,22 @@ const Add = () => {
 
     const results = snippetSchema.safeParse(newSnippet);
 
-    if (results.success) {
-      // Save data to chrome storage
-      console.log(results.data);
-    }
+    try {
+      if (results.success) {
+        const snippets = await getLocalStorageValue("snippets");
+        if (!snippets) {
+          await setOrUpdateLocalStorageValue("snippets", [newSnippet]);
+        } else {
+          // Merge snippets
+          await setOrUpdateLocalStorageValue("snippets", [
+            ...snippets,
+            newSnippet,
+          ]);
+        }
+
+        navigate("/");
+      }
+    } catch (error) {}
   };
 
   const addDraft = () => {
