@@ -1,7 +1,7 @@
 import useSnippets from "./hooks/useSnippets";
 import { Input, Select, SelectItem } from "@nextui-org/react";
 import { Button, Combobox } from "@acme/ui";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Param } from "../snippet/model";
 
 type HandleParameterChange = (key: string, value: string) => void;
@@ -13,6 +13,10 @@ const ParameterEditor: React.FC<{
   const [choosenOption, setChoosenOption] = useState(
     parameter.type === "options" ? parameter.options[0] : "",
   );
+
+  useEffect(() => {
+    handleParameterChange(parameter.title, choosenOption);
+  }, []);
 
   if (parameter.type === "string") {
     return (
@@ -36,8 +40,10 @@ const ParameterEditor: React.FC<{
         onChange={(e) => {
           const value = e.target.value;
 
-          setChoosenOption(value);
-          handleParameterChange(parameter.title, value);
+          if (value) {
+            setChoosenOption(value);
+            handleParameterChange(parameter.title, value);
+          }
         }}
       >
         {parameter.options.map((option) => {
