@@ -1,60 +1,144 @@
-import { Button, Textarea } from "@nextui-org/react";
-import { KeyboardEvent, useRef } from "react";
+import useSnippets from "./hooks/useSnippets";
+import { Input, Select, SelectItem } from "@nextui-org/react";
+import { Button, Combobox } from "@acme/ui";
+import React, { useState } from "react";
+import { Param } from "../snippet/model";
 
-const TEXTAREA_HIGH_LIMIT = 200;
+type HandleParameterChange = (key: string, value: string) => void;
+
+const ParameterEditor: React.FC<{
+  parameter: Param;
+  handleParameterChange: HandleParameterChange;
+}> = ({ parameter, handleParameterChange }) => {
+  const [choosenOption, setChoosenOption] = useState(
+    parameter.type === "options" ? parameter.options[0] : "",
+  );
+
+  if (parameter.type === "string") {
+    return (
+      <Input
+        onChange={(e) => handleParameterChange(parameter.title, e.target.value)}
+        label={parameter.title}
+        labelPlacement="outside"
+        placeholder={parameter.title}
+      />
+    );
+  }
+
+  if (parameter.type === "options") {
+    return (
+      <Select
+        selectedKeys={new Set([choosenOption])}
+        placeholder="Select parameter type"
+        label="Type"
+        labelPlacement="outside"
+        disableAnimation
+        onChange={(e) => {
+          const value = e.target.value;
+
+          setChoosenOption(value);
+          handleParameterChange(parameter.title, value);
+        }}
+      >
+        {parameter.options.map((option) => {
+          return (
+            <SelectItem key={option} value={option}>
+              {option}
+            </SelectItem>
+          );
+        })}
+      </Select>
+    );
+  }
+
+  return null;
+};
+
+const replaceKeywords = (
+  target: string,
+  dict: Record<string, string>,
+): string => {
+  let replacedTarget = target;
+
+  for (const key in dict) {
+    // biome-ignore lint/suspicious/noPrototypeBuiltins: <explanation>
+    if (dict.hasOwnProperty(key)) {
+      const regex = new RegExp(`\\[${key}\\]`, "g");
+      replacedTarget = replacedTarget.replace(regex, dict[key]);
+    }
+  }
+
+  return replacedTarget;
+};
 
 const PromptBuilder = () => {
-  const textareaRef = useRef<HTMLInputElement | null>(null);
+  const { snippets, activeSnippet, setActiveSnippet } = useSnippets();
+  // Create a state tracker for snippet parameters
+  const [choosenParameters, setChoosenParameters] = useState<{
+    [key: string]: string;
+  }>({});
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  if (snippets.length === 0) {
+    return <span>No snippets, you can add new ones here</span>;
+  }
 
-    // Since this is an iframe , send the message to the parent window
-    window.parent.postMessage(textareaRef.current?.value || "", "*");
+  const snippet = snippets.find((i) => i.title === activeSnippet);
 
-    if (textareaRef.current) {
-      textareaRef.current.value = "";
-    }
+  const handleParameterChange: HandleParameterChange = (key, value) => {
+    setChoosenParameters((prev) => {
+      const newParams = { ...prev };
+
+      newParams[key] = value;
+      return newParams;
+    });
   };
 
-  const enter = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (textareaRef.current) {
-      textareaRef.current.style.height = "";
-      textareaRef.current.style.height = `${Math.min(
-        textareaRef.current.scrollHeight,
-        TEXTAREA_HIGH_LIMIT,
-      )}px`;
-    }
+  // Create submit handler
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const finalPrompt = replaceKeywords(
+      snippet?.prompt || "",
+      choosenParameters,
+    );
 
-    if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault();
-
-      console.log(textareaRef.current?.value);
-
-      // Since this is an iframe , send the message to the parent window
-      window.parent.postMessage(textareaRef.current?.value || "", "*");
-
-      if (textareaRef.current) {
-        textareaRef.current.value = "";
-        textareaRef.current.style.height = "";
-      }
-    }
+    // Since this is an iframe , send the message to the parent window
+    window.parent.postMessage(finalPrompt, "*");
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-y-2">
-      <Textarea
-        id="prompt-textarea"
-        label="Prompt"
-        labelPlacement="outside"
-        ref={textareaRef}
-        type="text"
-        onKeyDown={enter}
-        placeholder="Create a short story about the danger of AI"
+    <form onSubmit={handleSubmit}>
+      <Combobox
+        setChosenValue={(e: string | null) => {
+          setActiveSnippet(e || activeSnippet);
+          setChoosenParameters({});
+        }}
+        options={snippets.map((i) => i.title)}
+        chosenValue={activeSnippet}
       />
-      <Button color="primary" type="submit">
-        Submit
-      </Button>
+
+      {activeSnippet && snippet && (
+        <>
+          <p className="line-clamp-3 opacity-80 text-sm mt-2">
+            {snippet.prompt}
+          </p>
+
+          <div className="flex flex-col gap-2 mt-3">
+            {snippet.parameters?.map((parameter) => {
+              return (
+                <ParameterEditor
+                  handleParameterChange={handleParameterChange}
+                  parameter={parameter}
+                  key={parameter.id}
+                />
+              );
+            })}
+          </div>
+
+          <Button className="mt-3" type="submit" color="primary">
+            Send
+          </Button>
+        </>
+      )}
     </form>
   );
 };

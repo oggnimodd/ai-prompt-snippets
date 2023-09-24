@@ -75,7 +75,7 @@ const Combobox: React.FC<ComboboxProps> = ({
                   value={item}
                   className={({ active, selected }) =>
                     clsx(
-                      "relative cursor-default select-none py-2 pl-3 pr-9 capitalize text-gray-900 hover:bg-primary-200 hover:bg-primary-200 dark:text-white dark:hover:bg-primary-400 dark:hover:text-black",
+                      "relative cursor-default select-none py-2 pl-3 pr-9 capitalize text-gray-900 hover:bg-primary-200 hover:bg-primary-200 dark:text-black dark:hover:bg-primary-400 dark:hover:text-black",
                       selected && "bg-primary-300 dark:bg-primary-500",
                       active && "bg-primary-200 dark:bg-primary-400",
                     )
