@@ -1,5 +1,4 @@
-### Snippets example
-
+### Snippet examples
 ```js
 const snippets: Snippet[] = [
   {
