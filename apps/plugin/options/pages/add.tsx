@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { Input, Button, Textarea, Select, SelectItem } from "@nextui-org/react";
-import { Plus } from "lucide-react";
+import { Plus, Home } from "lucide-react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useState, useRef, useEffect } from "react";
@@ -12,6 +12,7 @@ import {
   Snippet,
   snippetSchema,
 } from "../../snippet/model";
+import { Link } from "react-router-dom";
 
 type Option = {
   label: string;
@@ -285,6 +286,17 @@ const Add = () => {
 
   return (
     <div className="mt-4">
+      <div className="mb-2 flex">
+        <Button
+          startContent={<Home size={16} />}
+          className="ml-auto"
+          color="primary"
+          as={Link}
+          to="/"
+          isIconOnly
+        />
+      </div>
+
       <form className="flex flex-col gap-y-2" onSubmit={handleSubmit(onSubmit)}>
         <Input
           required
