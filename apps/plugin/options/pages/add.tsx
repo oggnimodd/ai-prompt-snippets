@@ -75,7 +75,7 @@ const OptionsEditor = () => {
   return (
     <div className="flex flex-col">
       <span className="block text-small font-medium text-foreground pb-1.5 will-change-auto origin-top-left transition-all !duration-200 !ease-out motion-reduce:transition-none">
-        Parameters
+        Options
       </span>
       <div className="flex flex-col mb-2 gap-y-2">
         {options.length > 0 &&
@@ -91,7 +91,7 @@ const OptionsEditor = () => {
       </div>
 
       {options.length < 5 && (
-        <div className="flex flex-col gap-y-2 gap-x-4">
+        <div className="flex gap-x-4">
           <Input
             onKeyDown={handleEnter}
             ref={inputRef}
