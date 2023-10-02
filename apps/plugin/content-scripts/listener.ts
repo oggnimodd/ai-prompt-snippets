@@ -1,4 +1,4 @@
-type ChatProvider = "chat-gpt" | "poe" | "claude";
+type ChatProvider = "chat-gpt" | "poe" | "claude" | "perplexity";
 
 class Listener {
   private autoSubmit: boolean;
@@ -68,6 +68,26 @@ class Listener {
               inputButton.click();
             }
           }, 100);
+        }
+
+        if (this.chatprovider === "perplexity") {
+          const promptField = document.querySelector(
+            "textarea[placeholder*='follow']",
+          ) as HTMLTextAreaElement;
+          const inputButton = document.querySelector(
+            ".relative > div:has(lt-mirror):has(textarea) ~ div.absolute:has(button + button) button:has(svg[data-icon='arrow-up'])",
+          ) as HTMLButtonElement;
+
+          if (inputButton.disabled) {
+            inputButton.removeAttribute("disabled");
+          }
+
+          promptField.value = event.data;
+          promptField.dispatchEvent(new Event("input", { bubbles: true }));
+
+          if (this.autoSubmit) {
+            inputButton.click();
+          }
         }
       }
     });

@@ -9,7 +9,8 @@
       "matches": [
         "https://chat.openai.com/*",
         "https://poe.com/*",
-        "https://claude.ai/*"
+        "https://claude.ai/*",
+        "https://www.perplexity.ai/*"
       ],
       "js": ["content-scripts/index.tsx"],
       "all_frames": false,

@@ -78,3 +78,27 @@ if (hostname === "claude.ai") {
     listener.listen();
   }
 }
+
+if (hostname === "www.perplexity.ai") {
+  // @ts-ignore
+  newDiv.style = "position:sticky;top:0;right:0;width:auto;height:100vh;";
+
+  iframeMountPointParent = document.querySelector(
+    "main > div > div > div + div",
+  );
+
+  if (iframeMountPointParent) {
+    iframeMountPointParent.classList.add("flex", "relative");
+    iframeMountPointParent.append(newDiv);
+
+    iframe.src = iframeUrl;
+    // @ts-ignore
+    iframe.style =
+      "width: 100%; height: 100%; border: none!important; outline:none!important;";
+
+    newDiv.append(iframe);
+
+    const listener = new Listener(true, "perplexity");
+    listener.listen();
+  }
+}
