@@ -6,16 +6,30 @@ import { Param } from "../snippet/model";
 
 type HandleParameterChange = (key: string, value: string) => void;
 
+// TODO : refactor code and optimize the number of render
+
 const ParameterEditor: React.FC<{
   parameter: Param;
   handleParameterChange: HandleParameterChange;
 }> = ({ parameter, handleParameterChange }) => {
+  // We use id as the value, so we don't need to worry if there are multiple options with the same name
   const [choosenOption, setChoosenOption] = useState(
-    parameter.type === "options" ? parameter.options[0] : "",
+    parameter.type === "options" ? parameter.options[0].id : "",
   );
 
+  let optionValue: string;
+
+  if (parameter.type === "options") {
+    // Here we get the value that we want to use using the id
+    optionValue = parameter.options.filter(
+      (option) => option.id === choosenOption,
+    )[0].title;
+  }
+
   useEffect(() => {
-    handleParameterChange(parameter.title, choosenOption);
+    if (parameter.type === "options") {
+      handleParameterChange(parameter.title, optionValue);
+    }
   }, []);
 
   if (parameter.type === "string") {
@@ -42,14 +56,18 @@ const ParameterEditor: React.FC<{
 
           if (value) {
             setChoosenOption(value);
-            handleParameterChange(parameter.title, value);
+            handleParameterChange(
+              parameter.title,
+              parameter.options.filter((option) => option.id === value)[0]
+                .title,
+            );
           }
         }}
       >
         {parameter.options.map((option) => {
           return (
-            <SelectItem key={option} value={option}>
-              {option}
+            <SelectItem key={option.id} value={option.id}>
+              {option.title}
             </SelectItem>
           );
         })}
@@ -106,6 +124,8 @@ const PromptBuilder = () => {
       snippet?.prompt || "",
       choosenParameters,
     );
+
+    console.log(finalPrompt);
 
     // Since this is an iframe , send the message to the parent window
     window.parent.postMessage(finalPrompt, "*");
