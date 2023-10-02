@@ -1,5 +1,8 @@
 export default {
-  stories: ["components/**/*.stories.{js,jsx,ts,tsx}"],
+  stories: [
+    "iframe/**/*.stories.{js,jsx,ts,tsx}",
+    "options/**/*.stories.{js,jsx,ts,tsx}",
+  ],
   addons: {
     a11y: {
       enabled: false,

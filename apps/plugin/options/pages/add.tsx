@@ -59,6 +59,8 @@ const OptionsEditor: React.FC<{
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
+    console.log("tEST");
+
     handleParamChange(
       "options",
       options.map((i) => i.label),
