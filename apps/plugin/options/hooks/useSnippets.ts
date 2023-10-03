@@ -10,9 +10,14 @@ const useSnippets = () => {
 
   useEffect(() => {
     (async () => {
-      const results = await getLocalStorageValue("snippets");
-      if (results) {
-        setSnippets(results);
+      try {
+        const results = await getLocalStorageValue("snippets");
+        if (results) {
+          setSnippets(results);
+        }
+      } catch (error) {
+        console.log(error);
+      } finally {
         setIsLoading(false);
       }
     })();
