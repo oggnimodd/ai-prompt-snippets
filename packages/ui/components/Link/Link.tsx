@@ -10,6 +10,12 @@ export interface LinkProps extends React.HTMLAttributes<HTMLAnchorElement> {
   onClick?: () => void;
 }
 
+declare global {
+  interface Window {
+    __NEXT_DATA__: any;
+  }
+}
+
 const Link: React.FC<LinkProps> = forwardRef<HTMLAnchorElement, LinkProps>(
   (props, ref) => {
     const {

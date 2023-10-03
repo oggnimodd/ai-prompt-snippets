@@ -1,4 +1,3 @@
-import React from "react";
 import { useProgressBar } from "react-aria";
 
 const ButtonLoadingIndicator = (props: {

@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import { useTextField } from "@react-aria/textfield";
 import type { AriaTextFieldProps } from "@react-aria/textfield";
 import clsx from "clsx";
