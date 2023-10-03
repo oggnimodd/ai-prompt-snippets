@@ -71,12 +71,20 @@ class Listener {
         }
 
         if (this.chatprovider === "perplexity") {
-          const promptField = document.querySelector(
-            "textarea[placeholder*='follow']",
-          ) as HTMLTextAreaElement;
-          const inputButton = document.querySelector(
-            ".relative > div:has(lt-mirror):has(textarea) ~ div.absolute:has(button + button) button:has(svg[data-icon='arrow-up'])",
-          ) as HTMLButtonElement;
+          const promptField =
+            (document.querySelector(
+              "textarea[placeholder*='follow']",
+            ) as HTMLTextAreaElement) ||
+            (document.querySelector(
+              "textarea[placeholder*='nything']",
+            ) as HTMLTextAreaElement);
+          const inputButton =
+            (document.querySelector(
+              ".relative > div:has(lt-mirror):has(textarea) ~ div.absolute:has(button + button) button:has(svg[data-icon*='arrow'])",
+            ) as HTMLButtonElement) ||
+            document.querySelector(
+              ".relative:has(textarea[placeholder*='nything']) button:has(svg[data-icon*='arrow'])",
+            );
 
           if (inputButton.disabled) {
             inputButton.removeAttribute("disabled");
