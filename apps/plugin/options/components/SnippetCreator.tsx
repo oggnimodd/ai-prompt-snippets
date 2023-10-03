@@ -155,22 +155,19 @@ const paramTypes = [
   },
 ];
 
-type ParamType = "string" | "options";
-
 const ParameterEditor: React.FC<ParameterEditorProps> = ({
   control,
   parameterIndex,
   remove,
 }) => {
-  const values = useWatch({
-    name: "parameters",
-    control,
-  });
-  const { errors } = useFormState({
+  const paramType = useWatch({
+    name: `parameters.${parameterIndex}.type`,
     control,
   });
 
-  const paramType = values?.[parameterIndex]?.type as ParamType;
+  const { errors } = useFormState({
+    control,
+  });
 
   return (
     <div className="flex flex-col bg-zinc-200 rounded-sm px-5 py-2 gap-y-2">
