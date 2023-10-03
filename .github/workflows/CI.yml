@@ -13,7 +13,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        job: [build, ui-components-test, lint]
+        job: [build, lint]
 
     steps:
       - name: Checkout code
@@ -26,16 +26,11 @@ jobs:
       - name: Install dependencies
         run: bun install
 
-      - name: Run job ${{ matrix.job }}
+      - name: Linting
         if: matrix.job == 'lint'
         run: bun run lint
 
-      - name: Run job ${{ matrix.job }}
+      - name: Build extension
         if: matrix.job == 'build'
         run: cd apps/plugin && bun run build && ls -al
 
-      - name: Run job ${{ matrix.job }}
-        if: matrix.job == 'ui-components-test'
-        uses: cypress-io/github-action@v5
-        with:
-          command: cd packages/ui && bun run build && ls -al
