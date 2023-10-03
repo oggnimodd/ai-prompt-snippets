@@ -257,15 +257,13 @@ export interface SnippetCreatorProps {
   snippet?: Snippet;
 }
 
-const emptySnippet: Snippet = {
-  id: nanoid(),
-  title: "",
-  prompt: "",
-  parameters: [],
-};
-
 const SnippetCreator: React.FC<SnippetCreatorProps> = ({
-  snippet = emptySnippet,
+  snippet = {
+    id: nanoid(),
+    title: "",
+    prompt: "",
+    parameters: [],
+  } satisfies Snippet,
 }) => {
   const {
     control,
@@ -290,7 +288,9 @@ const SnippetCreator: React.FC<SnippetCreatorProps> = ({
 
   const onSubmit = async (data: Snippet) => {
     try {
-      const snippets = (await getLocalStorageValue("snippets")) as Snippet[];
+      const snippets = (await getLocalStorageValue("snippets")) as
+        | Snippet[]
+        | undefined;
 
       if (!snippets) {
         await setOrUpdateLocalStorageValue("snippets", [data]);
@@ -300,9 +300,8 @@ const SnippetCreator: React.FC<SnippetCreatorProps> = ({
           (snippet) => snippet.id === data.id,
         );
         if (snippetExists) {
-          // edit the snippet instead of adding
           const index = snippets.findIndex((snippet) => snippet.id === data.id);
-          snippets[index] = data;
+          snippets.splice(index, 1, data);
 
           await setOrUpdateLocalStorageValue("snippets", snippets);
         } else {
@@ -310,9 +309,11 @@ const SnippetCreator: React.FC<SnippetCreatorProps> = ({
           await setOrUpdateLocalStorageValue("snippets", [...snippets, data]);
         }
       }
-
+    } catch (error) {
+      console.log(error);
+    } finally {
       navigate("/");
-    } catch (error) {}
+    }
   };
 
   return (
