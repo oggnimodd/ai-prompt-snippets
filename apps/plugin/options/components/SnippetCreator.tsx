@@ -23,6 +23,9 @@ import {
 } from "../../utils/storage";
 import { useNavigate } from "react-router-dom";
 
+const ALLOWED_OPTIONS_NUMBER = 20;
+const ALLOWED_PARAMETERS_NUMBER = 15;
+
 interface OptionEditorProps {
   control: Control<Snippet, any>;
   parameterIndex: number;
@@ -121,7 +124,7 @@ const OptionEditor: React.FC<OptionEditorProps> = ({
       {/* Display error if there is no options provided */}
       {rootError && <p className="text-tiny text-danger">{rootError}</p>}
 
-      {options.length < 5 && (
+      {options.length < ALLOWED_OPTIONS_NUMBER && (
         <div className="flex gap-x-4">
           <Button
             onPress={() => addNewOption()}
@@ -334,7 +337,7 @@ const SnippetCreator: React.FC<SnippetCreatorProps> = ({
       )}
 
       {/* For now let just set the max number of params to 5*/}
-      {parameters.length < 5 && (
+      {parameters.length < ALLOWED_PARAMETERS_NUMBER && (
         <Button
           onPress={() =>
             append({
