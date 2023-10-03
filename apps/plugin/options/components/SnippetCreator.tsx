@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 
 import {
   Control,
@@ -35,6 +35,8 @@ const OptionEditor: React.FC<OptionEditorProps> = ({
   control,
   parameterIndex,
 }) => {
+  const optionsWrapperRef = useRef<HTMLDivElement | null>(null);
+
   const {
     fields: options,
     remove,
@@ -49,11 +51,23 @@ const OptionEditor: React.FC<OptionEditorProps> = ({
   });
 
   const addNewOption = () => {
-    append({
-      id: nanoid(),
-      title: "",
-    });
+    if (options.length < ALLOWED_OPTIONS_NUMBER) {
+      append({
+        id: nanoid(),
+        title: "",
+      });
+    }
   };
+
+  useEffect(() => {
+    const lastInput = optionsWrapperRef.current
+      ?.querySelector("div:has(button):last-child")
+      ?.querySelector("input") as HTMLInputElement | undefined;
+
+    if (lastInput) {
+      lastInput.focus();
+    }
+  }, [options.length]);
 
   const errors = _errors as FieldErrors<{
     id: string;
@@ -69,7 +83,7 @@ const OptionEditor: React.FC<OptionEditorProps> = ({
       <span className="block text-small font-medium text-foreground will-change-auto origin-top-left transition-all !duration-200 !ease-out motion-reduce:transition-none">
         Options
       </span>
-      <div className="flex flex-col mb-2 gap-y-2">
+      <div className="flex flex-col mb-2 gap-y-2" ref={optionsWrapperRef}>
         {options.length > 0 &&
           options.map((option, optionIndex) => {
             return (
