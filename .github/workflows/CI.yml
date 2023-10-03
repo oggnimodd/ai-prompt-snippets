@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  build-and-test:
+    name: Build And Test
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        job: [build, ui-components-test, lint]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Run job ${{ matrix.job }}
+        if: matrix.job == 'lint'
+        run: bun run lint
+
+      - name: Run job ${{ matrix.job }}
+        if: matrix.job == 'build'
+        run: cd apps/plugin && bun run build && ls -al
+
+      - name: Run job ${{ matrix.job }}
+        if: matrix.job == 'ui-components-test'
+        uses: cypress-io/github-action@v5
+        with:
+          command: cd packages/ui && bun run build && ls -al
