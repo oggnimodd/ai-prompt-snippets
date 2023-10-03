@@ -202,6 +202,12 @@ const ParameterEditor: React.FC<ParameterEditorProps> = ({
               labelPlacement="outside"
               disableAnimation
               {...field}
+              onChange={(e) => {
+                const newValue = e.target.value;
+                if (newValue) {
+                  field.onChange(newValue);
+                }
+              }}
             >
               {paramTypes.map((paramType) => {
                 return (
