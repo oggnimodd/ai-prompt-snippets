@@ -33,11 +33,9 @@ jobs:
         run: |
           cd apps/plugin
           bun run build
-          tar czf plugin-artifact.tar.gz dist
-          echo "::set-output name=artifact_path::$(pwd)/plugin-artifact.tar.gz"
       - name: Upload Artifact
         if: matrix.job == 'build' && success()
         uses: actions/upload-artifact@v3
         with:
           name: ai-chat-plugin
-          path: '${{ steps.Run build.outputs.artifact_path }}'
+          path: apps/plugin/dist
