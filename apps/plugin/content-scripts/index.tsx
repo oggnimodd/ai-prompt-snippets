@@ -89,6 +89,15 @@ if (hostname === "www.perplexity.ai") {
 
   if (iframeMountPointParent) {
     iframeMountPointParent.classList.add("flex", "relative");
+    const mainContainer = document.querySelector(
+      "main > div > div > div + div > div:first-child",
+    );
+
+    if (mainContainer) {
+      //@ts-ignore
+      mainContainer.style = "flex:1";
+    }
+
     iframeMountPointParent.append(newDiv);
 
     iframe.src = iframeUrl;
