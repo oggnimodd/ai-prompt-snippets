@@ -20,6 +20,9 @@ out/
 .expo/
 dist/
 
+#astro
+.astro/
+
 # production
 build
 
