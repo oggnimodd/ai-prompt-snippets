@@ -10,7 +10,8 @@
     "**/build": true,
     "**/dist": true,
     "**/.turbo": true,
-    "**/tsconfig.tsbuildinfo": true
+    "**/tsconfig.tsbuildinfo": true,
+    "**/.astro": true
   },
   "editor.defaultFormatter": "biomejs.biome",
   "editor.codeActionsOnSave": {

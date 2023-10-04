@@ -33,7 +33,6 @@ const SnippetCard: FC<{
     <div className="bg-zinc-300 bg-opacity-30 rounded-lg p-4 flex flex-col">
       <span className="font-bold text-xl text-primary-500">{title}</span>
       <p className="line-clamp-3">{prompt}</p>
-
       <div className="flex justify-between mt-auto items-center">
         <Link to={`/details/${id}`} className="text-primary-400 underline">
           View Details
