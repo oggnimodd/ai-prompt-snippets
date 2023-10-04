@@ -1,4 +1,5 @@
 import { extensionUrl } from "utils/chrome";
+import { EnterPromptData, IframeMessage } from "utils/message";
 
 type ChatProvider = "chat-gpt" | "poe" | "claude" | "perplexity";
 
@@ -15,28 +16,36 @@ class Listener {
 
   listen() {
     // Listen message from iframe
-    window.addEventListener("message", (event) => {
-      if (event.origin === extensionUrl) {
-        this.prompt = event.data;
+    window.addEventListener(
+      "message",
+      (event: MessageEvent<IframeMessage<EnterPromptData>>) => {
+        if (
+          event.origin === extensionUrl &&
+          event.data.type === "ENTER_PROMPT"
+        ) {
+          this.prompt = event.data.message.prompt;
 
-        switch (this.chatprovider) {
-          case "chat-gpt":
-            this.chatGPT();
-            break;
-          case "claude":
-            this.claude();
-            break;
-          case "perplexity":
-            this.perplexity();
-            break;
-          case "poe":
-            this.poe();
-            break;
-          default:
-            break;
+          if (!this.prompt) return;
+
+          switch (this.chatprovider) {
+            case "chat-gpt":
+              this.chatGPT();
+              break;
+            case "claude":
+              this.claude();
+              break;
+            case "perplexity":
+              this.perplexity();
+              break;
+            case "poe":
+              this.poe();
+              break;
+            default:
+              break;
+          }
         }
-      }
-    });
+      },
+    );
   }
 
   chatGPT() {

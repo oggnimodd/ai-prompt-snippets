@@ -3,6 +3,7 @@ import { Input, Select, SelectItem } from "@nextui-org/react";
 import { Button, Combobox } from "@acme/ui";
 import React, { useEffect, useState } from "react";
 import { Param } from "snippet/model";
+import { PromptData, messageIframeParent } from "utils/message";
 
 type HandleParameterChange = (key: string, value: string) => void;
 
@@ -128,7 +129,12 @@ const PromptBuilder = () => {
     console.log(finalPrompt);
 
     // Since this is an iframe , send the message to the parent window
-    window.parent.postMessage(finalPrompt, "*");
+    messageIframeParent<PromptData>({
+      type: "ENTER_PROMPT",
+      message: {
+        prompt: finalPrompt,
+      },
+    });
   };
 
   return (
