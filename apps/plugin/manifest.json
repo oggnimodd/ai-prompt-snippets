@@ -12,7 +12,7 @@
         "https://claude.ai/*",
         "https://www.perplexity.ai/*"
       ],
-      "js": ["content-scripts/index.tsx"],
+      "js": ["content-scripts/index.ts"],
       "all_frames": false,
       "run_at": "document_end"
     }
