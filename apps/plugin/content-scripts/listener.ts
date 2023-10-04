@@ -1,8 +1,6 @@
-import { getExtensionUrl } from "utils/chrome";
+import { extensionUrl } from "utils/chrome";
 
 type ChatProvider = "chat-gpt" | "poe" | "claude" | "perplexity";
-
-const extensionUrl = getExtensionUrl();
 
 class Listener {
   private autoSubmit: boolean;

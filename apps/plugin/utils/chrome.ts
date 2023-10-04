@@ -1,1 +1,1 @@
-export const getExtensionUrl = () => `chrome-extension://${chrome.runtime.id}`;
+export const extensionUrl = `chrome-extension://${chrome.runtime.id}`;
