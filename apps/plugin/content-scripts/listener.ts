@@ -1,5 +1,5 @@
 import { extensionUrl } from "utils/chrome";
-import { EnterPromptData, IframeMessage } from "utils/message";
+import { PromptData, IframeMessage } from "utils/message";
 
 type ChatProvider = "chat-gpt" | "poe" | "claude" | "perplexity";
 
@@ -18,7 +18,7 @@ class Listener {
     // Listen message from iframe
     window.addEventListener(
       "message",
-      (event: MessageEvent<IframeMessage<EnterPromptData>>) => {
+      (event: MessageEvent<IframeMessage<PromptData>>) => {
         if (
           event.origin === extensionUrl &&
           event.data.type === "ENTER_PROMPT"
