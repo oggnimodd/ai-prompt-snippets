@@ -16,7 +16,20 @@ export const correctSnippetExample: Snippet = {
       id: nanoid(),
       title: "language",
       type: "options",
-      options: ["English", "Japanese", "Spanish"],
+      options: [
+        {
+          id: nanoid(),
+          title: "English",
+        },
+        {
+          id: nanoid(),
+          title: "France",
+        },
+        {
+          id: nanoid(),
+          title: "Italian",
+        },
+      ],
     },
   ],
 };
