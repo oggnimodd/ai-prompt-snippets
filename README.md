@@ -1,1 +1,1 @@
-# turbo-next-template
+# ai-chat-snippet

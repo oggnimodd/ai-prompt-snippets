@@ -1,5 +1,5 @@
 {
-  "name": "gpt-ui-plugin",
+  "name": "ai-chat-snippet",
   "private": true,
   "scripts": {
     "clean": "find . -name 'node_modules' -type d -prune -exec rm -rf '{}' +",
