@@ -2,7 +2,7 @@ import useSnippets from "./hooks/useSnippets";
 import { Input, Select, SelectItem } from "@nextui-org/react";
 import { Button, Combobox } from "@acme/ui";
 import React, { useEffect, useState } from "react";
-import { Param } from "../snippet/model";
+import { Param } from "snippet/model";
 
 type HandleParameterChange = (key: string, value: string) => void;
 

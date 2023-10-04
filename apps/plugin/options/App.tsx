@@ -1,5 +1,5 @@
 import Routes from "./routes";
-import { getLocalStorageValue } from "../utils/storage";
+import { getLocalStorageValue } from "utils/storage";
 
 (async () => {
   const results = await getLocalStorageValue("snippets");
