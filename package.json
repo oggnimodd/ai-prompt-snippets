@@ -1,7 +1,6 @@
 {
   "name": "gpt-ui-plugin",
   "private": true,
-  "packageManager": "pnpm@8.5.1",
   "scripts": {
     "clean": "find . -name 'node_modules' -type d -prune -exec rm -rf '{}' +",
     "prepare": "bun prepare.js",
