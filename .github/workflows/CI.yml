@@ -31,11 +31,11 @@ jobs:
       - name: Run build job
         if: matrix.job == 'build'
         run: |
-          cd apps/plugin
+          cd apps/extension
           bun run build
       - name: Upload Artifact
         if: matrix.job == 'build' && success()
         uses: actions/upload-artifact@v3
         with:
           name: ai-chat-snippet
-          path: apps/plugin/dist
+          path: apps/extension/dist

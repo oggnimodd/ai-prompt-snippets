@@ -26,7 +26,7 @@
   },
   "workspaces": [
     "apps/nextjs",
-    "apps/plugin",
+    "apps/extension",
     "apps/docs",
     "packages/config/tailwind",
     "packages/ui",
