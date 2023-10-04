@@ -5,92 +5,112 @@ type ChatProvider = "chat-gpt" | "poe" | "claude" | "perplexity";
 class Listener {
   private autoSubmit: boolean;
   private chatprovider: ChatProvider;
+  private prompt: string;
 
   constructor(autoSubmit: boolean, provider: ChatProvider) {
     this.autoSubmit = autoSubmit;
     this.chatprovider = provider;
+    this.prompt = "";
   }
 
   listen() {
     // Listen message from iframe
     window.addEventListener("message", (event) => {
       if (event.origin === extensionUrl) {
-        if (this.chatprovider === "chat-gpt") {
-          const promptField = document.querySelector(
-            "#prompt-textarea",
-          ) as HTMLTextAreaElement;
-          const submitButton = document.querySelector(
-            '[data-testid="send-button"]',
-          ) as HTMLButtonElement;
+        this.prompt = event.data;
 
-          this.setNativeValue(promptField, event.data);
-
-          this.submit(submitButton);
-        }
-
-        if (this.chatprovider === "poe") {
-          const promptField = document.querySelector(
-            "[class*='ChatMessageInputContainer_textArea'] textarea",
-          ) as HTMLTextAreaElement;
-          const submitButton = document.querySelector(
-            "[class*='ChatMessageInputContainer_submitButton']",
-          ) as HTMLButtonElement;
-
-          if (submitButton.disabled) {
-            submitButton.removeAttribute("disabled");
-          }
-
-          promptField.value = event.data;
-          promptField.dispatchEvent(new Event("input", { bubbles: true }));
-
-          this.submit(submitButton);
-        }
-
-        if (this.chatprovider === "claude") {
-          const promptField = document.querySelector(
-            "[contenteditable='true'].ProseMirror",
-          ) as HTMLDivElement;
-
-          const paragraph = document.createElement("p");
-          paragraph.innerHTML = event.data;
-          promptField.appendChild(paragraph);
-
-          setTimeout(() => {
-            const submitButton = document.querySelector(
-              "[aria-label='Send Message']",
-            ) as HTMLButtonElement;
-
-            this.submit(submitButton);
-          }, 100);
-        }
-
-        if (this.chatprovider === "perplexity") {
-          const promptField =
-            (document.querySelector(
-              "textarea[placeholder*='follow']",
-            ) as HTMLTextAreaElement) ||
-            (document.querySelector(
-              "textarea[placeholder*='nything']",
-            ) as HTMLTextAreaElement);
-          const submitButton =
-            (document.querySelector(
-              ".relative > div:has(lt-mirror):has(textarea) ~ div.absolute:has(button + button) button:has(svg[data-icon*='arrow'])",
-            ) as HTMLButtonElement) ||
-            document.querySelector(
-              ".relative:has(textarea[placeholder*='nything']) button:has(svg[data-icon*='arrow'])",
-            );
-
-          if (submitButton.disabled) {
-            submitButton.removeAttribute("disabled");
-          }
-
-          promptField.value = event.data;
-          promptField.dispatchEvent(new Event("input", { bubbles: true }));
-
-          this.submit(submitButton);
+        switch (this.chatprovider) {
+          case "chat-gpt":
+            this.chatGPT();
+            break;
+          case "claude":
+            this.claude();
+            break;
+          case "perplexity":
+            this.perplexity();
+            break;
+          case "poe":
+            this.poe();
+            break;
+          default:
+            break;
         }
       }
     });
+  }
+
+  chatGPT() {
+    const promptField = document.querySelector(
+      "#prompt-textarea",
+    ) as HTMLTextAreaElement;
+    const submitButton = document.querySelector(
+      '[data-testid="send-button"]',
+    ) as HTMLButtonElement;
+
+    this.setNativeValue(promptField, this.prompt);
+    this.submit(submitButton);
+  }
+
+  claude() {
+    const promptField = document.querySelector(
+      "[contenteditable='true'].ProseMirror",
+    ) as HTMLDivElement;
+
+    const paragraph = document.createElement("p");
+    paragraph.innerHTML = this.prompt;
+    promptField.appendChild(paragraph);
+
+    setTimeout(() => {
+      const submitButton = document.querySelector(
+        "[aria-label='Send Message']",
+      ) as HTMLButtonElement;
+
+      this.submit(submitButton);
+    }, 100);
+  }
+
+  poe() {
+    const promptField = document.querySelector(
+      "[class*='ChatMessageInputContainer_textArea'] textarea",
+    ) as HTMLTextAreaElement;
+    const submitButton = document.querySelector(
+      "[class*='sendButton']",
+    ) as HTMLButtonElement;
+
+    if (submitButton.disabled) {
+      submitButton.removeAttribute("disabled");
+    }
+
+    promptField.value = this.prompt;
+    promptField.dispatchEvent(new Event("input", { bubbles: true }));
+
+    this.submit(submitButton);
+  }
+
+  perplexity() {
+    const promptField =
+      (document.querySelector(
+        "textarea[placeholder*='follow']",
+      ) as HTMLTextAreaElement) ||
+      (document.querySelector(
+        "textarea[placeholder*='nything']",
+      ) as HTMLTextAreaElement);
+    const submitButton =
+      (document.querySelector(
+        ".relative > div:has(lt-mirror):has(textarea) ~ div.absolute:has(button + button) button:has(svg[data-icon*='arrow'])",
+      ) as HTMLButtonElement) ||
+      document.querySelector(
+        ".relative:has(textarea[placeholder*='nything']) button:has(svg[data-icon*='arrow'])",
+      );
+
+    if (submitButton.disabled) {
+      submitButton.removeAttribute("disabled");
+    }
+
+    promptField.value = this.prompt;
+    promptField.dispatchEvent(new Event("input", { bubbles: true }));
+
+    this.submit(submitButton);
   }
 
   submit(submitButton: HTMLButtonElement) {
