@@ -1,4 +1,8 @@
+import { getExtensionUrl } from "utils/chrome";
+
 type ChatProvider = "chat-gpt" | "poe" | "claude" | "perplexity";
+
+const extensionUrl = getExtensionUrl();
 
 class Listener {
   private autoSubmit: boolean;
@@ -12,42 +16,36 @@ class Listener {
   listen() {
     // Listen message from iframe
     window.addEventListener("message", (event) => {
-      // For chatgpt
-
-      if (event.origin === `chrome-extension://${chrome.runtime.id}`) {
+      if (event.origin === extensionUrl) {
         if (this.chatprovider === "chat-gpt") {
           const promptField = document.querySelector(
             "#prompt-textarea",
           ) as HTMLTextAreaElement;
-          const inputButton = document.querySelector(
+          const submitButton = document.querySelector(
             '[data-testid="send-button"]',
           ) as HTMLButtonElement;
 
           this.setNativeValue(promptField, event.data);
 
-          if (this.autoSubmit) {
-            inputButton.click();
-          }
+          this.submit(submitButton);
         }
 
         if (this.chatprovider === "poe") {
           const promptField = document.querySelector(
             "[class*='ChatMessageInputContainer_textArea'] textarea",
           ) as HTMLTextAreaElement;
-          const inputButton = document.querySelector(
-            "[class*='ChatMessageInputContainer_sendButton']",
+          const submitButton = document.querySelector(
+            "[class*='ChatMessageInputContainer_submitButton']",
           ) as HTMLButtonElement;
 
-          if (inputButton.disabled) {
-            inputButton.removeAttribute("disabled");
+          if (submitButton.disabled) {
+            submitButton.removeAttribute("disabled");
           }
 
           promptField.value = event.data;
           promptField.dispatchEvent(new Event("input", { bubbles: true }));
 
-          if (this.autoSubmit) {
-            inputButton.click();
-          }
+          this.submit(submitButton);
         }
 
         if (this.chatprovider === "claude") {
@@ -60,13 +58,11 @@ class Listener {
           promptField.appendChild(paragraph);
 
           setTimeout(() => {
-            const inputButton = document.querySelector(
+            const submitButton = document.querySelector(
               "[aria-label='Send Message']",
             ) as HTMLButtonElement;
 
-            if (this.autoSubmit) {
-              inputButton.click();
-            }
+            this.submit(submitButton);
           }, 100);
         }
 
@@ -78,7 +74,7 @@ class Listener {
             (document.querySelector(
               "textarea[placeholder*='nything']",
             ) as HTMLTextAreaElement);
-          const inputButton =
+          const submitButton =
             (document.querySelector(
               ".relative > div:has(lt-mirror):has(textarea) ~ div.absolute:has(button + button) button:has(svg[data-icon*='arrow'])",
             ) as HTMLButtonElement) ||
@@ -86,19 +82,23 @@ class Listener {
               ".relative:has(textarea[placeholder*='nything']) button:has(svg[data-icon*='arrow'])",
             );
 
-          if (inputButton.disabled) {
-            inputButton.removeAttribute("disabled");
+          if (submitButton.disabled) {
+            submitButton.removeAttribute("disabled");
           }
 
           promptField.value = event.data;
           promptField.dispatchEvent(new Event("input", { bubbles: true }));
 
-          if (this.autoSubmit) {
-            inputButton.click();
-          }
+          this.submit(submitButton);
         }
       }
     });
+  }
+
+  submit(submitButton: HTMLButtonElement) {
+    if (this.autoSubmit) {
+      submitButton.click();
+    }
   }
 
   setNativeValue = (element: HTMLTextAreaElement, value: string) => {
