@@ -15,8 +15,8 @@
     "typescript": "5.2.2"
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.0.0",
-    "@biomejs/cli-linux-x64": "^1.0.0",
+    "@biomejs/biome": "^1.2.2",
+    "@biomejs/cli-linux-x64": "^1.2.2",
     "cypress": "13.1.0",
     "husky": "^8.0.3",
     "lint-staged": "^13.2.2"
