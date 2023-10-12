@@ -1,4 +1,4 @@
-import useSnippets from "./hooks/useSnippets";
+import useSnippets from "../hooks/useSnippets";
 import { Input, Select, SelectItem } from "@nextui-org/react";
 import { Combobox } from "@acme/ui";
 import { Button } from "@nextui-org/react";
