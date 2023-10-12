@@ -31,7 +31,7 @@ const Header = () => {
           size="sm"
         />
         <Button
-          onClick={() => window.location.reload()}
+          onPress={() => window.location.reload()}
           startContent={<ReloadIcon size={16} />}
           className="ml-auto"
           color="primary"
