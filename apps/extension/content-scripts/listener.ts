@@ -104,12 +104,14 @@ class Listener {
       (document.querySelector(
         "textarea[placeholder*='nything']",
       ) as HTMLTextAreaElement);
+
+    console.log(promptField);
     const submitButton =
       (document.querySelector(
-        ".relative > div:has(lt-mirror):has(textarea) ~ div.absolute:has(button + button) button:has(svg[data-icon*='arrow'])",
+        "button:has(svg[data-icon*='arrow']):is(button+button)",
       ) as HTMLButtonElement) ||
       document.querySelector(
-        ".relative:has(textarea[placeholder*='nything']) button:has(svg[data-icon*='arrow'])",
+        "button:has(svg[data-icon*='arrow']):is(button+button)",
       );
 
     if (submitButton.disabled) {
