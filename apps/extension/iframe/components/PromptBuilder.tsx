@@ -5,6 +5,7 @@ import { Button } from "@nextui-org/react";
 import React, { useEffect, useState } from "react";
 import { Param } from "snippet/model";
 import { PromptData, messageIframeParent } from "utils/message";
+import { optionsUrl } from "utils/chrome";
 
 type HandleParameterChange = (key: string, value: string) => void;
 
@@ -50,7 +51,7 @@ const ParameterEditor: React.FC<{
       <Select
         selectedKeys={new Set([choosenOption])}
         placeholder="Select parameter type"
-        label="Type"
+        label={parameter.title}
         labelPlacement="outside"
         disableAnimation
         onChange={(e) => {
@@ -105,7 +106,19 @@ const PromptBuilder = () => {
   }>({});
 
   if (snippets.length === 0) {
-    return <span>No snippets, you can add new ones here</span>;
+    return (
+      <span>
+        No snippets, you can add new ones{" "}
+        <a
+          className="text-primary-500 underline"
+          href={optionsUrl}
+          target="_blank"
+          rel="noreferrer"
+        >
+          here
+        </a>
+      </span>
+    );
   }
 
   const snippet = snippets.find((i) => i.title === activeSnippet);
