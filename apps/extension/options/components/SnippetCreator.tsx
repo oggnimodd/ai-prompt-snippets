@@ -22,6 +22,7 @@ import {
   setOrUpdateLocalStorageValue,
 } from "../../utils/storage";
 import { useNavigate } from "react-router-dom";
+import { useIsFirstRender } from "shared/hooks";
 
 const ALLOWED_OPTIONS_NUMBER = 20;
 const ALLOWED_PARAMETERS_NUMBER = 15;
@@ -35,6 +36,7 @@ const OptionEditor: React.FC<OptionEditorProps> = ({
   control,
   parameterIndex,
 }) => {
+  const isFirstRender = useIsFirstRender();
   const optionsWrapperRef = useRef<HTMLDivElement | null>(null);
 
   const {
@@ -64,7 +66,8 @@ const OptionEditor: React.FC<OptionEditorProps> = ({
       ?.querySelector("div:has(button):last-child")
       ?.querySelector("input") as HTMLInputElement | undefined;
 
-    if (lastInput) {
+    // Here checking the isFirstRender will prevent focusing when opening the page
+    if (lastInput && !isFirstRender) {
       lastInput.focus();
     }
   }, [options.length]);

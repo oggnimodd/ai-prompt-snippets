@@ -26,6 +26,7 @@
       "types/*": ["types/*"],
       "config/*": ["config/*"],
       "hooks/*": ["hooks/*"],
+      "shared/*": ["shared/*"],
       "@ui/*": ["../../packages/ui/*"]
     }
   },
