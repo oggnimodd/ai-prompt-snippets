@@ -164,9 +164,12 @@ const PromptBuilder = () => {
 
       {activeSnippet && snippet && (
         <>
-          <p className="line-clamp-3 opacity-80 text-sm mt-2">
-            {snippet.prompt}
-          </p>
+          <div className="my-6 flex flex-col">
+            <span className="block text-small font-medium pointer-events-none text-foreground pb-1 transition-none">
+              Prompt Snippet
+            </span>
+            <p className="line-clamp-3 opacity-80 text-sm ">{snippet.prompt}</p>
+          </div>
 
           <div className="flex flex-col gap-2 mt-3">
             {snippet.parameters?.map((parameter) => {
