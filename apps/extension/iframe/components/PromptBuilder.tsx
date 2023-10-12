@@ -1,5 +1,5 @@
 import useSnippets from "../hooks/useSnippets";
-import { Input, Select, SelectItem } from "@nextui-org/react";
+import { Select, SelectItem, Textarea } from "@nextui-org/react";
 import { Combobox } from "@acme/ui";
 import { Button } from "@nextui-org/react";
 import React, { useEffect, useState } from "react";
@@ -37,11 +37,14 @@ const ParameterEditor: React.FC<{
 
   if (parameter.type === "string") {
     return (
-      <Input
+      <Textarea
         onChange={(e) => handleParameterChange(parameter.title, e.target.value)}
         label={parameter.title}
         labelPlacement="outside"
         placeholder={parameter.title}
+        minRows={1}
+        maxRows={3}
+        rows={1}
       />
     );
   }
