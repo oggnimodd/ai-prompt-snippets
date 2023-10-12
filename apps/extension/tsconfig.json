@@ -25,7 +25,8 @@
       "stores/*": ["stores/*"],
       "types/*": ["types/*"],
       "config/*": ["config/*"],
-      "hooks/*": ["hooks/*"]
+      "hooks/*": ["hooks/*"],
+      "@ui/*": ["../../packages/ui/*"]
     }
   },
   "include": ["popup", "utils", "options", "iframe", "content-scripts"],

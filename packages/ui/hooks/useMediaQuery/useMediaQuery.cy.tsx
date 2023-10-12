@@ -1,4 +1,5 @@
 import React from "react";
+
 import { useMediaQuery } from ".";
 
 const Renderer = ({ query }: { query: string }) => {

@@ -25,7 +25,7 @@ export default {
     },
     theme: {
       enabled: true,
-      defaultState: "light",
+      defaultState: "dark",
     },
     width: {
       enabled: true,

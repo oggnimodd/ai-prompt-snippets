@@ -1,6 +1,6 @@
 // source : https://github.com/mantinedev/mantine/blob/master/src/mantine-hooks/src/use-media-query/use-media-query.ts
 
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export interface UseMediaQueryOptions {
   getInitialValueInEffect: boolean;

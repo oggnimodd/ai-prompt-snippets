@@ -1,6 +1,6 @@
-import { defineConfig, type ViteDevServer } from "vite";
-import queryString from "query-string";
 import path from "path";
+import queryString from "query-string";
+import { defineConfig, type ViteDevServer } from "vite";
 
 const mapNextJsAssets = {
   name: "map-next-js-assets",

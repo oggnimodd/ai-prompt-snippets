@@ -1,6 +1,7 @@
 import useSnippets from "./hooks/useSnippets";
 import { Input, Select, SelectItem } from "@nextui-org/react";
-import { Button, Combobox } from "@acme/ui";
+import { Combobox } from "@acme/ui";
+import { Button } from "@nextui-org/react";
 import React, { useEffect, useState } from "react";
 import { Param } from "snippet/model";
 import { PromptData, messageIframeParent } from "utils/message";
