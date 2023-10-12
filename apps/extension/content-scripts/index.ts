@@ -8,15 +8,17 @@ const iframeUrl = `${extensionUrl}/iframe/index.html`;
 const iframe = document.createElement("iframe");
 
 if (hostname === "chat.openai.com") {
-  // create div tag with 200px width
-  newDiv.style.width = "250px";
-  newDiv.style.height = "100%";
-
   iframeMountPointParent = document.querySelector(
-    "#__next > .overflow-hidden > .dark + div",
+    "#__next > div.relative.z-0.flex.h-full.w-full.overflow-hidden > div.relative.flex.h-full.max-w-full.flex-1.flex-col.overflow-hidden",
   );
 
-  if (iframeMountPointParent) {
+  const main = iframeMountPointParent?.querySelector("main");
+
+  if (iframeMountPointParent && main) {
+    main.style.width = "calc(100% - 250px)";
+
+    iframeMountPointParent.classList.remove("flex-col");
+    iframeMountPointParent.classList.add("flex-row");
     iframeMountPointParent.append(newDiv);
 
     iframe.src = iframeUrl;
