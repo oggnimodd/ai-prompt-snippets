@@ -102,7 +102,8 @@ const replaceKeywords = (
 };
 
 const PromptBuilder = () => {
-  const { snippets, activeSnippet, setActiveSnippet } = useSnippets();
+  const { snippets, activeSnippet, setActiveSnippet, convertToOption } =
+    useSnippets();
   // Create a state tracker for snippet parameters
   const [choosenParameters, setChoosenParameters] = useState<{
     [key: string]: string;
@@ -124,7 +125,7 @@ const PromptBuilder = () => {
     );
   }
 
-  const snippet = snippets.find((i) => i.title === activeSnippet);
+  const snippet = snippets.find((i) => i.title === activeSnippet?.label);
 
   const handleParameterChange: HandleParameterChange = (key, value) => {
     setChoosenParameters((prev) => {
@@ -156,12 +157,13 @@ const PromptBuilder = () => {
   return (
     <form onSubmit={handleSubmit}>
       <Combobox
-        setChosenValue={(e: string | null) => {
-          setActiveSnippet(e || activeSnippet);
+        placeholder="Search snippets"
+        setSelected={(e) => {
+          setActiveSnippet(e);
           setChoosenParameters({});
         }}
-        options={snippets.map((i) => i.title)}
-        chosenValue={activeSnippet}
+        options={snippets.map(convertToOption)}
+        selected={activeSnippet}
       />
 
       {activeSnippet && snippet && (

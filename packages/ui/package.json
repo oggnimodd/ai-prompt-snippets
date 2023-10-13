@@ -19,6 +19,7 @@
     "@nextui-org/react": "^2.1.13",
     "clsx": "^1.2.1",
     "framer-motion": "^10.16.4",
+    "lucide-react": "^0.286.0",
     "react-aria-components": "^1.0.0-beta.1",
     "tailwind-merge": "^1.14.0",
     "tailwind-variants": "^0.1.14"

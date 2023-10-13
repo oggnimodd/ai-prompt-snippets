@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import { getLocalStorageValue } from "utils/storage";
 import type { Snippet } from "snippet/model";
+import { Option } from "@ui/index";
 
 const useSnippets = () => {
   const [snippets, setSnippets] = useState<Snippet[]>([]);
-  const [activeSnippet, setActiveSnippet] = useState<Snippet["id"] | null>(
-    null,
-  );
+  const [activeSnippet, setActiveSnippet] = useState<Option | null>(null);
 
   useEffect(() => {
     (async () => {
@@ -17,10 +16,18 @@ const useSnippets = () => {
     })();
   }, []);
 
+  const convertToOption = (snippet: Snippet): Option => {
+    return {
+      key: snippet.id,
+      label: snippet.title,
+    };
+  };
+
   return {
     snippets,
     activeSnippet,
     setActiveSnippet,
+    convertToOption,
   };
 };
 
