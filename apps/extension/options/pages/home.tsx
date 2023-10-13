@@ -5,11 +5,21 @@ import { Download, Plus, Upload } from "lucide-react";
 import { LoadingWithMessage } from "@acme/ui";
 import { useImportSnippets, useSearchSnippets, useSnippets } from "../hooks";
 import { exportSnippets } from "../../export-import";
+import { delay } from "utils/delay";
 
 const Index = () => {
-  const { chooseSnippetsFile } = useImportSnippets();
+  const { isLoading, snippets, setSnippets, getSnippets, setIsLoading } =
+    useSnippets();
   const { search, onSearchChange, clearSearch } = useSearchSnippets();
-  const { isLoading, snippets, setSnippets } = useSnippets();
+  const { chooseSnippetsFile } = useImportSnippets({
+    onSuccess: async () => {
+      setIsLoading(true);
+      await delay(200);
+      await getSnippets();
+    },
+    // TODO : use toast to display error
+    onError: () => alert("Not a valid snippets file"),
+  });
 
   if (isLoading) {
     return <LoadingWithMessage message="Getting All Your Snippets" />;

@@ -8,22 +8,24 @@ const useSnippets = () => {
   // Todo : use useContext or any state manager library to prevent prop drilling
   const [snippets, setSnippets] = useState<Snippet[]>([]);
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const results = await getLocalStorageValue("snippets");
-        if (results) {
-          setSnippets(results);
-        }
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setIsLoading(false);
+  const getSnippets = async () => {
+    try {
+      const results = await getLocalStorageValue("snippets");
+      if (results) {
+        setSnippets(results);
       }
-    })();
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getSnippets();
   }, []);
 
-  return { isLoading, setIsLoading, snippets, setSnippets };
+  return { isLoading, setIsLoading, snippets, setSnippets, getSnippets };
 };
 
 export default useSnippets;

@@ -2,7 +2,12 @@ import { useEffect } from "react";
 import { useFilePicker } from "use-file-picker";
 import { importSnippets } from "../../export-import";
 
-const useImportSnippets = () => {
+interface ImportSnippetsProps {
+  onSuccess: () => void;
+  onError: (err: unknown) => void;
+}
+
+const useImportSnippets = ({ onSuccess, onError }: ImportSnippetsProps) => {
   const { filesContent, openFilePicker, ...rest } = useFilePicker({
     accept: ".json",
   });
@@ -16,10 +21,10 @@ const useImportSnippets = () => {
           // parse the content
           const fileContent = JSON.parse(textContent);
 
-          importSnippets(fileContent);
+          await importSnippets(fileContent);
+          onSuccess();
         } catch (error) {
-          // Todo : use toast
-          alert("Not a valid snippets file");
+          onError(error);
         }
       }
     })();
