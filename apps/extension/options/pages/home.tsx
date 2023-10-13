@@ -1,11 +1,13 @@
 import { Button, Input } from "@nextui-org/react";
 import { Link } from "react-router-dom";
 import { SnippetList } from "../components";
-import { Plus } from "lucide-react";
+import { Download, Plus, Upload } from "lucide-react";
 import { LoadingWithMessage } from "@acme/ui";
-import { useSearchSnippets, useSnippets } from "../hooks";
+import { useImportSnippets, useSearchSnippets, useSnippets } from "../hooks";
+import { exportSnippets } from "../../export-import";
 
 const Index = () => {
+  const { chooseSnippetsFile } = useImportSnippets();
   const { search, onSearchChange, clearSearch } = useSearchSnippets();
   const { isLoading, snippets, setSnippets } = useSnippets();
 
@@ -26,16 +28,30 @@ const Index = () => {
             base: "w-auto self-start",
           }}
         />
-
-        <Button
-          startContent={<Plus size={18} />}
-          className="self-auto"
-          as={Link}
-          color="primary"
-          to="/add"
-        >
-          Add New
-        </Button>
+        <div className="self-auto flex items-center gap-3 flex-wrap">
+          <Button
+            onPress={() => chooseSnippetsFile()}
+            startContent={<Download size={18} />}
+            color="primary"
+          >
+            Import
+          </Button>
+          <Button
+            onPress={exportSnippets}
+            startContent={<Upload size={18} />}
+            color="primary"
+          >
+            Export
+          </Button>
+          <Button
+            startContent={<Plus size={18} />}
+            as={Link}
+            color="primary"
+            to="/add"
+          >
+            Add New
+          </Button>
+        </div>
       </div>
       <SnippetList
         search={search}

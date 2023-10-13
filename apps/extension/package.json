@@ -20,6 +20,7 @@
     "@ladle/react": "^2.17.2",
     "@nextui-org/react": "^2.1.13",
     "clsx": "^1.2.1",
+    "file-saver": "^2.0.5",
     "framer-motion": "^10.16.4",
     "lucide-react": "^0.279.0",
     "nanoid": "^5.0.1",
@@ -27,11 +28,13 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.46.2",
     "react-router-dom": "^6.15.0",
+    "use-file-picker": "^2.1.0",
     "zod": "^3.20.0",
     "zustand": "^4.4.1"
   },
   "devDependencies": {
     "@crxjs/vite-plugin": "2.0.0-beta.17",
+    "@types/file-saver": "^2.0.5",
     "@types/chrome": "^0.0.244",
     "@types/react": "^18.2.21",
     "@types/react-dom": "^18.2.7",
