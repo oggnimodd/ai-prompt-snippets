@@ -27,6 +27,7 @@
       "config/*": ["config/*"],
       "hooks/*": ["hooks/*"],
       "shared/*": ["shared/*"],
+      "models/*": ["models/*"],
       "@ui/*": ["../../packages/ui/*"]
     }
   },

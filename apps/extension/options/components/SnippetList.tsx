@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { SnippetCard } from ".";
-import type { Snippet } from "../../snippet/model";
+import type { Snippet } from "models/snippet";
 import { PageMessage } from "@acme/ui";
 
 const SnippetList: FC<{

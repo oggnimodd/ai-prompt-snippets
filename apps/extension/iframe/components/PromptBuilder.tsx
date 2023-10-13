@@ -3,7 +3,7 @@ import { Select, SelectItem, Textarea } from "@nextui-org/react";
 import { Combobox } from "@acme/ui";
 import { Button } from "@nextui-org/react";
 import React, { useEffect, useState } from "react";
-import { Param } from "snippet/model";
+import { Param } from "models/snippet";
 import { PromptData, messageIframeParent } from "utils/message";
 import { optionsUrl } from "utils/chrome";
 

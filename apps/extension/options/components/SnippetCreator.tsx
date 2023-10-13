@@ -10,8 +10,8 @@ import {
   useFormState,
   useWatch,
 } from "react-hook-form";
-import type { OptionsParam, Snippet } from "../../snippet/model";
-import { snippetSchema } from "../../snippet/model";
+import type { OptionsParam, Snippet } from "models/snippet";
+import { snippetSchema } from "models/snippet";
 import { nanoid } from "nanoid";
 import { X as CloseIcon, Save } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";

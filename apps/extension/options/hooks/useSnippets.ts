@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getLocalStorageValue } from "utils/storage";
-import { Snippet } from "snippet/model";
+import { Snippet } from "models/snippet";
 
 const useSnippets = () => {
   const [isLoading, setIsLoading] = useState(true);
