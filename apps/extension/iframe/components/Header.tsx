@@ -3,13 +3,28 @@ import {
   RefreshCcw as ReloadIcon,
   Settings as OptionsIcon,
   Github,
+  Moon as DarkIcon,
+  Sun as LightIcon,
 } from "lucide-react";
 import { optionsUrl } from "utils/chrome";
+import { useDarkMode } from "shared/hooks";
 
 const Header = () => {
+  const { theme, toggleTheme } = useDarkMode();
+
   return (
     <div className="py-2 flex w-full items-center mb-2">
       <div className="ml-auto gap-x-3 flex items-center">
+        <Button
+          startContent={
+            theme === "dark" ? <DarkIcon size={16} /> : <LightIcon size={16} />
+          }
+          className="ml-auto"
+          color="primary"
+          isIconOnly
+          onPress={toggleTheme}
+          size="sm"
+        />
         <Button
           startContent={<Github size={16} />}
           className="ml-auto"

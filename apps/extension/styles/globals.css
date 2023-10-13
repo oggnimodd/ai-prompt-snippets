@@ -6,8 +6,8 @@ body{
   @apply min-h-screen;
 }
 
-body .dark {
-  @apply text-white;
+html.dark {
+  @apply text-white bg-[#202022];
 }
 
 *{

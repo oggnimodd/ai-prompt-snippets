@@ -3,7 +3,7 @@ interface StorageObject {
   [key: string]: any;
 }
 
-type AllowedKey = "snippets";
+type AllowedKey = "snippets" | "theme";
 
 // Define a function to set or update a value in local storage
 export const setOrUpdateLocalStorageValue = (
