@@ -46,7 +46,7 @@ const Combobox: React.FC<ComboboxProps> = ({
         <div className={inputWrapperClassNames({})}>
           <HeadlessCombobox.Input
             placeholder={placeholder}
-            autoComplete="false"
+            autoComplete="off"
             displayValue={(item) => (item as Option)?.label || ""}
             onChange={(event) => setQuery(event.target.value)}
             className={inputClassNames({})}
