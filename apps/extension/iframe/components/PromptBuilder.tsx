@@ -138,12 +138,11 @@ const PromptBuilder = () => {
   // Create submit handler
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     const finalPrompt = replaceKeywords(
       snippet?.prompt || "",
       choosenParameters,
     );
-
-    console.log(finalPrompt);
 
     // Since this is an iframe , send the message to the parent window
     messageIframeParent<PromptData>({
@@ -171,7 +170,9 @@ const PromptBuilder = () => {
             <span className="block text-small font-medium pointer-events-none text-foreground pb-1 transition-none">
               Prompt Snippet
             </span>
-            <p className="line-clamp-3 opacity-80 text-sm ">{snippet.prompt}</p>
+            <p className="line-clamp-3 opacity-80 text-sm text-default-500">
+              {snippet.prompt}
+            </p>
           </div>
 
           <div className="flex flex-col gap-2 mt-3">
