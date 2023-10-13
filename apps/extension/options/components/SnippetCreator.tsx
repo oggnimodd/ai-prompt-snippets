@@ -80,6 +80,7 @@ const OptionEditor: React.FC<OptionEditorProps> = ({
   }>;
 
   const rootError = errors.parameters?.[parameterIndex]?.options?.root?.message;
+  const optionsError = errors.parameters?.[parameterIndex]?.options?.message;
 
   return (
     <div className="flex flex-col">
@@ -139,7 +140,11 @@ const OptionEditor: React.FC<OptionEditorProps> = ({
       </div>
 
       {/* Display error if there is no options provided */}
-      {rootError && <p className="text-tiny text-danger">{rootError}</p>}
+      {(rootError || optionsError) && (
+        <p className="text-tiny text-danger mb-2">
+          {rootError || optionsError}
+        </p>
+      )}
 
       {options.length < ALLOWED_OPTIONS_NUMBER && (
         <div className="flex gap-x-4 className max-w-[50%]">
