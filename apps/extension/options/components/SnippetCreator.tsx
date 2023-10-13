@@ -13,7 +13,7 @@ import {
 import type { OptionsParam, Snippet } from "../../snippet/model";
 import { snippetSchema } from "../../snippet/model";
 import { nanoid } from "nanoid";
-import { X as CloseIcon } from "lucide-react";
+import { X as CloseIcon, Save } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input, Textarea, Button, Select, SelectItem } from "@nextui-org/react";
 import { Plus } from "lucide-react";
@@ -107,7 +107,7 @@ const OptionEditor: React.FC<OptionEditorProps> = ({
                         }
                         label={optionIndex + 1}
                         labelPlacement="outside-left"
-                        placeholder="Enter the option name"
+                        placeholder="Enter option"
                         {...field}
                         value={field.value.title}
                         required
@@ -142,8 +142,13 @@ const OptionEditor: React.FC<OptionEditorProps> = ({
       {rootError && <p className="text-tiny text-danger">{rootError}</p>}
 
       {options.length < ALLOWED_OPTIONS_NUMBER && (
-        <div className="flex gap-x-4">
+        <div className="flex gap-x-4 className max-w-[50%]">
           <Button
+            className="ml-auto"
+            fullWidth
+            variant="bordered"
+            color="primary"
+            size="sm"
             onPress={() => addNewOption()}
             startContent={<Plus size={18} />}
           >
@@ -187,7 +192,7 @@ const ParameterEditor: React.FC<ParameterEditorProps> = ({
   });
 
   return (
-    <div className="flex flex-col bg-zinc-200 rounded-sm px-5 py-2 gap-y-2">
+    <div className="flex flex-col py-5 gap-y-2 bg-default-200 bg-opacity-80 dark:bg-default-300 dark:bg-opacity-[15%] rounded-xl px-4">
       <Controller
         control={control}
         name={`parameters.${parameterIndex}.title`}
@@ -243,6 +248,7 @@ const ParameterEditor: React.FC<ParameterEditorProps> = ({
       )}
 
       <Button
+        startContent={<CloseIcon size={14} />}
         onPress={() => {
           remove(parameterIndex);
         }}
@@ -328,6 +334,7 @@ const SnippetCreator: React.FC<SnippetCreatorProps> = ({
         labelPlacement="outside"
         errorMessage={errors?.title?.message}
         {...register("title")}
+        classNames={{ label: "text-primary-500 font-bold" }}
       />
 
       <Textarea
@@ -337,11 +344,12 @@ const SnippetCreator: React.FC<SnippetCreatorProps> = ({
         labelPlacement="outside"
         errorMessage={errors?.prompt?.message}
         {...register("prompt")}
+        classNames={{ label: "text-primary-500 font-bold" }}
       />
 
       {parameters.length > 0 && (
         <div className="flex flex-col">
-          <span className="block text-small font-medium text-foreground pb-1.5 will-change-auto origin-top-left transition-all !duration-200 !ease-out motion-reduce:transition-none">
+          <span className="block text-small text-foreground pb-1.5 will-change-auto origin-top-left transition-all !duration-200 !ease-out motion-reduce:transition-none text-primary-500 font-bold">
             Parameters
           </span>
           <div className="flex flex-col gap-y-4">
@@ -360,6 +368,7 @@ const SnippetCreator: React.FC<SnippetCreatorProps> = ({
       {/* For now let just set the max number of params to 5*/}
       {parameters.length < ALLOWED_PARAMETERS_NUMBER && (
         <Button
+          color="primary"
           onPress={() =>
             append({
               type: "string",
@@ -373,7 +382,12 @@ const SnippetCreator: React.FC<SnippetCreatorProps> = ({
         </Button>
       )}
 
-      <Button className="self-end mt-4" color="primary" type="submit">
+      <Button
+        startContent={<Save size={16} />}
+        className="self-end mt-4"
+        color="primary"
+        type="submit"
+      >
         Save
       </Button>
     </form>

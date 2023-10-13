@@ -30,10 +30,10 @@ const SnippetCard: FC<{
   };
 
   return (
-    <div className="bg-zinc-300 bg-opacity-30 rounded-lg p-4 flex flex-col">
-      <span className="font-bold text-xl text-primary-500">{title}</span>
-      <p className="line-clamp-3">{prompt}</p>
-      <div className="flex justify-between mt-auto items-center">
+    <div className="bg-default-200 bg-opacity-80 dark:bg-default-200 dark:bg-opacity-30 rounded-lg p-4 flex flex-col">
+      <span className="font-bold text-xl text-primary-500 mb-3">{title}</span>
+      <p className="line-clamp-3 text-black dark:text-default-500">{prompt}</p>
+      <div className="flex justify-between mt-auto items-center py-3">
         <Link to={`/details/${id}`} className="text-primary-400 underline">
           View Details
         </Link>
