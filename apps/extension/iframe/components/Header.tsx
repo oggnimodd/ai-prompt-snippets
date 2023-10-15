@@ -5,9 +5,18 @@ import {
   Github,
   Moon as DarkIcon,
   Sun as LightIcon,
+  X as CloseIcon,
 } from "lucide-react";
 import { optionsUrl } from "utils/chrome";
 import { useTheme } from "shared/hooks";
+import { messageIframeParent } from "utils/message";
+
+const toggleIframe = () => {
+  // Since this is an iframe , send the message to the parent window
+  messageIframeParent<null>({
+    type: "TOGGLE_IFRAME",
+  });
+};
 
 const Header = () => {
   const { theme, toggleTheme } = useTheme();
@@ -50,6 +59,14 @@ const Header = () => {
           startContent={<ReloadIcon size={16} />}
           className="ml-auto"
           color="primary"
+          isIconOnly
+          size="sm"
+        />
+        <Button
+          onPress={toggleIframe}
+          startContent={<CloseIcon size={16} />}
+          className="ml-auto"
+          color="danger"
           isIconOnly
           size="sm"
         />

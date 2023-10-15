@@ -1,4 +1,4 @@
-type IframeMessageType = "ENTER_PROMPT";
+type IframeMessageType = "ENTER_PROMPT" | "TOGGLE_IFRAME";
 
 export interface PromptData {
   prompt: string;
@@ -6,7 +6,7 @@ export interface PromptData {
 
 export interface IframeMessage<T> {
   type: IframeMessageType;
-  message: T;
+  message?: T | null;
 }
 
 export const messageIframeParent = <T>({ type, message }: IframeMessage<T>) => {

@@ -20,7 +20,7 @@ class Listener {
           event.origin === extensionUrl &&
           event.data.type === "ENTER_PROMPT"
         ) {
-          this.prompt = event.data.message.prompt;
+          this.prompt = event.data?.message?.prompt || "";
 
           if (!this.prompt) return;
 

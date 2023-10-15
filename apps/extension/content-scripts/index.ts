@@ -2,12 +2,77 @@ import { extensionUrl } from "utils/chrome";
 import { getLocalStorageValue } from "utils/storage";
 import Listener from "./listener";
 import { ChatHost, ChatProvider, SupportedProviders } from "models/provider";
+import { IframeMessage } from "utils/message";
+
+// TODO : create a new injectable css to handle all the styling
 
 const newDiv = document.createElement("div");
+newDiv.style.display = "flex";
 const hostname = window.location.hostname as ChatHost;
 let iframeMountPointParent: HTMLElement | null;
 const iframeUrl = `${extensionUrl}/iframe/index.html`;
 const iframe = document.createElement("iframe");
+let togglerButton: HTMLButtonElement | null = null;
+
+const injectTogglerButton = () => {
+  const img = document.createElement("img");
+  img.style.width = "30px";
+  img.style.height = "30px";
+  img.src = `${extensionUrl}/images/icon.svg`;
+
+  const button = document.createElement("button");
+  const radius = "10px";
+  button.style.borderTopLeftRadius = radius;
+  button.style.borderBottomLeftRadius = radius;
+  button.style.width = "50px";
+  button.style.height = "50px";
+  button.style.position = "fixed";
+  button.style.right = "0px";
+  button.style.top = "80px";
+  button.style.display = "none";
+  button.style.justifyContent = "center";
+  button.style.alignItems = "center";
+  button.style.zIndex = "2147483647";
+  button.style.backgroundColor = "#0070f0";
+  button.style.boxShadow = "rgba(0, 0, 0, 0.24) 0px 3px 8px";
+  button.style.border = "none";
+  button.style.outline = "none";
+
+  button.append(img);
+  button.onclick = toggleIframe;
+
+  console.log(button);
+
+  document.body.append(button);
+  togglerButton = button;
+
+  window.addEventListener(
+    "message",
+    (event: MessageEvent<IframeMessage<null>>) => {
+      if (
+        event.origin === extensionUrl &&
+        event.data.type === "TOGGLE_IFRAME"
+      ) {
+        toggleIframe();
+      }
+    },
+  );
+};
+
+const toggleIframe = () => {
+  if (togglerButton?.style.display === "none") {
+    togglerButton.style.display = "flex";
+  } else if (togglerButton?.style.display === "flex") {
+    togglerButton.style.display = "none";
+  }
+
+  if (newDiv?.style.display === "none") {
+    newDiv.style.display = "flex";
+  } else if (newDiv?.style.display === "flex") {
+    console.log("Test");
+    newDiv.style.display = "none";
+  }
+};
 
 const isProviderEnabled = async (provider: ChatProvider) => {
   // The empty array just for error handling
@@ -72,9 +137,9 @@ const injectIframe = async () => {
   }
 
   if (await isProviderEnabled("claude")) {
-    newDiv.className = "fixed top-0 left-0 z-[9999]";
+    newDiv.className = "fixed top-0 right-0 z-[9999]";
     // @ts-ignore
-    newDiv.style = "width:250px;height:100%;padding-top:60px;";
+    newDiv.style = "width:250px;height:100%;padding-top:60px;display:flex;";
 
     iframeMountPointParent = document.querySelector("body");
 
@@ -95,7 +160,8 @@ const injectIframe = async () => {
 
   if (await isProviderEnabled("perplexity")) {
     // @ts-ignore
-    newDiv.style = "position:sticky;top:0;right:0;width:auto;height:100vh;";
+    newDiv.style =
+      "position:sticky;top:0;right:0;width:auto;height:100vh;display:flex;";
 
     iframeMountPointParent = document.querySelector(
       "main > div > div > div + div",
@@ -128,3 +194,4 @@ const injectIframe = async () => {
 };
 
 injectIframe();
+injectTogglerButton();
