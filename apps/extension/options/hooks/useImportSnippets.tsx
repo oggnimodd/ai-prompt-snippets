@@ -21,10 +21,11 @@ const useImportSnippets = ({ onSuccess, onError }: ImportSnippetsProps) => {
           // parse the content
           const fileContent = JSON.parse(textContent);
           await importSnippets(fileContent);
-          clear();
           onSuccess();
         } catch (error) {
           onError(error);
+        } finally {
+          clear();
         }
       }
     })();
