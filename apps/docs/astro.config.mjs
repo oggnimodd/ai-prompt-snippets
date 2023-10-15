@@ -19,6 +19,7 @@ export default defineConfig({
           ],
         },
       ],
+      favicon: "/images/icon.svg",
     }),
   ],
   // https://github.com/withastro/astro/issues/8297
