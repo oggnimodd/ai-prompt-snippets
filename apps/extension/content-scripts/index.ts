@@ -69,7 +69,6 @@ const toggleIframe = () => {
   if (newDiv?.style.display === "none") {
     newDiv.style.display = "flex";
   } else if (newDiv?.style.display === "flex") {
-    console.log("Test");
     newDiv.style.display = "none";
   }
 };
