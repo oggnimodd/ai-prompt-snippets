@@ -1,7 +1,6 @@
 import { extensionUrl } from "utils/chrome";
 import { PromptData, IframeMessage } from "utils/message";
-
-type ChatProvider = "chat-gpt" | "poe" | "claude" | "perplexity";
+import type { ChatProvider } from "models/provider";
 
 class Listener {
   private chatprovider: ChatProvider;

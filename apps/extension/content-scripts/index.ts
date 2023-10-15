@@ -1,8 +1,9 @@
 import { extensionUrl } from "utils/chrome";
 import Listener from "./listener";
+import { ChatHost } from "models/provider";
 
 const newDiv = document.createElement("div");
-const hostname = window.location.hostname;
+const hostname = window.location.hostname as ChatHost;
 let iframeMountPointParent: HTMLElement | null;
 const iframeUrl = `${extensionUrl}/iframe/index.html`;
 const iframe = document.createElement("iframe");
