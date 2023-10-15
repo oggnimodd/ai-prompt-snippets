@@ -41,7 +41,8 @@ export const importSnippets = async (snippetsFile: unknown) => {
     });
 
     // Concat newSnippets with existing snippets
-    const existingSnippets = await getLocalStorageValue("snippets");
+    const existingSnippets = (await getLocalStorageValue("snippets")) || [];
+
     const snippets = [...existingSnippets, ...newSnippets];
     setOrUpdateLocalStorageValue("snippets", snippets);
   } else {

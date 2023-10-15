@@ -20,7 +20,6 @@ const useImportSnippets = ({ onSuccess, onError }: ImportSnippetsProps) => {
         try {
           // parse the content
           const fileContent = JSON.parse(textContent);
-
           await importSnippets(fileContent);
           onSuccess();
         } catch (error) {
