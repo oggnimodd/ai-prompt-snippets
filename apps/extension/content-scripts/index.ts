@@ -41,8 +41,6 @@ const injectTogglerButton = () => {
   button.append(img);
   button.onclick = toggleIframe;
 
-  console.log(button);
-
   document.body.append(button);
   togglerButton = button;
 
