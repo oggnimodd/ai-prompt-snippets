@@ -1,6 +1,7 @@
 import Routes from "./routes";
 import { getLocalStorageValue } from "utils/storage";
 import { Toaster } from "react-hot-toast";
+import { useTheme } from "shared/hooks";
 
 (async () => {
   const results = await getLocalStorageValue("snippets");
@@ -8,6 +9,7 @@ import { Toaster } from "react-hot-toast";
 })();
 
 const App = () => {
+  useTheme();
   return (
     <>
       <Toaster toastOptions={{ duration: 10000 }} position="bottom-right" />
