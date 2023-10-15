@@ -1,7 +1,7 @@
 import { Button, Input } from "@nextui-org/react";
 import { Link } from "react-router-dom";
 import { SnippetList } from "../components";
-import { Download, Plus, Upload, Moon, Sun } from "lucide-react";
+import { Download, Plus, Upload, Moon, Sun, Trash2 } from "lucide-react";
 import { LoadingWithMessage, Toast } from "@acme/ui";
 import { useImportSnippets, useSearchSnippets, useSnippets } from "../hooks";
 import { useTheme } from "shared/hooks";
@@ -10,8 +10,14 @@ import { delay } from "utils/delay";
 import { toast } from "react-hot-toast";
 
 const Index = () => {
-  const { isLoading, snippets, setSnippets, getSnippets, setIsLoading } =
-    useSnippets();
+  const {
+    isLoading,
+    snippets,
+    setSnippets,
+    getSnippets,
+    setIsLoading,
+    deleteAllSnippets,
+  } = useSnippets();
   const { search, onSearchChange, clearSearch } = useSearchSnippets();
   const { chooseSnippetsFile } = useImportSnippets({
     onSuccess: async () => {
@@ -69,6 +75,13 @@ const Index = () => {
             color="primary"
           >
             {theme === "dark" ? "Dark" : "Light"}
+          </Button>
+          <Button
+            onPress={deleteAllSnippets}
+            startContent={<Trash2 size={18} />}
+            color="primary"
+          >
+            Clear
           </Button>
           <Button
             onPress={chooseSnippetsFile}

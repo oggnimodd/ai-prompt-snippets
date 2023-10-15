@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
-import { getLocalStorageValue } from "utils/storage";
+import {
+  getLocalStorageValue,
+  setOrUpdateLocalStorageValue,
+} from "utils/storage";
 import { Snippet } from "models/snippet";
 
 const useSnippets = () => {
@@ -21,11 +24,23 @@ const useSnippets = () => {
     }
   };
 
+  const deleteAllSnippets = async () => {
+    await setOrUpdateLocalStorageValue("snippets", []);
+    await getSnippets();
+  };
+
   useEffect(() => {
     getSnippets();
   }, []);
 
-  return { isLoading, setIsLoading, snippets, setSnippets, getSnippets };
+  return {
+    isLoading,
+    setIsLoading,
+    snippets,
+    setSnippets,
+    getSnippets,
+    deleteAllSnippets,
+  };
 };
 
 export default useSnippets;
