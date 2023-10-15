@@ -7,7 +7,7 @@ import { saveAs } from "file-saver";
 import { nanoid } from "nanoid";
 import type { Snippet } from "models/snippet";
 
-export const exportSnippets = async () => {
+export const exportSnippets = async (singleSnippet?: Snippet) => {
   const snippets = (await getLocalStorageValue("snippets")) as Snippet[];
 
   if (!snippets || snippets.length === 0) {
@@ -16,7 +16,7 @@ export const exportSnippets = async () => {
 
   const forExporting: SnippetsFile = {
     version: "0",
-    snippets,
+    snippets: singleSnippet ? [singleSnippet] : snippets,
   };
 
   // Create a blob of the data
@@ -24,7 +24,9 @@ export const exportSnippets = async () => {
     type: "application/json",
   });
 
-  const fileName = `ai-chat-snippets-${nanoid()}.json`;
+  const fileName = singleSnippet
+    ? `${singleSnippet.title.toLowerCase().replace(" ", "-")}-${nanoid(6)}`
+    : `ai-chat-snippets-${nanoid(10)}.json`;
 
   // Save the file
   saveAs(fileToSave, fileName);

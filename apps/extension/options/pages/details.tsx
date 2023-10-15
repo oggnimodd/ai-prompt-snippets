@@ -29,7 +29,7 @@ const Add = () => {
   }
 
   return (
-    <SnippetCreatorWrapper>
+    <SnippetCreatorWrapper snippet={snippet}>
       <SnippetCreator snippet={snippet} />
     </SnippetCreatorWrapper>
   );
