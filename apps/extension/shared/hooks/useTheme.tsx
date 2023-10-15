@@ -7,6 +7,7 @@ const DEFAULT_THEME: Theme = "dark";
 const useTheme = () => {
   const [theme, setTheme] = useState<Theme>(() => {
     const savedTheme = localStorage.getItem("theme") as Theme;
+
     return savedTheme ? savedTheme : DEFAULT_THEME;
   });
 
@@ -18,7 +19,7 @@ const useTheme = () => {
   };
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
+    const savedTheme = localStorage.getItem("theme") || DEFAULT_THEME;
     if (savedTheme) {
       document.documentElement.classList.toggle("dark", savedTheme === "dark");
     }
