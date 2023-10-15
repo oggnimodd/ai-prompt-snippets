@@ -7,10 +7,10 @@ import {
   Sun as LightIcon,
 } from "lucide-react";
 import { optionsUrl } from "utils/chrome";
-import { useDarkMode } from "shared/hooks";
+import { useTheme } from "shared/hooks";
 
 const Header = () => {
-  const { theme, toggleTheme } = useDarkMode();
+  const { theme, toggleTheme } = useTheme();
 
   return (
     <div className="py-2 flex w-full items-center mb-2">

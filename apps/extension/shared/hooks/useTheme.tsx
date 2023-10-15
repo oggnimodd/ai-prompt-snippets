@@ -4,7 +4,7 @@ type Theme = "dark" | "light";
 
 const DEFAULT_THEME: Theme = "dark";
 
-const useDarkMode = () => {
+const useTheme = () => {
   const [theme, setTheme] = useState<Theme>(() => {
     const savedTheme = localStorage.getItem("theme") as Theme;
     return savedTheme ? savedTheme : DEFAULT_THEME;
@@ -27,4 +27,4 @@ const useDarkMode = () => {
   return { theme, toggleTheme };
 };
 
-export default useDarkMode;
+export default useTheme;

@@ -1,6 +1,6 @@
 import Routes from "./routes";
 import { getLocalStorageValue } from "utils/storage";
-import { useDarkMode } from "shared/hooks";
+import { useTheme } from "shared/hooks";
 
 (async () => {
   const results = await getLocalStorageValue("snippets");
@@ -8,7 +8,7 @@ import { useDarkMode } from "shared/hooks";
 })();
 
 const App = () => {
-  const { toggleTheme } = useDarkMode();
+  const { toggleTheme } = useTheme();
 
   return (
     <div className="flex w-full text-base">
