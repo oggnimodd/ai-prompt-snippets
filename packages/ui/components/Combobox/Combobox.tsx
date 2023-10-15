@@ -49,7 +49,7 @@ const Combobox: React.FC<ComboboxProps> = ({
             autoComplete="off"
             displayValue={(item) => (item as Option)?.label || ""}
             onChange={(event) => setQuery(event.target.value)}
-            className={inputClassNames({})}
+            className={cn(inputClassNames({}), "pr-12")}
             data-cy="combobox-input"
             ref={inputRef}
           />
