@@ -1,9 +1,10 @@
 import { Button, Input } from "@nextui-org/react";
 import { Link } from "react-router-dom";
 import { SnippetList } from "../components";
-import { Download, Plus, Upload } from "lucide-react";
+import { Download, Plus, Upload, Moon, Sun } from "lucide-react";
 import { LoadingWithMessage } from "@acme/ui";
 import { useImportSnippets, useSearchSnippets, useSnippets } from "../hooks";
+import { useTheme } from "shared/hooks";
 import { exportSnippets } from "../../export-import";
 import { delay } from "utils/delay";
 
@@ -20,6 +21,7 @@ const Index = () => {
     // TODO : use toast to display error
     onError: () => alert("Not a valid snippets file"),
   });
+  const { toggleTheme, theme } = useTheme();
 
   if (isLoading) {
     return <LoadingWithMessage message="Getting All Your Snippets" />;
@@ -27,7 +29,7 @@ const Index = () => {
 
   return (
     <>
-      <div className="my-4 py-3 flex flex-wrap justify-between gap-x-4 gap-y-2 items-end">
+      <div className="flex flex-wrap justify-between gap-x-4 gap-y-2 items-end mb-8">
         <Input
           onClear={clearSearch}
           onChange={onSearchChange}
@@ -40,7 +42,16 @@ const Index = () => {
         />
         <div className="self-auto flex items-center gap-3 flex-wrap">
           <Button
-            onPress={() => chooseSnippetsFile()}
+            onPress={toggleTheme}
+            startContent={
+              theme === "dark" ? <Moon size={18} /> : <Sun size={18} />
+            }
+            color="primary"
+          >
+            {theme === "dark" ? "Dark" : "Light"}
+          </Button>
+          <Button
+            onPress={chooseSnippetsFile}
             startContent={<Download size={18} />}
             color="primary"
           >
@@ -59,7 +70,7 @@ const Index = () => {
             color="primary"
             to="/add"
           >
-            Add New
+            Add
           </Button>
         </div>
       </div>

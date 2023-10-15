@@ -21,7 +21,7 @@ const Add = () => {
   }
 
   return (
-    <div className="mt-4">
+    <div>
       {/* TODO : create a reusable layout for this kind of page */}
 
       <div className="mb-2 flex">

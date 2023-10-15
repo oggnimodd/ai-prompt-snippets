@@ -1,6 +1,5 @@
 import Routes from "./routes";
 import { getLocalStorageValue } from "utils/storage";
-import { useTheme } from "shared/hooks";
 
 (async () => {
   const results = await getLocalStorageValue("snippets");
@@ -8,12 +7,9 @@ import { useTheme } from "shared/hooks";
 })();
 
 const App = () => {
-  const { toggleTheme } = useTheme();
-
   return (
     <div className="flex w-full text-base">
-      <div className="w-full min-h-screen mx-auto lg:max-w-[800px] px-4 lg:px-20 xl:px-0 pb-10">
-        <button onClick={toggleTheme}>toggle theme</button>
+      <div className="w-full min-h-screen mx-auto lg:max-w-[800px] px-4 lg:px-20 xl:px-0 pb-10 my-8">
         <Routes />
       </div>
     </div>
