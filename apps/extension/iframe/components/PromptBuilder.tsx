@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 import { Param } from "models/snippet";
 import { PromptData, messageIframeParent } from "utils/message";
 import { optionsUrl } from "utils/chrome";
+import { Send as SendIcon } from "lucide-react";
 
 type HandleParameterChange = (key: string, value: string) => void;
 
@@ -189,8 +190,13 @@ const PromptBuilder = () => {
             })}
           </div>
 
-          <Button className="mt-3" type="submit" color="primary">
-            Send
+          <Button
+            startContent={<SendIcon size={16} />}
+            className="mt-3 ml-auto"
+            type="submit"
+            color="primary"
+          >
+            Enter
           </Button>
         </>
       )}
