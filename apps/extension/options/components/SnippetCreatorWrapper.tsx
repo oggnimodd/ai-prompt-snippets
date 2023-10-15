@@ -7,7 +7,7 @@ import { exportSnippets } from "export-import";
 
 export interface SnippetCreatorWrapperProps {
   children: React.ReactNode;
-  snippet: Snippet;
+  snippet?: Snippet;
 }
 
 const SnippetCreatorWrapper: FC<SnippetCreatorWrapperProps> = ({

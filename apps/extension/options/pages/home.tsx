@@ -91,7 +91,7 @@ const Index = () => {
             Import
           </Button>
           <Button
-            onPress={exportSnippets}
+            onPress={() => exportSnippets()}
             startContent={<Upload size={18} />}
             color="primary"
           >
