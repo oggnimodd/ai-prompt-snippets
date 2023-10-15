@@ -8,7 +8,7 @@ interface ImportSnippetsProps {
 }
 
 const useImportSnippets = ({ onSuccess, onError }: ImportSnippetsProps) => {
-  const { filesContent, openFilePicker, ...rest } = useFilePicker({
+  const { filesContent, openFilePicker, clear, ...rest } = useFilePicker({
     accept: ".json",
   });
 
@@ -21,6 +21,7 @@ const useImportSnippets = ({ onSuccess, onError }: ImportSnippetsProps) => {
           // parse the content
           const fileContent = JSON.parse(textContent);
           await importSnippets(fileContent);
+          clear();
           onSuccess();
         } catch (error) {
           onError(error);
@@ -32,6 +33,7 @@ const useImportSnippets = ({ onSuccess, onError }: ImportSnippetsProps) => {
   return {
     ...rest,
     filesContent,
+    clear,
     chooseSnippetsFile: openFilePicker,
   };
 };
