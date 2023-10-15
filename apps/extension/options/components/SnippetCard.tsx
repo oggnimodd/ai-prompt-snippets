@@ -39,7 +39,7 @@ const SnippetCard: FC<{
         </Link>
 
         <Button
-          onClick={deleteSnippet}
+          onPress={deleteSnippet}
           color="primary"
           isIconOnly
           startContent={<DeleteIcon size={18} />}
