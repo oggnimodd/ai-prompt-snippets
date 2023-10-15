@@ -2,11 +2,12 @@ import { Button, Input } from "@nextui-org/react";
 import { Link } from "react-router-dom";
 import { SnippetList } from "../components";
 import { Download, Plus, Upload, Moon, Sun } from "lucide-react";
-import { LoadingWithMessage } from "@acme/ui";
+import { LoadingWithMessage, Toast } from "@acme/ui";
 import { useImportSnippets, useSearchSnippets, useSnippets } from "../hooks";
 import { useTheme } from "shared/hooks";
 import { exportSnippets } from "../../export-import";
 import { delay } from "utils/delay";
+import { toast } from "react-hot-toast";
 
 const Index = () => {
   const { isLoading, snippets, setSnippets, getSnippets, setIsLoading } =
@@ -17,9 +18,28 @@ const Index = () => {
       setIsLoading(true);
       await delay(200);
       await getSnippets();
+      toast.custom((t) => {
+        return (
+          <Toast
+            isClosable
+            onClose={() => toast.remove(t.id)}
+            variant="success"
+            description="Snippets successfully imported"
+          />
+        );
+      });
     },
-    // TODO : use toast to display error
-    onError: () => alert("Not a valid snippets file"),
+    onError: () =>
+      toast.custom((t) => {
+        return (
+          <Toast
+            isClosable
+            onClose={() => toast.remove(t.id)}
+            variant="error"
+            description="Not a valid snippets file"
+          />
+        );
+      }),
   });
   const { toggleTheme, theme } = useTheme();
 

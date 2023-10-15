@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body{
-  @apply min-h-screen;
+  @apply min-h-screen text-base;
 }
 
 html.dark {
