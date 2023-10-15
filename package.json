@@ -24,7 +24,6 @@
     "**/*.{js,ts,jsx,tsx}": ["biome check --apply .", "biome format --write ."]
   },
   "workspaces": [
-    "apps/nextjs",
     "apps/extension",
     "apps/docs",
     "packages/config/tailwind",
