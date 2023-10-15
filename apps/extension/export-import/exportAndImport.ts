@@ -5,9 +5,14 @@ import {
 import { snippetsFileSchema, type SnippetsFile } from "../models/file";
 import { saveAs } from "file-saver";
 import { nanoid } from "nanoid";
+import type { Snippet } from "models/snippet";
 
 export const exportSnippets = async () => {
-  const snippets = await getLocalStorageValue("snippets");
+  const snippets = (await getLocalStorageValue("snippets")) as Snippet[];
+
+  if (!snippets || snippets.length === 0) {
+    return;
+  }
 
   const forExporting: SnippetsFile = {
     version: "0",
