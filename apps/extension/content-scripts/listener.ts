@@ -4,12 +4,10 @@ import { PromptData, IframeMessage } from "utils/message";
 type ChatProvider = "chat-gpt" | "poe" | "claude" | "perplexity";
 
 class Listener {
-  private autoSubmit: boolean;
   private chatprovider: ChatProvider;
   private prompt: string;
 
-  constructor(autoSubmit: boolean, provider: ChatProvider) {
-    this.autoSubmit = autoSubmit;
+  constructor(provider: ChatProvider) {
     this.chatprovider = provider;
     this.prompt = "";
   }
@@ -125,9 +123,7 @@ class Listener {
   }
 
   submit(submitButton: HTMLButtonElement) {
-    if (this.autoSubmit) {
-      submitButton.click();
-    }
+    submitButton.click();
   }
 
   setNativeValue = (element: HTMLTextAreaElement, value: string) => {

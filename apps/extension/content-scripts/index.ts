@@ -27,7 +27,7 @@ if (hostname === "chat.openai.com") {
 
     newDiv.append(iframe);
 
-    const listener = new Listener(true, "chat-gpt");
+    const listener = new Listener("chat-gpt");
     listener.listen();
   }
 }
@@ -53,7 +53,7 @@ if (hostname === "poe.com") {
 
     newDiv.append(iframe);
 
-    const listener = new Listener(true, "poe");
+    const listener = new Listener("poe");
     listener.listen();
   }
 }
@@ -75,7 +75,7 @@ if (hostname === "claude.ai") {
 
     newDiv.append(iframe);
 
-    const listener = new Listener(true, "claude");
+    const listener = new Listener("claude");
     listener.listen();
   }
 }
@@ -108,7 +108,7 @@ if (hostname === "www.perplexity.ai") {
 
     newDiv.append(iframe);
 
-    const listener = new Listener(true, "perplexity");
+    const listener = new Listener("perplexity");
     listener.listen();
   }
 }
