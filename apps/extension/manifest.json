@@ -23,7 +23,11 @@
   ],
   "web_accessible_resources": [
     {
-      "resources": ["content-scripts/index.ts", "iframe/index.html"],
+      "resources": [
+        "content-scripts/index.ts",
+        "iframe/index.html",
+        "images/icon.svg"
+      ],
       "matches": ["<all_urls>"]
     }
   ],
