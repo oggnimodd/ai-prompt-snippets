@@ -1,6 +1,7 @@
 import { extensionUrl } from "utils/chrome";
+import { getLocalStorageValue } from "utils/storage";
 import Listener from "./listener";
-import { ChatHost } from "models/provider";
+import { ChatHost, ChatProvider, SupportedProviders } from "models/provider";
 
 const newDiv = document.createElement("div");
 const hostname = window.location.hostname as ChatHost;
@@ -8,108 +9,122 @@ let iframeMountPointParent: HTMLElement | null;
 const iframeUrl = `${extensionUrl}/iframe/index.html`;
 const iframe = document.createElement("iframe");
 
-if (hostname === "chat.openai.com") {
-  iframeMountPointParent = document.querySelector(
-    "#__next > div.relative.z-0.flex.h-full.w-full.overflow-hidden > div.relative.flex.h-full.max-w-full.flex-1.flex-col.overflow-hidden",
-  );
+const isProviderEnabled = async (provider: ChatProvider) => {
+  // The empty array just for error handling
+  const providers =
+    ((await getLocalStorageValue("providers")) as SupportedProviders) || [];
 
-  const main = iframeMountPointParent?.querySelector("main");
+  const providerInfo = providers.find((p) => p.name === provider);
 
-  if (iframeMountPointParent && main) {
-    main.style.width = "calc(100% - 250px)";
+  return hostname === providerInfo?.hostname && providerInfo.enabled;
+};
 
-    iframeMountPointParent.classList.remove("flex-col");
-    iframeMountPointParent.classList.add("flex-row");
-    iframeMountPointParent.append(newDiv);
-
-    iframe.src = iframeUrl;
-    // @ts-ignore
-    iframe.style = "width: 100%; height: 100%;";
-
-    newDiv.append(iframe);
-
-    const listener = new Listener("chat-gpt");
-    listener.listen();
-  }
-}
-
-if (hostname === "poe.com") {
-  // create div tag with 200px width
-  newDiv.style.width = "250px";
-  newDiv.style.height = "100%";
-
-  iframeMountPointParent = document.querySelector(
-    "[class*='SidebarLayout_layoutWrapper']",
-  );
-
-  iframeMountPointParent?.querySelector("aside:last-child")?.remove();
-
-  if (iframeMountPointParent) {
-    iframeMountPointParent.append(newDiv);
-
-    iframe.src = iframeUrl;
-    // @ts-ignore
-    iframe.style =
-      "width: 100%; height: 100%; border: none!important; outline:none!important;";
-
-    newDiv.append(iframe);
-
-    const listener = new Listener("poe");
-    listener.listen();
-  }
-}
-
-if (hostname === "claude.ai") {
-  newDiv.className = "fixed top-0 left-0 z-[9999]";
-  // @ts-ignore
-  newDiv.style = "width:250px;height:100%;padding-top:60px;";
-
-  iframeMountPointParent = document.querySelector("body");
-
-  if (iframeMountPointParent) {
-    iframeMountPointParent.append(newDiv);
-
-    iframe.src = iframeUrl;
-    // @ts-ignore
-    iframe.style =
-      "width: 100%; height: 100%; border: none!important; outline:none!important;";
-
-    newDiv.append(iframe);
-
-    const listener = new Listener("claude");
-    listener.listen();
-  }
-}
-
-if (hostname === "www.perplexity.ai") {
-  // @ts-ignore
-  newDiv.style = "position:sticky;top:0;right:0;width:auto;height:100vh;";
-
-  iframeMountPointParent = document.querySelector(
-    "main > div > div > div + div",
-  );
-
-  if (iframeMountPointParent) {
-    iframeMountPointParent.classList.add("flex", "relative");
-    const mainContainer = document.querySelector(
-      "main > div > div > div + div > div:first-child",
+const injectIframe = async () => {
+  if (await isProviderEnabled("chat-gpt")) {
+    iframeMountPointParent = document.querySelector(
+      "#__next > div.relative.z-0.flex.h-full.w-full.overflow-hidden > div.relative.flex.h-full.max-w-full.flex-1.flex-col.overflow-hidden",
     );
 
-    if (mainContainer) {
-      //@ts-ignore
-      mainContainer.style = "flex:1";
+    const main = iframeMountPointParent?.querySelector("main");
+
+    if (iframeMountPointParent && main) {
+      main.style.width = "calc(100% - 250px)";
+
+      iframeMountPointParent.classList.remove("flex-col");
+      iframeMountPointParent.classList.add("flex-row");
+      iframeMountPointParent.append(newDiv);
+
+      iframe.src = iframeUrl;
+      // @ts-ignore
+      iframe.style = "width: 100%; height: 100%;";
+
+      newDiv.append(iframe);
+
+      const listener = new Listener("chat-gpt");
+      listener.listen();
     }
-
-    iframeMountPointParent.append(newDiv);
-
-    iframe.src = iframeUrl;
-    // @ts-ignore
-    iframe.style =
-      "width: 100%; height: 100%; border: none!important; outline:none!important;";
-
-    newDiv.append(iframe);
-
-    const listener = new Listener("perplexity");
-    listener.listen();
   }
-}
+
+  if (await isProviderEnabled("poe")) {
+    // create div tag with 200px width
+    newDiv.style.width = "250px";
+    newDiv.style.height = "100%";
+
+    iframeMountPointParent = document.querySelector(
+      "[class*='SidebarLayout_layoutWrapper']",
+    );
+
+    iframeMountPointParent?.querySelector("aside:last-child")?.remove();
+
+    if (iframeMountPointParent) {
+      iframeMountPointParent.append(newDiv);
+
+      iframe.src = iframeUrl;
+      // @ts-ignore
+      iframe.style =
+        "width: 100%; height: 100%; border: none!important; outline:none!important;";
+
+      newDiv.append(iframe);
+
+      const listener = new Listener("poe");
+      listener.listen();
+    }
+  }
+
+  if (await isProviderEnabled("claude")) {
+    newDiv.className = "fixed top-0 left-0 z-[9999]";
+    // @ts-ignore
+    newDiv.style = "width:250px;height:100%;padding-top:60px;";
+
+    iframeMountPointParent = document.querySelector("body");
+
+    if (iframeMountPointParent) {
+      iframeMountPointParent.append(newDiv);
+
+      iframe.src = iframeUrl;
+      // @ts-ignore
+      iframe.style =
+        "width: 100%; height: 100%; border: none!important; outline:none!important;";
+
+      newDiv.append(iframe);
+
+      const listener = new Listener("claude");
+      listener.listen();
+    }
+  }
+
+  if (await isProviderEnabled("perplexity")) {
+    // @ts-ignore
+    newDiv.style = "position:sticky;top:0;right:0;width:auto;height:100vh;";
+
+    iframeMountPointParent = document.querySelector(
+      "main > div > div > div + div",
+    );
+
+    if (iframeMountPointParent) {
+      iframeMountPointParent.classList.add("flex", "relative");
+      const mainContainer = document.querySelector(
+        "main > div > div > div + div > div:first-child",
+      );
+
+      if (mainContainer) {
+        //@ts-ignore
+        mainContainer.style = "flex:1";
+      }
+
+      iframeMountPointParent.append(newDiv);
+
+      iframe.src = iframeUrl;
+      // @ts-ignore
+      iframe.style =
+        "width: 100%; height: 100%; border: none!important; outline:none!important;";
+
+      newDiv.append(iframe);
+
+      const listener = new Listener("perplexity");
+      listener.listen();
+    }
+  }
+};
+
+injectIframe();

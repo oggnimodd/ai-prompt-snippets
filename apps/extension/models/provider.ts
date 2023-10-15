@@ -5,9 +5,10 @@ export type ChatHost =
   | "claude.ai"
   | "www.perplexity.ai";
 
-export interface Provider {
+export interface ProviderInfo {
   name: ChatProvider;
   hostname: ChatHost;
+  enabled: boolean;
 }
 
-export type SupportedProviders = Provider[];
+export type SupportedProviders = ProviderInfo[];

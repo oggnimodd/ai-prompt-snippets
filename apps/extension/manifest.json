@@ -4,6 +4,10 @@
   "name": "Ai Chat Snippet",
   "version": "1.0.0",
   "action": { "default_popup": "popup/index.html" },
+  "background": {
+    "service_worker": "background/index.ts",
+    "type": "module"
+  },
   "content_scripts": [
     {
       "matches": [

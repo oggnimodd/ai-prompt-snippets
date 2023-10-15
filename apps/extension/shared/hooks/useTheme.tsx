@@ -1,8 +1,5 @@
 import { useEffect, useState } from "react";
-
-type Theme = "dark" | "light";
-
-const DEFAULT_THEME: Theme = "dark";
+import { DEFAULT_THEME, type Theme } from "../settings";
 
 const useTheme = () => {
   const [theme, setTheme] = useState<Theme>(() => {

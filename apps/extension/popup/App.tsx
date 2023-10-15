@@ -1,9 +1,12 @@
-import { Button } from "@nextui-org/react";
+import ChatProvider from "./components/ChatProvider";
+import { useTheme } from "../shared/hooks";
 
 const App = () => {
+  useTheme();
+
   return (
-    <div>
-      <Button color="secondary">Test</Button>
+    <div className="w-[300px] p-5">
+      <ChatProvider />
     </div>
   );
 };
