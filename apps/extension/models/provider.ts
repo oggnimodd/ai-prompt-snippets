@@ -1,9 +1,15 @@
-export type ChatProvider = "chat-gpt" | "poe" | "claude" | "perplexity";
+export type ChatProvider =
+  | "chat-gpt"
+  | "poe"
+  | "claude"
+  | "perplexity"
+  | "bard";
 export type ChatHost =
   | "chat.openai.com"
   | "poe.com"
   | "claude.ai"
-  | "www.perplexity.ai";
+  | "www.perplexity.ai"
+  | "bard.google.com";
 
 export interface ProviderInfo {
   name: ChatProvider;

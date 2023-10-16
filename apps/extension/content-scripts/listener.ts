@@ -37,6 +37,9 @@ class Listener {
             case "poe":
               this.poe();
               break;
+            case "bard":
+              this.bard();
+              break;
             default:
               break;
           }
@@ -119,6 +122,24 @@ class Listener {
     promptField.dispatchEvent(new Event("input", { bubbles: true }));
 
     this.submit(submitButton);
+  }
+
+  bard() {
+    const promptField = document.querySelector(
+      ".ql-editor.textarea",
+    ) as HTMLDivElement;
+
+    const paragraph = document.createElement("p");
+    paragraph.innerHTML = this.prompt;
+    promptField.appendChild(paragraph);
+
+    setTimeout(() => {
+      const submitButton = document.querySelector(
+        ".send-button-container button",
+      ) as HTMLButtonElement;
+
+      this.submit(submitButton);
+    }, 100);
   }
 
   submit(submitButton: HTMLButtonElement) {

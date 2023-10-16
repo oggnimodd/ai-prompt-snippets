@@ -25,4 +25,9 @@ export const DEFAULT_PROVIDERS: SupportedProviders = [
     hostname: "claude.ai",
     enabled: true,
   },
+  {
+    name: "bard",
+    hostname: "bard.google.com",
+    enabled: true,
+  },
 ];

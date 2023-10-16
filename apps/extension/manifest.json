@@ -14,7 +14,8 @@
         "https://chat.openai.com/*",
         "https://poe.com/*",
         "https://claude.ai/*",
-        "https://www.perplexity.ai/*"
+        "https://www.perplexity.ai/*",
+        "https://bard.google.com/chat/*"
       ],
       "js": ["content-scripts/index.ts"],
       "all_frames": false,
