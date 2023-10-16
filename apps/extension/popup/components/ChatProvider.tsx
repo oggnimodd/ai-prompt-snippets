@@ -24,6 +24,7 @@ const ChatProvider: FC = () => {
         {providers.map((provider) => {
           return (
             <Switch
+              key={provider.hostname}
               onValueChange={() => {
                 toggleProvider(provider.name);
               }}
