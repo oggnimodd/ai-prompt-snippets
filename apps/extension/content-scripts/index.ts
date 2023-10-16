@@ -69,6 +69,15 @@ const toggleIframe = () => {
   } else if (newDiv?.style.display === "flex") {
     newDiv.style.display = "none";
   }
+
+  // TODO : this is just a hack, need to refactor the entire content-scripts:
+  if (hostname === "bard.google.com" && iframeMountPointParent) {
+    if (iframeMountPointParent.style.width === "calc(100% - 250px)") {
+      iframeMountPointParent.style.width = "100%";
+    } else if (iframeMountPointParent.style.width === "100%") {
+      iframeMountPointParent.style.width = "calc(100% - 250px)";
+    }
+  }
 };
 
 const isProviderEnabled = async (provider: ChatProvider) => {
@@ -190,17 +199,15 @@ const injectIframe = async () => {
   }
 
   if (await isProviderEnabled("bard")) {
-    iframeMountPointParent = document.querySelector("mat-sidenav-content");
-
-    console.log("test");
+    iframeMountPointParent = document.querySelector("body > chat-app");
 
     if (iframeMountPointParent) {
-      iframeMountPointParent.style.display = "inline-flex";
-      iframeMountPointParent.style.maxWidth = "calc(100% - 250px)";
+      iframeMountPointParent.style.display = "flex";
+      iframeMountPointParent.style.width = "calc(100% - 250px)";
 
       // @ts-ignore
       newDiv.style =
-        "position:fixed;top:64px;right:0;width:250px;height:100vh;display:flex;z:2147483647";
+        "position:fixed;top:64px;right:0;width:250px;height:100vh;display:flex;z-index:2147483647";
 
       iframeMountPointParent.append(newDiv);
 
