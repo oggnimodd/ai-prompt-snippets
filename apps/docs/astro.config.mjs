@@ -20,6 +20,10 @@ export default defineConfig({
         },
       ],
       favicon: "/images/icon.svg",
+      customCss: [
+        // Relative path to your custom CSS file
+        "./src/styles/custom.css",
+      ],
     }),
   ],
   // https://github.com/withastro/astro/issues/8297
