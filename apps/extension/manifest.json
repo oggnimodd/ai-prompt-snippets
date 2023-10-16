@@ -1,5 +1,4 @@
 {
-  "$schema": "https://json.schemastore.org/chrome-manifest",
   "manifest_version": 3,
   "name": "Ai Chat Snippet",
   "version": "1.0.0",
