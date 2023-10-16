@@ -7,4 +7,4 @@ What is this extension useful for
 
 
 # Download
-[Download Link](https://github.com/oggnimodd/ai-chat-snippet/actions)
+[Download Link](https://github.com/oggnimodd/ai-prompt-snippets/actions)

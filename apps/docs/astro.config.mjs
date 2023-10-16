@@ -5,9 +5,9 @@ import starlight from "@astrojs/starlight";
 export default defineConfig({
   integrations: [
     starlight({
-      title: "Ai Chat Snippet",
+      title: "Ai Prompt Snippets",
       social: {
-        github: "https://github.com/oggnimodd/ai-chat-snippet",
+        github: "https://github.com/oggnimodd/ai-prompt-snippets",
       },
       sidebar: [
         {

@@ -37,5 +37,5 @@ jobs:
         if: matrix.job == 'build' && success()
         uses: actions/upload-artifact@v3
         with:
-          name: ai-chat-snippet
+          name: ai-prompt-snippets
           path: apps/extension/dist

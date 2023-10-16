@@ -26,7 +26,7 @@ export const exportSnippets = async (singleSnippet?: Snippet) => {
 
   const fileName = singleSnippet
     ? `${singleSnippet.title.toLowerCase().replace(" ", "-")}-${nanoid(6)}`
-    : `ai-chat-snippets-${nanoid(10)}.json`;
+    : `ai-prompt-snippets-${nanoid(10)}.json`;
 
   // Save the file
   saveAs(fileToSave, fileName);

@@ -40,7 +40,7 @@ const Header = () => {
           color="primary"
           isIconOnly
           as="a"
-          href="https://github.com/oggnimodd/ai-chat-snippet"
+          href="https://github.com/oggnimodd/ai-prompt-snippets"
           target="_blank"
           size="sm"
         />

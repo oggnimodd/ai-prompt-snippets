@@ -1,5 +1,5 @@
 {
-  "name": "ai-chat-snippet",
+  "name": "ai-prompt-snippets",
   "private": true,
   "scripts": {
     "clean": "find . -name 'node_modules' -type d -prune -exec rm -rf '{}' +",
