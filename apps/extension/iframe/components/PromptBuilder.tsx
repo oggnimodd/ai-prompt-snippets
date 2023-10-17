@@ -36,7 +36,7 @@ const ParameterEditor: React.FC<{
     }
   }, []);
 
-  if (parameter.type === "string") {
+  if (parameter.type === "text") {
     return (
       <Textarea
         onChange={(e) => handleParameterChange(parameter.title, e.target.value)}

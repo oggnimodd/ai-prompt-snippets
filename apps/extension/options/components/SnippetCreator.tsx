@@ -10,7 +10,7 @@ import {
   useFormState,
   useWatch,
 } from "react-hook-form";
-import type { OptionsParam, Snippet } from "models/snippet";
+import type { OptionsParam, Snippet, StringParam } from "models/snippet";
 import { snippetSchema } from "models/snippet";
 import { nanoid } from "nanoid";
 import { X as CloseIcon, Save } from "lucide-react";
@@ -171,10 +171,15 @@ interface ParameterEditorProps {
   remove: UseFieldArrayRemove;
 }
 
-const paramTypes = [
+type SelectParamTypes = {
+  label: string;
+  value: StringParam["type"] | OptionsParam["type"];
+}[];
+
+const paramTypes: SelectParamTypes = [
   {
     label: "String",
-    value: "string",
+    value: "text",
   },
   {
     label: "Options",
@@ -376,7 +381,7 @@ const SnippetCreator: React.FC<SnippetCreatorProps> = ({
           color="primary"
           onPress={() =>
             append({
-              type: "string",
+              type: "text",
               title: "new",
               id: nanoid(),
             })

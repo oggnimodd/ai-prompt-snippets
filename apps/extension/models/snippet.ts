@@ -14,7 +14,7 @@ export const stringParamSchema = z.object({
     .string()
     .min(3, "Title must have at least 3 characters")
     .max(255, "Title must have at most 255 characters"),
-  type: z.literal("string"),
+  type: z.literal("text"),
 });
 
 export const optionsParamSchema = z.object({
