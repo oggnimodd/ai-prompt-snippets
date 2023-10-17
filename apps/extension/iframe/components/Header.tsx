@@ -7,7 +7,7 @@ import {
   Sun as LightIcon,
   X as CloseIcon,
 } from "lucide-react";
-import { optionsUrl } from "utils/chrome";
+import { openOptionsPage } from "utils/chrome";
 import { useTheme } from "shared/hooks";
 import { messageIframeParent } from "utils/message";
 
@@ -49,9 +49,7 @@ const Header = () => {
           className="ml-auto"
           color="primary"
           isIconOnly
-          as="a"
-          href={optionsUrl}
-          target="_blank"
+          onClick={openOptionsPage}
           size="sm"
         />
         <Button

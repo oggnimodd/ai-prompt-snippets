@@ -33,7 +33,7 @@
   ],
   "host_permissions": ["<all_urls>"],
   "options_page": "options/index.html",
-  "permissions": ["storage"],
+  "permissions": ["storage", "tabs"],
   "icons": {
     "48": "images/icon-48.png",
     "128": "images/icon-128.png"

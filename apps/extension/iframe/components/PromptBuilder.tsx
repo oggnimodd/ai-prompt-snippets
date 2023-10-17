@@ -5,7 +5,7 @@ import { Button } from "@nextui-org/react";
 import React, { useEffect, useState } from "react";
 import { Param } from "models/snippet";
 import { PromptData, messageIframeParent } from "utils/message";
-import { optionsUrl } from "utils/chrome";
+import { openOptionsPage } from "utils/chrome";
 import { Send as SendIcon } from "lucide-react";
 
 type HandleParameterChange = (key: string, value: string) => void;
@@ -114,14 +114,12 @@ const PromptBuilder = () => {
     return (
       <span>
         No snippets, you can add new ones{" "}
-        <a
+        <button
           className="text-primary-500 underline"
-          href={optionsUrl}
-          target="_blank"
-          rel="noreferrer"
+          onClick={openOptionsPage}
         >
           here
-        </a>
+        </button>
       </span>
     );
   }
