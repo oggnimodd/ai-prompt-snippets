@@ -178,7 +178,7 @@ type SelectParamTypes = {
 
 const paramTypes: SelectParamTypes = [
   {
-    label: "String",
+    label: "Text",
     value: "text",
   },
   {
