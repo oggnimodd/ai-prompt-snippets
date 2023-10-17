@@ -143,9 +143,9 @@ const injectIframe = async () => {
   }
 
   if (await isProviderEnabled("claude")) {
-    newDiv.className = "fixed top-0 right-0 z-[9999]";
     // @ts-ignore
-    newDiv.style = "width:250px;height:100%;padding-top:60px;display:flex;";
+    newDiv.style =
+      "width:250px;height:100%;right:0;position:fixed;top:60px;display:flex;z-index:50;";
 
     iframeMountPointParent = document.querySelector("body");
 

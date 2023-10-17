@@ -70,9 +70,13 @@ class Listener {
     promptField.appendChild(paragraph);
 
     setTimeout(() => {
-      const submitButton = document.querySelector(
-        "[aria-label='Send Message']",
-      ) as HTMLButtonElement;
+      const submitButton =
+        (document.querySelector(
+          "[aria-label='Send Message']",
+        ) as HTMLButtonElement) ||
+        (document.querySelector(
+          "[cmdk-item][role='option'] button",
+        ) as HTMLButtonElement);
 
       this.submit(submitButton);
     }, 100);
