@@ -14,8 +14,14 @@ export default defineConfig({
           label: "Guides",
           items: [
             // Each item here is one entry in the navigation menu.
-            { label: "Get Started", link: "/guides/get-started/" },
-            { label: "Hello World", link: "/guides/hello-world/" },
+            {
+              label: "Get Started",
+              link: "/guides/get-started/",
+            },
+            {
+              label: "Hello World",
+              link: "/guides/hello-world/",
+            },
           ],
         },
       ],
