@@ -1,4 +1,4 @@
-import { defineConfig, squooshImageService } from "astro/config";
+import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
 
 // https://astro.build/config
@@ -41,7 +41,7 @@ export default defineConfig({
           autogenerate: { directory: "additional-information" },
         },
       ],
-      favicon: "/images/icon.svg",
+      favicon: "/images/icons/icon.svg",
       customCss: [
         // Relative path to your custom CSS file
         "./src/styles/custom.css",
@@ -53,8 +53,5 @@ export default defineConfig({
     ssr: {
       noExternal: ["execa", "is-stream", "npm-run-path"],
     },
-  },
-  image: {
-    service: squooshImageService(),
   },
 });
