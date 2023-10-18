@@ -2,36 +2,8 @@
 title: AI Prompt Snippets
 description: Tired of constantly re-typing the same AI prompts and questions? Create customizable snippets to automate your interactions and boost productivity.
 template: splash
-hero:
-  tagline: Tired of constantly re-typing the same AI prompts and questions? Create customizable snippets to automate your interactions and boost productivity.
-  image:
-    file: ../../assets/houston.webp
-  actions:
-    - text: Download Extension   
-      link: /guides/download
-      icon: external
-      variant: primary
-    - text: Get Started
-      link: /guides/get-started/
-      icon: right-arrow
-      variant: primary
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+import LandingPage from "../../components/LandingPage.astro";
 
-## Next steps
-
-<CardGrid stagger>
-	<Card title="Customizable Snippets" icon="pencil">
-		Create reusable prompts, queries, and templates to automate repetitive AI conversations. Save time and boost productivity.
-	</Card>
-	<Card title="Import/Export Snippets" icon="add-document">
-		Export and import your personalized snippet libraries as JSON files. Share collections with friends and across devices.
-	</Card>
-	<Card title="Supports Major AI Chat Websites" icon="setting">
-		This Chrome extension works with ChatGPT, Poe, Claude AI, and Bard.
-	</Card>	
-  <Card title="Dark Mode and Light Mode" icon="setting">
-		Easily switch between dark mode or light mode. Use the extension comfortably in your preferred theme.
-	</Card>	
-</CardGrid>
+<LandingPage/>

@@ -1,5 +1,6 @@
-import { defineConfig, squooshImageService } from "astro/config";
+import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
+import react from "@astrojs/react";
 
 // https://astro.build/config
 export default defineConfig({
@@ -11,34 +12,52 @@ export default defineConfig({
       },
       sidebar: [
         {
-          label: "Guides",
+          label: "Start Here",
           items: [
             // Each item here is one entry in the navigation menu.
             {
-              label: "Get Started",
-              link: "/guides/get-started/",
+              label: "Introduction",
+              link: "/getting-started/get-started/",
             },
             {
-              label: "Hello World",
-              link: "/guides/hello-world/",
+              label: "Download",
+              link: "/getting-started/download/",
+            },
+            {
+              label: "Supported Platforms",
+              link: "/getting-started/supported-platforms/",
             },
           ],
         },
+        {
+          label: "Guides",
+          autogenerate: { directory: "guides" },
+        },
+        {
+          label: "Settings",
+          autogenerate: { directory: "settings" },
+        },
+        {
+          label: "Additional Information",
+          autogenerate: { directory: "additional-information" },
+        },
       ],
-      favicon: "/images/icon.svg",
+      favicon: "/images/icons/icon.svg",
       customCss: [
         // Relative path to your custom CSS file
         "./src/styles/custom.css",
       ],
+      editLink: {
+        baseUrl:
+          "https://github.com/oggnimodd/ai-prompt-snippets/edit/main/apps/docs/",
+      },
     }),
+    react(),
   ],
   // https://github.com/withastro/astro/issues/8297
   vite: {
     ssr: {
       noExternal: ["execa", "is-stream", "npm-run-path"],
     },
-  },
-  image: {
-    service: squooshImageService(),
   },
 });
