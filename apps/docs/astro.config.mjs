@@ -11,18 +11,34 @@ export default defineConfig({
       },
       sidebar: [
         {
-          label: "Guides",
+          label: "Start Here",
           items: [
             // Each item here is one entry in the navigation menu.
             {
-              label: "Get Started",
-              link: "/guides/get-started/",
+              label: "Introduction",
+              link: "/getting-started/get-started/",
             },
             {
-              label: "Hello World",
-              link: "/guides/hello-world/",
+              label: "Download",
+              link: "/getting-started/download/",
+            },
+            {
+              label: "Supported Platforms",
+              link: "/getting-started/supported-platforms/",
             },
           ],
+        },
+        {
+          label: "Guides",
+          autogenerate: { directory: "guides" },
+        },
+        {
+          label: "Settings",
+          autogenerate: { directory: "settings" },
+        },
+        {
+          label: "Additional Information",
+          autogenerate: { directory: "additional-information" },
         },
       ],
       favicon: "/images/icon.svg",
