@@ -1,5 +1,6 @@
 import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
+import react from "@astrojs/react";
 
 // https://astro.build/config
 export default defineConfig({
@@ -46,7 +47,12 @@ export default defineConfig({
         // Relative path to your custom CSS file
         "./src/styles/custom.css",
       ],
+      editLink: {
+        baseUrl:
+          "https://github.com/oggnimodd/ai-prompt-snippets/edit/main/apps/docs/",
+      },
     }),
+    react(),
   ],
   // https://github.com/withastro/astro/issues/8297
   vite: {

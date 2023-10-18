@@ -1,0 +1,122 @@
+---
+import { Card, CardGrid } from '@astrojs/starlight/components';
+import YoutubeEmbed from "./YoutubeEmbed";
+import CallToAction from "./CallToAction.astro";
+---
+
+<div class="hero">
+	<div class="video-wrapper">
+		<YoutubeEmbed client:load/>	
+	</div>
+
+	<div class="sl-flex stack">
+		<div class="sl-flex copy">
+			<h1 id="_top" data-page-title set:html={"AI Chat Snippets"} />
+			<div class="tagline" set:html={"Tired of constantly re-typing the same AI prompts and questions? Create customizable snippets to automate your interactions and boost productivity."} />
+			<div class="sl-flex actions">
+
+					<CallToAction variant='primary' icon="external" set:html={"Download Extension"} link='/getting-started/download' />
+					<CallToAction variant='primary' icon="right-arrow" set:html={"Get Started"} link='/getting-started/get-started/' />
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<CardGrid stagger>
+	<Card title="Customizable Snippets" icon="pencil">
+		Create reusable prompts, queries, and templates to automate repetitive AI conversations. Save time and boost productivity.
+	</Card>
+	<Card title="Import/Export Snippets" icon="add-document">
+		Export and import your personalized snippet libraries as JSON files. Share collections with friends and across devices.
+	</Card>
+	<Card title="Supports Major AI Chat Websites" icon="setting">
+		This Chrome extension works with ChatGPT, Poe, Claude AI, and Bard.
+	</Card>	
+  <Card title="Dark Mode and Light Mode" icon="setting">
+		Easily switch between dark mode or light mode. Use the extension comfortably in your preferred theme.
+	</Card>	
+</CardGrid>
+
+
+<style>
+	.hero {
+		display: grid;
+		align-items: center;
+		gap: 1rem;
+		padding-bottom: 1rem;
+	}
+
+	.hero > .video-wrapper {
+		object-fit: contain;
+		width: min(70%, 20rem);
+		height: auto;
+		margin-inline: auto;
+	}
+
+	.stack {
+		flex-direction: column;
+		gap: clamp(1.5rem, calc(1.5rem + 1vw), 2rem);
+		text-align: center;
+	}
+
+	.copy {
+		flex-direction: column;
+		gap: 1rem;
+		align-items: center;
+	}
+
+	.copy > * {
+		max-width: 50ch;
+	}
+
+	h1 {
+		font-size: clamp(var(--sl-text-3xl), calc(0.25rem + 5vw), var(--sl-text-6xl)) !important;
+		line-height: var(--sl-line-height-headings);
+		font-weight: 600;
+		color: var(--sl-color-white);
+	}
+
+	.tagline {
+		font-size: clamp(var(--sl-text-base), calc(0.0625rem + 2vw), var(--sl-text-xl));
+		color: var(--sl-color-gray-2);
+	}
+
+	.actions {
+		gap: 1rem 2rem;
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+
+	@media (min-width: 50rem) {
+		.hero {
+			grid-template-columns: 5fr 5fr;
+			gap: 3%;
+			margin-block: clamp(2.5rem, calc(1rem + 10vmin), 10rem);
+		}
+
+		.hero > .video-wrapper {
+			order: 2;
+			width: min(100%, 50rem);
+			height: 280px;
+		}
+
+		body :is(img,picture,video,canvas,svg,iframe):not(:where(.not-content *)) .hero > .video-wrapper iframe{
+			height: 100%!important;
+		}
+
+		.stack {
+			text-align: start;
+		}
+
+		.copy {
+			align-items: flex-start;
+		}
+
+		.actions {
+			justify-content: flex-start;
+		}
+	}
+</style>
