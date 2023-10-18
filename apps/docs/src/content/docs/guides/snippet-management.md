@@ -5,4 +5,4 @@ sidebar:
   order: 1
 ---
 
-How to create, update, delete, and customize snippets
+Coming soon

@@ -5,4 +5,4 @@ sidebar:
   order: 2
 ---
 
-Explaining how to use snippet
+Coming soon
