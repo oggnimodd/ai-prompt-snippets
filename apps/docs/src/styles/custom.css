@@ -28,10 +28,9 @@
 	--sl-color-black: #ffffff;
 }
 
-[data-pagefind-body] > .content-panel:first-child{
+body:not(:has(.starlight__sidebar)) .content-panel:first-child{
 	display: none;
 }
-
 
 body :is(img,picture,video,canvas,svg,iframe):not(:where(.not-content *)):is(.hero > .video-wrapper iframe){
 	height: 100%!important;
