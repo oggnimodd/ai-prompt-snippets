@@ -28,7 +28,7 @@
 	--sl-color-black: #ffffff;
 }
 
-body:not(:has(.starlight__sidebar)) .content-panel:first-child{
+body:has(.tagline) .content-panel:first-child{
 	display: none;
 }
 
