@@ -31,7 +31,13 @@
       "matches": ["<all_urls>"]
     }
   ],
-  "host_permissions": ["<all_urls>"],
+  "host_permissions": [
+    "https://chat.openai.com/*",
+    "https://poe.com/*",
+    "https://claude.ai/*",
+    "https://www.perplexity.ai/*",
+    "https://bard.google.com/chat/*"
+  ],
   "options_page": "options/index.html",
   "permissions": ["storage", "tabs"],
   "icons": {
