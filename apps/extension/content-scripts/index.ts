@@ -155,7 +155,7 @@ const injectIframe = async () => {
       iframe.src = iframeUrl;
       // @ts-ignore
       iframe.style =
-        "width: 100%; height: 100%; border: none!important; outline:none!important;";
+        "width: 100%; height: 100%; border: none!important; outline:none!important;overflow:auto;padding-bottom:60px;";
 
       newDiv.append(iframe);
 
