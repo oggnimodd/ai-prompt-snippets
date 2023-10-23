@@ -1,6 +1,9 @@
 <p align="center"><img width="128" src="https://ai-prompt-snippets.vercel.app/images/icons/icon.svg" alt="Ai Prompt Snippets Logo"></p>
 <h1 align="center">AI Prompt Snippets</h1>
-
+<p align="center">
+  <a align="center" href="https://ai-prompt-snippets.vercel.app/getting-started/get-started/">Documentation</p>
+  <a align="center" href="https://ai-prompt-snippets.vercel.app/getting-started/download/">Download</p>
+</p>
 
 ## Why do we need this extension?
 
