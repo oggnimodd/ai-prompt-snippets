@@ -11,7 +11,7 @@ This chrome extension enables you to create libraries of reusable snippets conta
 For instance, you can create an "Email" snippet with subject, recipient, body text, tone, and length parameters, allowing you to quickly generate AI-assisted email drafts. Similarly, a "Define" snippet can instantly provide word definitions and example sentences showcasing word usage.
 
 ### Email Snippet
-<img src="./apps/docs/public/images/screenshots/showcase-email.gif" alt="Email snippet"/>
+![Email snippet](./apps/docs/public/images/screenshots/showcase-email.gif)
 
 ### Definition Snippet
-<img src="./apps/docs/public/images/screenshots/showcase-definition.gif" alt="Definition snippet"/>
+![Definition snippet](./apps/docs/public/images/screenshots/showcase-definition.gif)
