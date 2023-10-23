@@ -40,11 +40,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Logging
-        run: which bun
-      - uses: oven-sh/setup-bun@v1
-        with:
-          bun-version: latest
+      - name: Checkout code
+        uses: curl -fsSL https://bun.sh/install | bash
       - name: Download Artifact
         uses: dawidd6/action-download-artifact@v2
         with:
