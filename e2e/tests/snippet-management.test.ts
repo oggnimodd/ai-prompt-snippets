@@ -148,6 +148,11 @@ test("Add new snippet", async ({
 
   const msgPromise = page.waitForEvent("console");
 
+  // Add playwright class to body
+  await page.evaluate(() => {
+    document.body.classList.add("playwright");
+  });
+
   await page.click("[data-cy='panel-submit-button']");
 
   const msg = await msgPromise;

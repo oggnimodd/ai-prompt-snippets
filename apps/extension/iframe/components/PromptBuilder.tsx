@@ -7,6 +7,7 @@ import { Param } from "models/snippet";
 import { PromptData, messageIframeParent } from "utils/message";
 import { openOptionsPage } from "utils/chrome";
 import { Send as SendIcon } from "lucide-react";
+import { logForTesting } from "utils/playwright";
 
 type HandleParameterChange = (key: string, value: string) => void;
 
@@ -146,8 +147,7 @@ const PromptBuilder = () => {
       choosenParameters,
     );
 
-    // TODO : check test env
-    console.log(finalPrompt);
+    logForTesting(finalPrompt);
 
     // Since this is an iframe , send the message to the parent window
     messageIframeParent<PromptData>({

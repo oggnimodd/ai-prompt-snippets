@@ -5,6 +5,8 @@ const createExtensionUrl = (path: string) => {
   return `chrome-extension://${path}`;
 };
 
+const isHeadless = !!process.env.CI || !!process.env.PLAYWRIGHT_HEADLESS;
+
 // Extension pages to test
 type ExtensionPages = {
   optionPage: string;
@@ -27,13 +29,18 @@ export const test = base.extend<{
       "dist",
     );
 
+    const flags = [
+      `--disable-extensions-except=${pathToExtension}`,
+      `--load-extension=${pathToExtension}`,
+    ];
+
+    if (isHeadless) {
+      flags.unshift("--headless=new");
+    }
+
     const context = await chromium.launchPersistentContext("", {
-      // TODO : determine headless value from env variables
       headless: false,
-      args: [
-        `--disable-extensions-except=${pathToExtension}`,
-        `--load-extension=${pathToExtension}`,
-      ],
+      args: flags,
     });
     await use(context);
     await context.close();

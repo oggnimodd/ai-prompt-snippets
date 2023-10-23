@@ -10,7 +10,8 @@
     "lint:apply": "biome check --apply .",
     "format": "biome format .",
     "format:fix": "biome format --write .",
-    "e2e": "playwright test"
+    "e2e": "playwright test",
+    "e2e:headless": "PLAYWRIGHT_HEADLESS=true playwright test"
   },
   "dependencies": {
     "@playwright/test": "^1.39.0",
