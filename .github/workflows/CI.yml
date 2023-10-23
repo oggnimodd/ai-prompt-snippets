@@ -32,19 +32,19 @@ jobs:
           name: ai-prompt-snippets
           path: apps/extension/dist
 
-    playwright:
-      name: Playwright Tests
-      runs-on: ubuntu-latest
-      container:
-        image: mcr.microsoft.com/playwright:v1.39.0-jammy
-      steps:
-        - uses: actions/setup-node@v3
-          with:
-            node-version: 18
-        - uses: oven-sh/setup-bun@v1
-          with:
-            bun-version: latest
-        - name: Install dependencies
-          run: bun install
-        - name: Run your tests
-          run: bun run e2e:headless
+  playwright:
+    name: Playwright Tests
+    runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.39.0-jammy
+    steps:
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+      - name: Install dependencies
+        run: bun install
+      - name: Run your tests
+        run: bun run e2e:headless
