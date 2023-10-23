@@ -5,6 +5,7 @@ const config: PlaywrightTestConfig = {
   use: {
     ...devices["Desktop Chrome"],
   },
+  reporter: "list",
 };
 
 export default config;
