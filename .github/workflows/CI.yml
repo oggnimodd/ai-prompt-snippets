@@ -25,19 +25,13 @@ jobs:
         run: |
           cd apps/extension
           bun run build
+      - name: Logging
+        container:
+          image: mcr.microsoft.com/playwright:v1.39.0-jammy
+        run: ls -al
       - name: Upload Artifact
         if: matrix.job == 'build' && success()
         uses: actions/upload-artifact@v3
         with:
           name: ai-prompt-snippets
           path: apps/extension/dist
-
-  playwright:
-    name: Playwright Tests
-    runs-on: ubuntu-latest
-    needs: build-and-test
-    container:
-      image: mcr.microsoft.com/playwright:v1.39.0-jammy
-    steps:
-      - name: Run your tests
-        run: ls -al
