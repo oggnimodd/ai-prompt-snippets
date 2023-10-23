@@ -50,6 +50,7 @@ jobs:
         run: bun install
       - name: Logging
         run: ls -al
+        working-directory: apps/extension/
       - name: Install Playwright Browsers
         run: bunx playwright install --with-deps
       - name: Run Playwright tests
