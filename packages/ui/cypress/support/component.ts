@@ -14,6 +14,7 @@
 // ***********************************************************
 
 // Styles
+import "../../.ladle/ladle.css";
 import "../../index.css";
 // Import commands.js using ES2015 syntax:
 import "./commands";
