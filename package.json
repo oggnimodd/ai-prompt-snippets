@@ -8,9 +8,12 @@
     "lint": "biome check .",
     "lint:apply": "biome check --apply .",
     "format": "biome format .",
-    "format:fix": "biome format --write ."
+    "format:fix": "biome format --write .",
+    "e2e": "playwright test"
   },
   "dependencies": {
+    "@playwright/test": "^1.39.0",
+    "playwright": "^1.39.0",
     "typescript": "5.2.2"
   },
   "devDependencies": {
@@ -29,5 +32,6 @@
     "packages/config/tailwind",
     "packages/ui",
     "packages/types"
-  ]
+  ],
+  "trustedDependencies": ["playwright"]
 }
