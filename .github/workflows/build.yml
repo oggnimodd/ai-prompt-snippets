@@ -1,4 +1,4 @@
-name: CI
+name: build
 'on':
   push:
     branches:
@@ -11,12 +11,6 @@ jobs:
   build-and-test:
     name: Build And Test
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        job:
-          - build
-          - lint
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -26,10 +20,8 @@ jobs:
       - name: Install dependencies
         run: bun install
       - name: Linting
-        if: matrix.job == 'lint'
         run: bun run lint
       - name: Run build job
-        if: matrix.job == 'build'
         run: |
           cd apps/extension
           bun run build
@@ -39,3 +31,21 @@ jobs:
         with:
           name: ai-prompt-snippets
           path: apps/extension/dist
+
+    playwright:
+    name: 'Playwright Tests'
+    runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.39.0-jammy
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Install dependencies
+        run: npm ci
+      - uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+      - name: Run your tests
+        run: bun run e2e:headless
