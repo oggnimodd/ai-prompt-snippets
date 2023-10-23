@@ -19,7 +19,10 @@ const PageMessage: React.FC<PageMessageProps> = ({
   children,
 }) => {
   return (
-    <Container className="flex w-full flex-col items-center justify-center px-5 pt-20 text-center sm:px-20">
+    <Container
+      data-cy="page-message-container"
+      className="flex w-full flex-col items-center justify-center px-5 pt-20 text-center sm:px-20"
+    >
       <span
         data-cy="page-message-icon"
         className="mb-3 text-6xl text-primary-500"

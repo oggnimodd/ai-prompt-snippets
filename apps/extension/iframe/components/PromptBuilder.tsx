@@ -112,11 +112,12 @@ const PromptBuilder = () => {
 
   if (snippets.length === 0) {
     return (
-      <span>
+      <span data-cy="empty-panel-message">
         No snippets, you can add new ones{" "}
         <button
           className="text-primary-500 underline"
           onClick={openOptionsPage}
+          data-cy="options-page-link"
         >
           here
         </button>
