@@ -14,6 +14,6 @@ jobs:
       - name: Download Artifact
         uses: dawidd6/action-download-artifact@v2
         with:
-          workflow_conclusion: success
+          workflow: "build.yml"
       - name: Run your tests
         run: ls -al
