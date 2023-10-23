@@ -10,7 +10,7 @@
     "dev": "ladle serve",
     "build": "ladle build",
     "preview": "ladle preview",
-    "test": "bunx cypress run --component --browser chrome",
+    "cy:test": "bunx cypress run --component --browser chrome --headless",
     "cy:open": "bunx cypress open --component --browser chrome"
   },
   "dependencies": {
