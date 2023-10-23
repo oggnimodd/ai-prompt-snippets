@@ -12,7 +12,7 @@ const Favicon = ({ url }: { url: string }) => {
   );
 };
 
-const ChatProvider: FC = () => {
+const ChatProviders: FC = () => {
   const { isLoading, providers, toggleProvider } = useChatProviders();
 
   if (isLoading) return <div>Loading...</div>;
@@ -42,4 +42,4 @@ const ChatProvider: FC = () => {
   );
 };
 
-export default ChatProvider;
+export default ChatProviders;

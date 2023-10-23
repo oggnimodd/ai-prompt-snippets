@@ -68,6 +68,7 @@ const Index = () => {
         />
         <div className="self-auto flex items-center gap-3 flex-wrap">
           <Button
+            data-cy="toggle-theme-button"
             onPress={toggleTheme}
             startContent={
               theme === "dark" ? <Moon size={18} /> : <Sun size={18} />
@@ -77,6 +78,7 @@ const Index = () => {
             {theme === "dark" ? "Dark" : "Light"}
           </Button>
           <Button
+            data-cy="delete-all-snippets-button"
             onPress={deleteAllSnippets}
             startContent={<Trash2 size={18} />}
             color="primary"
@@ -84,6 +86,7 @@ const Index = () => {
             Clear
           </Button>
           <Button
+            data-cy="import-snippet-button"
             onPress={chooseSnippetsFile}
             startContent={<Download size={18} />}
             color="primary"
@@ -91,6 +94,7 @@ const Index = () => {
             Import
           </Button>
           <Button
+            data-cy="export-snippet-button"
             onPress={() => exportSnippets()}
             startContent={<Upload size={18} />}
             color="primary"
@@ -98,6 +102,7 @@ const Index = () => {
             Export
           </Button>
           <Button
+            data-cy="add-snippet-button"
             startContent={<Plus size={18} />}
             as={Link}
             color="primary"

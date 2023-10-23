@@ -7,6 +7,7 @@ import { Param } from "models/snippet";
 import { PromptData, messageIframeParent } from "utils/message";
 import { openOptionsPage } from "utils/chrome";
 import { Send as SendIcon } from "lucide-react";
+import { logForTesting } from "utils/playwright";
 
 type HandleParameterChange = (key: string, value: string) => void;
 
@@ -46,6 +47,7 @@ const ParameterEditor: React.FC<{
         minRows={1}
         maxRows={3}
         rows={1}
+        data-cy="panel-textarea"
       />
     );
   }
@@ -112,11 +114,12 @@ const PromptBuilder = () => {
 
   if (snippets.length === 0) {
     return (
-      <span>
+      <span data-cy="empty-panel-message">
         No snippets, you can add new ones{" "}
         <button
           className="text-primary-500 underline"
           onClick={openOptionsPage}
+          data-cy="options-page-link"
         >
           here
         </button>
@@ -143,6 +146,8 @@ const PromptBuilder = () => {
       snippet?.prompt || "",
       choosenParameters,
     );
+
+    logForTesting(finalPrompt);
 
     // Since this is an iframe , send the message to the parent window
     messageIframeParent<PromptData>({
@@ -171,7 +176,10 @@ const PromptBuilder = () => {
             <span className="block text-small font-medium pointer-events-none text-foreground pb-1 transition-none">
               Prompt Snippet
             </span>
-            <p className="line-clamp-3 opacity-80 text-sm text-default-500">
+            <p
+              data-cy="panel-prompt"
+              className="line-clamp-3 opacity-80 text-sm text-default-500"
+            >
               {snippet.prompt}
             </p>
           </div>
@@ -193,6 +201,7 @@ const PromptBuilder = () => {
             className="mt-3 ml-auto"
             type="submit"
             color="primary"
+            data-cy="panel-submit-button"
           >
             Enter
           </Button>

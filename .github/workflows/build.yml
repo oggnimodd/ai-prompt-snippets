@@ -1,4 +1,4 @@
-name: CI
+name: Build
 'on':
   push:
     branches:
@@ -9,14 +9,8 @@ name: CI
       - synchronize
 jobs:
   build-and-test:
-    name: Build And Test
+    name: Build
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        job:
-          - build
-          - lint
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -26,10 +20,8 @@ jobs:
       - name: Install dependencies
         run: bun install
       - name: Linting
-        if: matrix.job == 'lint'
         run: bun run lint
       - name: Run build job
-        if: matrix.job == 'build'
         run: |
           cd apps/extension
           bun run build

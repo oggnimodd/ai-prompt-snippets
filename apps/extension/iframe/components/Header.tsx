@@ -49,6 +49,7 @@ const Header = () => {
           className="ml-auto"
           color="primary"
           isIconOnly
+          data-cy="options-page-link"
           onClick={openOptionsPage}
           size="sm"
         />

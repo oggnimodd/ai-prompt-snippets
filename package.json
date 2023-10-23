@@ -1,6 +1,7 @@
 {
   "name": "ai-prompt-snippets",
   "private": true,
+  "type": "module",
   "scripts": {
     "clean": "find . -name 'node_modules' -type d -prune -exec rm -rf '{}' +",
     "prepare": "bun prepare.js",
@@ -8,9 +9,14 @@
     "lint": "biome check .",
     "lint:apply": "biome check --apply .",
     "format": "biome format .",
-    "format:fix": "biome format --write ."
+    "format:fix": "biome format --write .",
+    "e2e": "playwright test",
+    "e2e:headless": "PLAYWRIGHT_HEADLESS=true playwright test"
   },
   "dependencies": {
+    "@playwright/test": "^1.39.0",
+    "delay": "^6.0.0",
+    "playwright": "^1.39.0",
     "typescript": "5.2.2"
   },
   "devDependencies": {
@@ -29,5 +35,6 @@
     "packages/config/tailwind",
     "packages/ui",
     "packages/types"
-  ]
+  ],
+  "trustedDependencies": ["playwright"]
 }

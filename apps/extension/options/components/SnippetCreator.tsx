@@ -92,6 +92,7 @@ const OptionEditor: React.FC<OptionEditorProps> = ({
           options.map((option, optionIndex) => {
             return (
               <div
+                data-cy="snippet-option-item"
                 key={option.id}
                 className="flex justify-between max-w-[50%] text-sm rounded-md items-center gap-x-4"
               >
@@ -101,6 +102,7 @@ const OptionEditor: React.FC<OptionEditorProps> = ({
                   render={({ field }) => {
                     return (
                       <Input
+                        data-cy="snippet-option-item-title-input"
                         errorMessage={
                           errors.parameters?.[parameterIndex]?.options?.[
                             optionIndex
@@ -130,6 +132,7 @@ const OptionEditor: React.FC<OptionEditorProps> = ({
                   }}
                 />
                 <Button
+                  data-cy="snippet-param-delete-option-button"
                   isIconOnly
                   onPress={() => remove(optionIndex)}
                   startContent={<CloseIcon size={18} />}
@@ -149,6 +152,7 @@ const OptionEditor: React.FC<OptionEditorProps> = ({
       {options.length < ALLOWED_OPTIONS_NUMBER && (
         <div className="flex gap-x-4 className max-w-[50%]">
           <Button
+            data-cy="snippet-param-add-option-button"
             className="ml-auto"
             fullWidth
             variant="bordered"
@@ -209,6 +213,7 @@ const ParameterEditor: React.FC<ParameterEditorProps> = ({
         render={({ field }) => {
           return (
             <Input
+              data-cy="snippet-param-name-input"
               placeholder="Enter the parameter name"
               label="Name"
               labelPlacement="outside"
@@ -228,6 +233,7 @@ const ParameterEditor: React.FC<ParameterEditorProps> = ({
         render={({ field }) => {
           return (
             <Select
+              data-cy="snippet-param-type-input"
               selectedKeys={new Set([paramType])}
               placeholder="Select parameter type"
               label="Type"
@@ -265,6 +271,7 @@ const ParameterEditor: React.FC<ParameterEditorProps> = ({
         color="danger"
         size="sm"
         className="self-end"
+        data-cy="snippet-delete-param-button"
       >
         Delete
       </Button>
@@ -336,8 +343,13 @@ const SnippetCreator: React.FC<SnippetCreatorProps> = ({
   };
 
   return (
-    <form className="flex flex-col gap-y-2" onSubmit={handleSubmit(onSubmit)}>
+    <form
+      data-cy="snippet-form"
+      className="flex flex-col gap-y-2"
+      onSubmit={handleSubmit(onSubmit)}
+    >
       <Input
+        data-cy="snippet-title-input"
         required
         placeholder="Enter snippet title"
         label="Title"
@@ -348,6 +360,7 @@ const SnippetCreator: React.FC<SnippetCreatorProps> = ({
       />
 
       <Textarea
+        data-cy="snippet-prompt-input"
         required
         placeholder="Enter the prompt here"
         label="Prompt"
@@ -362,7 +375,10 @@ const SnippetCreator: React.FC<SnippetCreatorProps> = ({
           <span className="block text-small text-foreground pb-1.5 will-change-auto origin-top-left transition-all !duration-200 !ease-out motion-reduce:transition-none text-primary-500 font-bold">
             Parameters
           </span>
-          <div className="flex flex-col gap-y-4">
+          <div
+            className="flex flex-col gap-y-4"
+            data-cy="snippet-params-container"
+          >
             {parameters.map((param, parameterIndex) => {
               return (
                 <ParameterEditor
@@ -378,6 +394,7 @@ const SnippetCreator: React.FC<SnippetCreatorProps> = ({
       {/* For now let just set the max number of params to 5*/}
       {parameters.length < ALLOWED_PARAMETERS_NUMBER && (
         <Button
+          data-cy="snippet-add-param-button"
           color="primary"
           onPress={() =>
             append({
@@ -397,6 +414,7 @@ const SnippetCreator: React.FC<SnippetCreatorProps> = ({
         className="self-end mt-4"
         color="primary"
         type="submit"
+        data-cy="snippet-form-submit-button"
       >
         Save
       </Button>

@@ -1,4 +1,4 @@
-import ChatProvider from "./components/ChatProvider";
+import ChatProviders from "./components/ChatProviders";
 import { useTheme } from "../shared/hooks";
 
 const App = () => {
@@ -6,7 +6,7 @@ const App = () => {
 
   return (
     <div className="w-[300px] p-5">
-      <ChatProvider />
+      <ChatProviders />
     </div>
   );
 };
