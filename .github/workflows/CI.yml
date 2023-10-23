@@ -42,6 +42,8 @@ jobs:
       - name: Download Artifact
         uses: actions/download-artifact@v2
         with:
+          workflow: ${{ github.event.workflow_run.workflow_id }}
+          workflow_conclusion: success
           name: ai-prompt-snippets
           path: apps/extension/dist
       - name: Run your tests
