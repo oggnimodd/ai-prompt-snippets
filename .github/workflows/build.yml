@@ -30,9 +30,10 @@ jobs:
         with:
           name: ai-prompt-snippets
           path: apps/extension/dist
-          
+
   playwright:
     name: Playwright Tests
+    needs: build-and-test
     runs-on: ubuntu-latest
     container:
       image: mcr.microsoft.com/playwright:v1.39.0-jammy
