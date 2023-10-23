@@ -44,6 +44,9 @@ jobs:
         uses: dawidd6/action-download-artifact@v2
         with:
           name: ai-prompt-snippets
+      - uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
       - name: Install dependencies
         run: bun install
       - name: Install Playwright Browsers
