@@ -1,18 +1,17 @@
 import React, { useState } from "react";
-import Combobox from "./Combobox";
+import Combobox, { Option } from "./Combobox";
 
-const options = ["Option 1", "Option 2", "Option 3"];
+const options: Option[] = ["Option 1", "Option 2", "Option 3"].map(
+  (option, index) => ({
+    key: `option_${index}`,
+    label: option,
+  }),
+);
 
 const ComboboxTest = () => {
-  const [value, setValue] = useState<string | null>(null);
+  const [value, setValue] = useState<Option>(options[0] as Option);
 
-  return (
-    <Combobox
-      setChosenValue={(e: string | null) => setValue(e || value)}
-      chosenValue={value}
-      options={options}
-    />
-  );
+  return <Combobox setSelected={setValue} selected={value} options={options} />;
 };
 
 describe("Combobox", () => {
@@ -30,12 +29,12 @@ describe("Combobox", () => {
     cy.getByDataCy("combobox-open-button").click();
     cy.getByDataCy("combobox-options").should("exist");
     options.forEach((option) => {
-      cy.contains(option).should("be.visible");
+      cy.contains(option.label).should("be.visible");
     });
   });
 
   it("should filter options when typing in the input field", () => {
-    cy.getByDataCy("combobox-input").type("option 1");
+    cy.getByDataCy("combobox-input").clear().type("option 1");
     cy.contains("Option 1").should("be.visible");
     cy.contains("Option 2").should("not.exist");
     cy.contains("Option 3").should("not.exist");
