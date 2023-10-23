@@ -35,19 +35,10 @@ jobs:
     name: Playwright Tests
     needs: build-and-test
     runs-on: ubuntu-latest
-    container:
-      image: mcr.microsoft.com/playwright:v1.39.0-jammy
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Log PATH
-        run: |
-          echo "Current PATH: $PATH"
-      - name: Install unzip
-        run: |
-          sudo apt-get install
-      - name: Install bun
-        run: curl -fsSL https://bun.sh/install | bash
+      - uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
       - name: Download Artifact
         uses: dawidd6/action-download-artifact@v2
         with:
