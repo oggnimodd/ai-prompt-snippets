@@ -45,6 +45,7 @@ jobs:
         uses: dawidd6/action-download-artifact@v2
         with:
           name: ai-prompt-snippets
+          path: apps/extension/dist
       - name: Install dependencies
         run: bun install
       - name: Logging
