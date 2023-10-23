@@ -48,7 +48,7 @@ jobs:
           path: apps/extension/dist
       - name: Install dependencies
         run: bun install
-      - name: Logging
+      - name: Log folder structure on apps/extension/ 
         run: ls -al
         working-directory: apps/extension/
       - name: Install Playwright Browsers
