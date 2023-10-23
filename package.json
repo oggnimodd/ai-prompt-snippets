@@ -1,6 +1,7 @@
 {
   "name": "ai-prompt-snippets",
   "private": true,
+  "type": "module",
   "scripts": {
     "clean": "find . -name 'node_modules' -type d -prune -exec rm -rf '{}' +",
     "prepare": "bun prepare.js",
@@ -13,6 +14,7 @@
   },
   "dependencies": {
     "@playwright/test": "^1.39.0",
+    "delay": "^6.0.0",
     "playwright": "^1.39.0",
     "typescript": "5.2.2"
   },

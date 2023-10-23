@@ -10,6 +10,7 @@ type ExtensionPages = {
   optionPage: string;
   popupPage: string;
   panelPage: string;
+  addSnippetPage: string;
 };
 
 export const test = base.extend<{
@@ -61,7 +62,11 @@ export const test = base.extend<{
       optionPage: createExtensionUrl(`${extensionId}/options/index.html#/`),
       popupPage: createExtensionUrl(`${extensionId}/popup/index.html`),
       panelPage: createExtensionUrl(`${extensionId}/iframe/index.html`),
+      addSnippetPage: createExtensionUrl(
+        `${extensionId}/options/index.html#/add`,
+      ),
     });
   },
 });
+
 export const expect = test.expect;

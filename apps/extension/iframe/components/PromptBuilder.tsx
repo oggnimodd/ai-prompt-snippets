@@ -46,6 +46,7 @@ const ParameterEditor: React.FC<{
         minRows={1}
         maxRows={3}
         rows={1}
+        data-cy="panel-textarea"
       />
     );
   }
@@ -145,6 +146,9 @@ const PromptBuilder = () => {
       choosenParameters,
     );
 
+    // TODO : check test env
+    console.log(finalPrompt);
+
     // Since this is an iframe , send the message to the parent window
     messageIframeParent<PromptData>({
       type: "ENTER_PROMPT",
@@ -172,7 +176,10 @@ const PromptBuilder = () => {
             <span className="block text-small font-medium pointer-events-none text-foreground pb-1 transition-none">
               Prompt Snippet
             </span>
-            <p className="line-clamp-3 opacity-80 text-sm text-default-500">
+            <p
+              data-cy="panel-prompt"
+              className="line-clamp-3 opacity-80 text-sm text-default-500"
+            >
               {snippet.prompt}
             </p>
           </div>
@@ -194,6 +201,7 @@ const PromptBuilder = () => {
             className="mt-3 ml-auto"
             type="submit"
             color="primary"
+            data-cy="panel-submit-button"
           >
             Enter
           </Button>
