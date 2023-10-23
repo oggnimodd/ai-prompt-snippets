@@ -1,4 +1,4 @@
-name: build
+name: Build and Test
 'on':
   push:
     branches:
@@ -9,7 +9,7 @@ name: build
       - synchronize
 jobs:
   build-and-test:
-    name: Build And Test
+    name: Build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -33,19 +33,18 @@ jobs:
           path: apps/extension/dist
 
     playwright:
-    name: 'Playwright Tests'
-    runs-on: ubuntu-latest
-    container:
-      image: mcr.microsoft.com/playwright:v1.39.0-jammy
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 18
-      - name: Install dependencies
-        run: npm ci
-      - uses: oven-sh/setup-bun@v1
-        with:
-          bun-version: latest
-      - name: Run your tests
-        run: bun run e2e:headless
+      name: Playwright Tests
+      runs-on: ubuntu-latest
+      container:
+        image: mcr.microsoft.com/playwright:v1.39.0-jammy
+      steps:
+        - uses: actions/setup-node@v3
+          with:
+            node-version: 18
+        - uses: oven-sh/setup-bun@v1
+          with:
+            bun-version: latest
+        - name: Install dependencies
+          run: bun install
+        - name: Run your tests
+          run: bun run e2e:headless
