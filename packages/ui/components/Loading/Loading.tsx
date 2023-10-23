@@ -2,15 +2,15 @@ import React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 
 const loadingCva = tv({
-  base: "relative animate-rotate-360 inline-block rounded-full line-normal flex border-b-transparent",
+  base: "relative animate-rotate-360 inline-block rounded-full line-normal flex",
   variants: {
     size: {
       button: "border-[3px] w-[28px] h-[28px]",
       normal: "border-[5px] w-[48px] h-[48px]",
     },
     color: {
-      white: "border-white",
-      primary: "border-primary-500",
+      white: "border-white border-b-transparent",
+      primary: "border-primary-500 border-b-transparent",
     },
   },
   defaultVariants: {
