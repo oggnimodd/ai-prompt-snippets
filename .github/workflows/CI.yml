@@ -44,7 +44,5 @@ jobs:
         with:
           workflow: ${{ github.event.workflow_run.workflow_id }}
           workflow_conclusion: success
-          name: ai-prompt-snippets
-          path: apps/extension/dist
       - name: Run your tests
         run: ls -al
