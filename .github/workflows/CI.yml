@@ -42,7 +42,6 @@ jobs:
       - name: Download Artifact
         uses: dawidd6/action-download-artifact@v2
         with:
-          workflow: ${{ github.event.workflow_run.workflow_id }}
-          workflow_conclusion: success
+          name: ai-prompt-snippets
       - name: Run your tests
         run: ls -al
