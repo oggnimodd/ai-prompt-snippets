@@ -58,6 +58,7 @@ const Combobox: React.FC<ComboboxProps> = ({
         {/* Buttons */}
         <div className="h-6 absolute right-2 top-1/2 transform -translate-y-1/2 flex gap-x-1">
           <button
+            data-cy="combobox-clear-button"
             onClick={(e) => {
               e.preventDefault();
               if (inputRef?.current) {

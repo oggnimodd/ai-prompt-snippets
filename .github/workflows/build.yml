@@ -8,6 +8,26 @@ name: Build
       - opened
       - synchronize
 jobs:
+
+  test-ui:
+    name: UI Component Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+      - name: Install dependencies
+        run: bun install
+      - name: Download cypress binary
+        run: bun cypress install
+      - name: Run build job
+        run: bun run build
+        working-directory: packages/ui
+      - name: Test UI using Cypress
+        run: cd packages/ui && bun run cy:test
+
   build-and-test:
     name: Build
     runs-on: ubuntu-latest
@@ -33,7 +53,9 @@ jobs:
 
   playwright:
     name: Playwright Tests
-    needs: build-and-test
+    needs:
+      - test-ui
+      - build-and-test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code

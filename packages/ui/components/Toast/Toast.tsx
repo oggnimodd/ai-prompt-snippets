@@ -45,11 +45,17 @@ const Toast: FC<ToastProps> = ({
   const { base, closeButton, heading, content, line } = toast({ variant });
 
   return (
-    <div className={cn(base(), className)}>
-      <div className={line()} />
+    <div className={cn(base(), className)} data-cy="toast">
+      <div className={line()} data-cy="toast-line" />
       <div className="flex flex-col gap-1">
-        <p className={heading()}>{variant}</p>
-        {description && <p className={content()}>{description}</p>}
+        <p className={heading()} data-cy="toast-variant">
+          {variant}
+        </p>
+        {description && (
+          <p className={content()} data-cy="toast-description">
+            {description}
+          </p>
+        )}
       </div>
       {isClosable && onClose && (
         <Button
@@ -58,6 +64,7 @@ const Toast: FC<ToastProps> = ({
           startContent={<CloseIcon size={16} />}
           isIconOnly
           onPress={onClose}
+          data-cy="close-button"
         />
       )}
     </div>
