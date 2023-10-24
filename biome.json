@@ -35,6 +35,12 @@
       "a11y": {
         "useButtonType": "off",
         "noSvgWithoutTitle": "off"
+      },
+      "correctness": {
+        "useExhaustiveDependencies": "off"
+      },
+      "complexity": {
+        "noForEach": "off"
       }
     }
   },
@@ -42,7 +48,7 @@
     "enabled": true,
     "formatWithErrors": false,
     "indentStyle": "space",
-    "indentSize": 2,
+    "indentWidth": 2,
     "lineWidth": 80,
     "ignore": [
       "**/node_modules/**/*.*",
