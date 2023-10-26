@@ -58,7 +58,7 @@ A snippet doesn't always have to have parameters. Sometimes, prompts don't need 
 :::
 
 :::note
-For now, this Chrome extension will not automatically add parameters based on the text you square bracketed in the prompt. So, you still have to manually add the parameters by clicking **"Add Param"** and ensuring the **"name"** of the parameter matches what you want in the prompt.
+For now, this Chrome extension will not automatically add parameter fields based on the text you enclosed in square brackets in the prompt. So, you still have to manually add the parameters by clicking **"Add Parameter"** and ensuring the **"name"** of the parameter matches what you want in the prompt.
 
 <img src="/images/screenshots/limitation.gif" alt="Limitation"/>
 :::
