@@ -3,6 +3,9 @@ title: Snippets Management
 description: Learn how to create and customize your AI chat snippets
 sidebar: 
   order: 1
+tableOfContents:
+  minHeadingLevel: 2
+  maxHeadingLevel: 4
 ---
 
 ## Managing Your Prompt Snippets
@@ -48,13 +51,19 @@ Instead of creating separate snippets for each, consider using placeholders:
 
 Now, these snippets have parameters that you can input dynamically whenever you use them. This makes your snippets reusable and more powerful.
 
-:::note
+:::tip
 A snippet doesn't always have to have parameters. Sometimes, prompts don't need any parameters, such as:
 - Recommend me random popular songs
 - Generate random short stories
 :::
 
-There are two types of parameters:
+:::note
+For now, this Chrome extension will not automatically add parameters based on the text you square bracketed in the prompt. So, you still have to manually add the parameters by clicking **"Add Param"** and ensuring the **"name"** of the parameter matches what you want in the prompt.
+
+<img src="/images/screenshots/limitation.gif" alt="Limitation"/>
+:::
+
+### Types of Parameters
 
 #### Text Parameter
 
