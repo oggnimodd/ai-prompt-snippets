@@ -28,7 +28,7 @@ jobs:
       - name: Test UI using Cypress
         run: cd packages/ui && bun run cy:test
 
-  build-and-test:
+  build:
     name: Build
     runs-on: ubuntu-latest
     steps:
@@ -55,7 +55,7 @@ jobs:
     name: Playwright Tests
     needs:
       - test-ui
-      - build-and-test
+      - build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
