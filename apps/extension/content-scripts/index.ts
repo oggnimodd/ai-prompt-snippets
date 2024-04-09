@@ -198,31 +198,6 @@ const injectIframe = async () => {
     }
   }
 
-  if (await isProviderEnabled("bard")) {
-    iframeMountPointParent = document.querySelector("body > chat-app");
-
-    if (iframeMountPointParent) {
-      iframeMountPointParent.style.display = "flex";
-      iframeMountPointParent.style.width = "calc(100% - 250px)";
-
-      // @ts-ignore
-      newDiv.style =
-        "position:fixed;top:64px;right:0;width:250px;height:100vh;display:flex;z-index:2147483647";
-
-      iframeMountPointParent.append(newDiv);
-
-      iframe.src = iframeUrl;
-      // @ts-ignore
-      iframe.style =
-        "width: 100%; height: 100%; border: none!important; outline:none!important;";
-
-      newDiv.append(iframe);
-
-      const listener = new Listener("bard");
-      listener.listen();
-    }
-  }
-
   if (await isProviderEnabled("gemini")) {
     iframeMountPointParent = document.querySelector("body > chat-app");
 
@@ -243,7 +218,7 @@ const injectIframe = async () => {
 
       newDiv.append(iframe);
 
-      const listener = new Listener("bard");
+      const listener = new Listener("gemini");
       listener.listen();
     }
   }

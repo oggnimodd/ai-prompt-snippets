@@ -37,8 +37,8 @@ class Listener {
             case "poe":
               this.poe();
               break;
-            case "bard":
-              this.bard();
+            case "gemini":
+              this.gemini();
               break;
             default:
               break;
@@ -127,7 +127,7 @@ class Listener {
     }, 100);
   }
 
-  bard() {
+  gemini() {
     const promptField = document.querySelector(
       ".ql-editor.textarea",
     ) as HTMLDivElement;
