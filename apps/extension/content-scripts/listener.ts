@@ -37,8 +37,8 @@ class Listener {
             case "poe":
               this.poe();
               break;
-            case "bard":
-              this.bard();
+            case "gemini":
+              this.gemini();
               break;
             default:
               break;
@@ -109,26 +109,25 @@ class Listener {
         "textarea[placeholder*='nything']",
       ) as HTMLTextAreaElement);
 
-    console.log(promptField);
     const submitButton =
       (document.querySelector(
-        "button:has(svg[data-icon*='arrow']):is(button+button)",
+        "button:has(svg[data-icon='arrow-right'])",
       ) as HTMLButtonElement) ||
-      document.querySelector(
-        "button:has(svg[data-icon*='arrow']):is(button+button)",
-      );
+      (document.querySelector(
+        "button:has(svg[data-icon='arrow-up'])",
+      ) as HTMLButtonElement);
 
-    if (submitButton.disabled) {
-      submitButton.removeAttribute("disabled");
-    }
+    submitButton.removeAttribute("disabled");
 
     promptField.value = this.prompt;
     promptField.dispatchEvent(new Event("input", { bubbles: true }));
 
-    this.submit(submitButton);
+    setTimeout(() => {
+      this.submit(submitButton);
+    }, 100);
   }
 
-  bard() {
+  gemini() {
     const promptField = document.querySelector(
       ".ql-editor.textarea",
     ) as HTMLDivElement;

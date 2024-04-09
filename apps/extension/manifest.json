@@ -1,8 +1,10 @@
 {
   "manifest_version": 3,
   "name": "Ai Prompt Snippets",
-  "version": "1.0.1",
-  "action": { "default_popup": "popup/index.html" },
+  "version": "1.0.2",
+  "action": {
+    "default_popup": "popup/index.html"
+  },
   "background": {
     "service_worker": "background/index.ts",
     "type": "module"
@@ -14,7 +16,7 @@
         "https://poe.com/*",
         "https://claude.ai/*",
         "https://www.perplexity.ai/*",
-        "https://bard.google.com/chat/*"
+        "https://gemini.google.com/app/*"
       ],
       "js": ["content-scripts/index.ts"],
       "all_frames": false,
@@ -36,7 +38,7 @@
     "https://poe.com/*",
     "https://claude.ai/*",
     "https://www.perplexity.ai/*",
-    "https://bard.google.com/chat/*"
+    "https://gemini.google.com/app/*"
   ],
   "options_page": "options/index.html",
   "permissions": ["storage", "tabs"],

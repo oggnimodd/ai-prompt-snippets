@@ -26,8 +26,8 @@ export const DEFAULT_PROVIDERS: SupportedProviders = [
     enabled: true,
   },
   {
-    name: "bard",
-    hostname: "bard.google.com",
+    name: "gemini",
+    hostname: "gemini.google.com",
     enabled: true,
   },
 ];

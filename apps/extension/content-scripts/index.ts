@@ -71,7 +71,7 @@ const toggleIframe = () => {
   }
 
   // TODO : this is just a hack, need to refactor the entire content-scripts:
-  if (hostname === "bard.google.com" && iframeMountPointParent) {
+  if (hostname === "gemini.google.com" && iframeMountPointParent) {
     if (iframeMountPointParent.style.width === "calc(100% - 250px)") {
       iframeMountPointParent.style.width = "100%";
     } else if (iframeMountPointParent.style.width === "100%") {
@@ -198,7 +198,7 @@ const injectIframe = async () => {
     }
   }
 
-  if (await isProviderEnabled("bard")) {
+  if (await isProviderEnabled("gemini")) {
     iframeMountPointParent = document.querySelector("body > chat-app");
 
     if (iframeMountPointParent) {
@@ -218,7 +218,7 @@ const injectIframe = async () => {
 
       newDiv.append(iframe);
 
-      const listener = new Listener("bard");
+      const listener = new Listener("gemini");
       listener.listen();
     }
   }
