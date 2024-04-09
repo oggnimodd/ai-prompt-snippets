@@ -2,7 +2,9 @@
   "manifest_version": 3,
   "name": "Ai Prompt Snippets",
   "version": "1.0.1",
-  "action": { "default_popup": "popup/index.html" },
+  "action": {
+    "default_popup": "popup/index.html"
+  },
   "background": {
     "service_worker": "background/index.ts",
     "type": "module"
@@ -14,9 +16,12 @@
         "https://poe.com/*",
         "https://claude.ai/*",
         "https://www.perplexity.ai/*",
-        "https://bard.google.com/chat/*"
+        "https://bard.google.com/chat/*",
+        "https://gemini.google.com/app/*"
       ],
-      "js": ["content-scripts/index.ts"],
+      "js": [
+        "content-scripts/index.ts"
+      ],
       "all_frames": false,
       "run_at": "document_end"
     }
@@ -28,7 +33,9 @@
         "iframe/index.html",
         "images/icon.svg"
       ],
-      "matches": ["<all_urls>"]
+      "matches": [
+        "<all_urls>"
+      ]
     }
   ],
   "host_permissions": [
@@ -36,10 +43,14 @@
     "https://poe.com/*",
     "https://claude.ai/*",
     "https://www.perplexity.ai/*",
-    "https://bard.google.com/chat/*"
+    "https://bard.google.com/chat/*",
+    "https://gemini.google.com/app/*"
   ],
   "options_page": "options/index.html",
-  "permissions": ["storage", "tabs"],
+  "permissions": [
+    "storage",
+    "tabs"
+  ],
   "icons": {
     "48": "images/icon-48.png",
     "128": "images/icon-128.png"
