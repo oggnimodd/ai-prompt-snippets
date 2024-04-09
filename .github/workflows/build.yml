@@ -64,7 +64,7 @@ jobs:
         with:
           bun-version: latest
       - name: Download Artifact
-        uses: dawidd6/action-download-artifact@v2
+        uses: dawidd6/action-download-artifact@v3
         with:
           name: ai-prompt-snippets
           path: apps/extension/dist
