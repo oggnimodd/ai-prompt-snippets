@@ -46,7 +46,7 @@ jobs:
           cd apps/extension
           bun run build
       - name: Upload Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ai-prompt-snippets
           path: apps/extension/dist
