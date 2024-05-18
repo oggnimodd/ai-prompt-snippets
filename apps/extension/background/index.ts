@@ -8,4 +8,9 @@ chrome.runtime.onInstalled.addListener((details) => {
     setOrUpdateLocalStorageValue("theme", DEFAULT_THEME);
     setOrUpdateLocalStorageValue("providers", DEFAULT_PROVIDERS);
   }
+
+  if (details.reason === "update") {
+    // Overwrite old chat providers
+    setOrUpdateLocalStorageValue("providers", DEFAULT_PROVIDERS);
+  }
 });
