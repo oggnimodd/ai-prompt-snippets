@@ -2,7 +2,7 @@ import useSnippets from "../hooks/useSnippets";
 import { Select, SelectItem, Textarea } from "@nextui-org/react";
 import { Combobox } from "@acme/ui";
 import { Button } from "@nextui-org/react";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Param } from "models/snippet";
 import { PromptData, messageIframeParent } from "utils/message";
 import { openOptionsPage } from "utils/chrome";
@@ -40,9 +40,7 @@ const ParameterEditor: React.FC<{
   if (parameter.type === "text") {
     return (
       <Textarea
-        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
-          handleParameterChange(parameter.title, e.target.value)
-        }
+        onChange={(e) => handleParameterChange(parameter.title, e.target.value)}
         label={parameter.title}
         labelPlacement="outside"
         placeholder={parameter.title}
