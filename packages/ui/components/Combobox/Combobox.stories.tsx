@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Combobox, { Option } from "./Combobox";
+import Combobox, { type Option } from "./Combobox";
 
 const people: Option[] = [
   { key: "1", label: "Wade Cooper" },

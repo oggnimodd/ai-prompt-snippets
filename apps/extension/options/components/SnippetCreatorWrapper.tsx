@@ -1,7 +1,8 @@
 import { Button } from "@nextui-org/react";
 import { BookOpen, Home, Upload } from "lucide-react";
-import { Snippet } from "models/snippet";
-import React, { FC } from "react";
+import type { Snippet } from "models/snippet";
+import type React from "react";
+import type { FC } from "react";
 import { Link } from "react-router-dom";
 import { exportSnippets } from "export-import";
 import { DOCS_URL } from "constants/links";

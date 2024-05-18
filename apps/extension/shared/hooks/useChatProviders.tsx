@@ -3,7 +3,7 @@ import {
   getLocalStorageValue,
   setOrUpdateLocalStorageValue,
 } from "../../utils/storage";
-import { ChatProvider, SupportedProviders } from "../../models/provider";
+import type { ChatProvider, SupportedProviders } from "../../models/provider";
 
 const useChatProviders = () => {
   const [isLoading, setIsLoading] = useState(true);

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Combobox, { Option } from "./Combobox";
+import Combobox, { type Option } from "./Combobox";
 
 const options: Option[] = ["Option 1", "Option 2", "Option 3"].map(
   (option, index) => ({

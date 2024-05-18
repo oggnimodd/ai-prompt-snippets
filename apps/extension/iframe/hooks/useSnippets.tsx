@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getLocalStorageValue } from "utils/storage";
 import type { Snippet } from "models/snippet";
-import { Option } from "@ui/index";
+import type { Option } from "@ui/index";
 
 const useSnippets = () => {
   const [snippets, setSnippets] = useState<Snippet[]>([]);

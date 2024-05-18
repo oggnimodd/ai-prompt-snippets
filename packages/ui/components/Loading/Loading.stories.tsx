@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 import Loading from "./Loading";
 import LoadingWithMessage from "./LoadingWithMessage";
 

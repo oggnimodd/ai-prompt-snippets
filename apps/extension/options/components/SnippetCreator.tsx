@@ -1,10 +1,11 @@
-import React, { useEffect, useRef } from "react";
+import type React from "react";
+import { useEffect, useRef } from "react";
 
 import {
-  Control,
+  type Control,
   Controller,
-  FieldErrors,
-  UseFieldArrayRemove,
+  type FieldErrors,
+  type UseFieldArrayRemove,
   useFieldArray,
   useForm,
   useFormState,

@@ -1,4 +1,4 @@
-import { FC } from "react";
+import type { FC } from "react";
 import type { Snippet } from "models/snippet";
 import { Link } from "react-router-dom";
 import { Trash2 as DeleteIcon } from "lucide-react";

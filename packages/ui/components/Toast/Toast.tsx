@@ -1,4 +1,4 @@
-import { FC } from "react";
+import type { FC } from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 import { cn } from "@ui/utils/cn";
 import { Button } from "@nextui-org/react";

@@ -1,4 +1,4 @@
-import { SupportedProviders } from "../../models/provider";
+import type { SupportedProviders } from "../../models/provider";
 
 export type Theme = "dark" | "light";
 

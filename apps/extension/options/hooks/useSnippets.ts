@@ -3,7 +3,7 @@ import {
   getLocalStorageValue,
   setOrUpdateLocalStorageValue,
 } from "utils/storage";
-import { Snippet } from "models/snippet";
+import type { Snippet } from "models/snippet";
 
 const useSnippets = () => {
   const [isLoading, setIsLoading] = useState(true);

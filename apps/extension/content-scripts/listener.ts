@@ -1,5 +1,5 @@
 import { extensionUrl } from "utils/chrome";
-import { PromptData, IframeMessage } from "utils/message";
+import type { PromptData, IframeMessage } from "utils/message";
 import type { ChatProvider } from "models/provider";
 
 class Listener {
