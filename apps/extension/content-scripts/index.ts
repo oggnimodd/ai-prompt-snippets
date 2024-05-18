@@ -87,6 +87,8 @@ const isProviderEnabled = async (provider: ChatProvider) => {
 
   const providerInfo = providers.find((p) => p.name === provider);
 
+  console.log(providerInfo);
+
   return hostname === providerInfo?.hostname && providerInfo.enabled;
 };
 
