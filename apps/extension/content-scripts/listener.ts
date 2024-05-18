@@ -132,6 +132,9 @@ class Listener {
       ".ql-editor.textarea",
     ) as HTMLDivElement;
 
+    // Before we append the prompt we need to clear the previous content if there is any
+    promptField.innerHTML = "";
+
     const paragraph = document.createElement("p");
     paragraph.innerHTML = this.prompt;
     promptField.appendChild(paragraph);
