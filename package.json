@@ -16,7 +16,6 @@
   "dependencies": {
     "@playwright/test": "^1.39.0",
     "delay": "^6.0.0",
-    "playwright": "^1.39.0",
     "typescript": "5.2.2"
   },
   "devDependencies": {
@@ -27,7 +26,10 @@
     "lint-staged": "^13.2.2"
   },
   "lint-staged": {
-    "**/*.{js,ts,jsx,tsx}": ["biome check --apply .", "biome format --write ."]
+    "**/*.{js,ts,jsx,tsx}": [
+      "biome check --apply .",
+      "biome format --write ."
+    ]
   },
   "workspaces": [
     "apps/extension",
@@ -36,5 +38,7 @@
     "packages/ui",
     "packages/types"
   ],
-  "trustedDependencies": ["playwright"]
+  "trustedDependencies": [
+    "playwright"
+  ]
 }
