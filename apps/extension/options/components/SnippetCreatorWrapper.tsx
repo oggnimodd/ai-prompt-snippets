@@ -1,9 +1,10 @@
 import { Button } from "@nextui-org/react";
-import { Home, Upload } from "lucide-react";
+import { BookOpen, Home, Upload } from "lucide-react";
 import { Snippet } from "models/snippet";
 import React, { FC } from "react";
 import { Link } from "react-router-dom";
 import { exportSnippets } from "export-import";
+import { DOCS_URL } from "constants/links";
 
 export interface SnippetCreatorWrapperProps {
   children: React.ReactNode;
@@ -17,6 +18,15 @@ const SnippetCreatorWrapper: FC<SnippetCreatorWrapperProps> = ({
   return (
     <div className="flex flex-col">
       <div className="mb-2 flex ml-auto gap-x-3">
+        <Button
+          startContent={<BookOpen size={18} />}
+          as={Link}
+          color="primary"
+          target="_blank"
+          to={DOCS_URL}
+        >
+          Docs
+        </Button>
         {snippet && (
           // Exporting individual snippet
           <Button

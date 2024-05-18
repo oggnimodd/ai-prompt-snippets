@@ -8,6 +8,7 @@ import { PromptData, messageIframeParent } from "utils/message";
 import { openOptionsPage } from "utils/chrome";
 import { Send as SendIcon } from "lucide-react";
 import { logForTesting } from "utils/playwright";
+import { DOCS_URL } from "constants/links";
 
 type HandleParameterChange = (key: string, value: string) => void;
 
@@ -114,16 +115,29 @@ const PromptBuilder = () => {
 
   if (snippets.length === 0) {
     return (
-      <span data-cy="empty-panel-message">
-        No snippets, you can add new ones{" "}
-        <button
-          className="text-primary-500 underline"
-          onClick={openOptionsPage}
-          data-cy="options-page-link"
-        >
-          here
-        </button>
-      </span>
+      <div data-cy="empty-panel-message">
+        <div>
+          No snippets, you can add new ones{" "}
+          <button
+            className="text-primary-500 underline"
+            onClick={openOptionsPage}
+            data-cy="options-page-link"
+          >
+            here
+          </button>
+        </div>
+
+        <div className="mt-4">
+          You can read the docs{" "}
+          <a
+            target="_blank "
+            href={DOCS_URL}
+            className="text-primary-500 underline"
+          >
+            here
+          </a>
+        </div>
+      </div>
     );
   }
 
