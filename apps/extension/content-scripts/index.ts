@@ -125,8 +125,6 @@ const injectIframe = async () => {
       "[class*='SidebarLayout_layoutWrapper']",
     );
 
-    iframeMountPointParent?.querySelector("aside:last-child")?.remove();
-
     if (iframeMountPointParent) {
       iframeMountPointParent.append(newDiv);
 
