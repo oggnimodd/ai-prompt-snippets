@@ -5,7 +5,7 @@ export type ChatProvider =
   | "perplexity"
   | "gemini";
 export type ChatHost =
-  | "chat.openai.com"
+  | "chatgpt.com"
   | "poe.com"
   | "claude.ai"
   | "www.perplexity.ai"

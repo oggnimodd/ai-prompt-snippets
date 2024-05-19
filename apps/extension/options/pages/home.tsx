@@ -1,13 +1,22 @@
 import { Button, Input } from "@nextui-org/react";
 import { Link } from "react-router-dom";
 import { SnippetList } from "../components";
-import { Download, Plus, Upload, Moon, Sun, Trash2 } from "lucide-react";
+import {
+  Download,
+  Plus,
+  Upload,
+  Moon,
+  Sun,
+  Trash2,
+  BookOpen,
+} from "lucide-react";
 import { LoadingWithMessage, Toast } from "@acme/ui";
 import { useImportSnippets, useSearchSnippets, useSnippets } from "../hooks";
 import { useTheme } from "shared/hooks";
 import { exportSnippets } from "../../export-import";
 import { delay } from "utils/delay";
 import { toast } from "react-hot-toast";
+import { DOCS_URL } from "constants/links";
 
 const Index = () => {
   const {
@@ -54,18 +63,8 @@ const Index = () => {
   }
 
   return (
-    <>
-      <div className="flex flex-wrap justify-between gap-x-4 gap-y-2 items-end mb-8">
-        <Input
-          onClear={clearSearch}
-          onChange={onSearchChange}
-          placeholder="Find Snippet"
-          labelPlacement="outside"
-          isClearable
-          classNames={{
-            base: "w-auto self-start",
-          }}
-        />
+    <div className="flex flex-col gap-y-6">
+      <div className="flex flex-wrap justify-between gap-x-4 gap-y-2 items-end">
         <div className="self-auto flex items-center gap-3 flex-wrap">
           <Button
             data-cy="toggle-theme-button"
@@ -76,6 +75,15 @@ const Index = () => {
             color="primary"
           >
             {theme === "dark" ? "Dark" : "Light"}
+          </Button>
+          <Button
+            startContent={<BookOpen size={18} />}
+            as={Link}
+            color="primary"
+            target="_blank"
+            to={DOCS_URL}
+          >
+            Docs
           </Button>
           <Button
             data-cy="delete-all-snippets-button"
@@ -112,12 +120,24 @@ const Index = () => {
           </Button>
         </div>
       </div>
+
+      <Input
+        onClear={clearSearch}
+        onChange={onSearchChange}
+        placeholder="Find Snippet"
+        labelPlacement="outside"
+        isClearable
+        classNames={{
+          base: "w-64 self-start",
+        }}
+      />
+
       <SnippetList
         search={search}
         snippets={snippets}
         setSnippets={setSnippets}
       />
-    </>
+    </div>
   );
 };
 

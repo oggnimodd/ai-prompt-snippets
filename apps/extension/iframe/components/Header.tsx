@@ -10,6 +10,7 @@ import {
 import { openOptionsPage } from "utils/chrome";
 import { useTheme } from "shared/hooks";
 import { messageIframeParent } from "utils/message";
+import { REPO_URL } from "constants/links";
 
 const toggleIframe = () => {
   // Since this is an iframe , send the message to the parent window
@@ -40,7 +41,7 @@ const Header = () => {
           color="primary"
           isIconOnly
           as="a"
-          href="https://github.com/oggnimodd/ai-prompt-snippets"
+          href={REPO_URL}
           target="_blank"
           size="sm"
         />

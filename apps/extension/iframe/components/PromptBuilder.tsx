@@ -2,12 +2,14 @@ import useSnippets from "../hooks/useSnippets";
 import { Select, SelectItem, Textarea } from "@nextui-org/react";
 import { Combobox } from "@acme/ui";
 import { Button } from "@nextui-org/react";
-import React, { useEffect, useState } from "react";
-import { Param } from "models/snippet";
-import { PromptData, messageIframeParent } from "utils/message";
+import type React from "react";
+import { useEffect, useState } from "react";
+import type { Param } from "models/snippet";
+import { type PromptData, messageIframeParent } from "utils/message";
 import { openOptionsPage } from "utils/chrome";
 import { Send as SendIcon } from "lucide-react";
 import { logForTesting } from "utils/playwright";
+import { DOCS_URL } from "constants/links";
 
 type HandleParameterChange = (key: string, value: string) => void;
 
@@ -60,7 +62,7 @@ const ParameterEditor: React.FC<{
         label={parameter.title}
         labelPlacement="outside"
         disableAnimation
-        onChange={(e) => {
+        onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
           const value = e.target.value;
 
           if (value) {
@@ -114,16 +116,29 @@ const PromptBuilder = () => {
 
   if (snippets.length === 0) {
     return (
-      <span data-cy="empty-panel-message">
-        No snippets, you can add new ones{" "}
-        <button
-          className="text-primary-500 underline"
-          onClick={openOptionsPage}
-          data-cy="options-page-link"
-        >
-          here
-        </button>
-      </span>
+      <div data-cy="empty-panel-message">
+        <div>
+          No snippets, you can add new ones{" "}
+          <button
+            className="text-primary-500 underline"
+            onClick={openOptionsPage}
+            data-cy="options-page-link"
+          >
+            here
+          </button>
+        </div>
+
+        <div className="mt-4">
+          You can read the docs{" "}
+          <a
+            target="_blank "
+            href={DOCS_URL}
+            className="text-primary-500 underline"
+          >
+            here
+          </a>
+        </div>
+      </div>
     );
   }
 

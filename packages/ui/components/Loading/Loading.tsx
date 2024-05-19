@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 
 const loadingCva = tv({

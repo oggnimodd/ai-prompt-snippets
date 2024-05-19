@@ -1,8 +1,12 @@
 import { extensionUrl } from "utils/chrome";
 import { getLocalStorageValue } from "utils/storage";
 import Listener from "./listener";
-import { ChatHost, ChatProvider, SupportedProviders } from "models/provider";
-import { IframeMessage } from "utils/message";
+import type {
+  ChatHost,
+  ChatProvider,
+  SupportedProviders,
+} from "models/provider";
+import type { IframeMessage } from "utils/message";
 
 // TODO : create a new injectable css to handle all the styling
 
@@ -125,8 +129,6 @@ const injectIframe = async () => {
       "[class*='SidebarLayout_layoutWrapper']",
     );
 
-    iframeMountPointParent?.querySelector("aside:last-child")?.remove();
-
     if (iframeMountPointParent) {
       iframeMountPointParent.append(newDiv);
 
@@ -195,6 +197,30 @@ const injectIframe = async () => {
 
       const listener = new Listener("perplexity");
       listener.listen();
+
+      const promptField =
+        (document.querySelector(
+          "textarea[placeholder*='follow']",
+        ) as HTMLTextAreaElement) ||
+        (document.querySelector(
+          "textarea[placeholder*='nything']",
+        ) as HTMLTextAreaElement);
+
+      // Currently perplexity will automatically focus on the prompt field if we click inside iframe
+      // We need to manually enable/disable depending on focus/blur of the main window
+      window.addEventListener("focus", () => {
+        promptField.disabled = false;
+        promptField.focus();
+      });
+
+      window.addEventListener("blur", () => {
+        promptField.disabled = true;
+      });
+
+      // If we focus on the iframe the prompt field is disabled, meaning user will need to click twice to focus on it, we can improve the ux by automatically focusing on the prompt field
+      promptField.onclick = () => {
+        promptField.focus();
+      };
     }
   }
 

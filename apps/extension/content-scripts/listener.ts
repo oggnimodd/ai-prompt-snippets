@@ -1,5 +1,5 @@
 import { extensionUrl } from "utils/chrome";
-import { PromptData, IframeMessage } from "utils/message";
+import type { PromptData, IframeMessage } from "utils/message";
 import type { ChatProvider } from "models/provider";
 
 class Listener {
@@ -53,7 +53,7 @@ class Listener {
       "#prompt-textarea",
     ) as HTMLTextAreaElement;
     const submitButton = document.querySelector(
-      '[data-testid="send-button"]',
+      "form:has(textarea#prompt-textarea) button:not([aria-label*=file])",
     ) as HTMLButtonElement;
 
     this.setNativeValue(promptField, this.prompt);
@@ -131,6 +131,9 @@ class Listener {
     const promptField = document.querySelector(
       ".ql-editor.textarea",
     ) as HTMLDivElement;
+
+    // Before we append the prompt we need to clear the previous content if there is any
+    promptField.innerHTML = "";
 
     const paragraph = document.createElement("p");
     paragraph.innerHTML = this.prompt;

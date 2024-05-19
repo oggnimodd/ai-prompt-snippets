@@ -1,8 +1,8 @@
 import { expect, it, test } from "vitest";
-import { snippetSchema, Snippet } from "../models/snippet";
+import { snippetSchema, type Snippet } from "../models/snippet";
 import { nanoid } from "nanoid";
 
-export const correctSnippetExample: Snippet = {
+const correctSnippetExample: Snippet = {
   id: nanoid(),
   title: "Word definition",
   prompt: "What is the definition of the word [word] in [language]?",
@@ -10,7 +10,7 @@ export const correctSnippetExample: Snippet = {
     {
       id: nanoid(),
       title: "word",
-      type: "string",
+      type: "text",
     },
     {
       id: nanoid(),
@@ -34,7 +34,7 @@ export const correctSnippetExample: Snippet = {
   ],
 };
 
-export const wrongSnippetExample = {
+const wrongSnippetExample = {
   title: "Word definition",
   prompt: "What is the definition of the word [word] in [language]?",
   parameters: {

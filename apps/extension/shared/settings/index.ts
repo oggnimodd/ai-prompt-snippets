@@ -1,4 +1,4 @@
-import { SupportedProviders } from "../../models/provider";
+import type { SupportedProviders } from "../../models/provider";
 
 export type Theme = "dark" | "light";
 
@@ -7,7 +7,7 @@ export const DEFAULT_THEME: Theme = "dark";
 export const DEFAULT_PROVIDERS: SupportedProviders = [
   {
     name: "chat-gpt",
-    hostname: "chat.openai.com",
+    hostname: "chatgpt.com",
     enabled: true,
   },
   {

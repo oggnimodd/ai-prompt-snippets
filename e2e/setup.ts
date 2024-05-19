@@ -1,5 +1,5 @@
 import { test as base, chromium, type BrowserContext } from "@playwright/test";
-import path from "path";
+import path from "node:path";
 
 const createExtensionUrl = (path: string) => {
   return `chrome-extension://${path}`;

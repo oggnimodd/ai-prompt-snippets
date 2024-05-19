@@ -12,7 +12,7 @@
   "content_scripts": [
     {
       "matches": [
-        "https://chat.openai.com/*",
+        "https://chatgpt.com/*",
         "https://poe.com/*",
         "https://claude.ai/*",
         "https://www.perplexity.ai/*",
@@ -34,7 +34,7 @@
     }
   ],
   "host_permissions": [
-    "https://chat.openai.com/*",
+    "https://chatgpt.com/*",
     "https://poe.com/*",
     "https://claude.ai/*",
     "https://www.perplexity.ai/*",

@@ -1,4 +1,5 @@
-import React, { InputHTMLAttributes, useRef } from "react";
+import type React from "react";
+import { type InputHTMLAttributes, useRef } from "react";
 import { Combobox as HeadlessCombobox } from "@headlessui/react";
 import { useState } from "react";
 import { input as inputTv } from "@nextui-org/react";
