@@ -26,7 +26,7 @@
     "lint-staged": "^13.2.2"
   },
   "lint-staged": {
-    "**/*.{js,ts,jsx,tsx}": [
+    "**/*.{js,ts,jsx,tsx,json}": [
       "biome check --apply .",
       "biome format --write ."
     ]
@@ -38,7 +38,5 @@
     "packages/ui",
     "packages/types"
   ],
-  "trustedDependencies": [
-    "playwright"
-  ]
+  "trustedDependencies": ["playwright"]
 }
