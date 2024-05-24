@@ -53,7 +53,7 @@ class Listener {
       "#prompt-textarea",
     ) as HTMLTextAreaElement;
     const submitButton = document.querySelector(
-      "form:has(textarea#prompt-textarea) button:not([aria-label*=file])",
+      "form:has(textarea#prompt-textarea) button[data-testid*='send']",
     ) as HTMLButtonElement;
 
     this.setNativeValue(promptField, this.prompt);
