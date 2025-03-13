@@ -11,6 +11,7 @@ const Renderer = ({ breakpoint }: { breakpoint: BreakpointKey }) => {
 describe("useBreakpoint", () => {
   beforeEach(() => {
     cy.mount(
+      // biome-ignore lint/complexity/noUselessFragments: <explanation>
       <>
         {Object.keys(breakpoints).map((breakpoint) => {
           return (

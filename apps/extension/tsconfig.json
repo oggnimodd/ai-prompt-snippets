@@ -19,23 +19,21 @@
     "noFallthroughCasesInSwitch": true,
     "baseUrl": ".",
     "paths": {
-      "components/*": ["components/*"],
-      "utils/*": ["utils/*"],
-      "layouts/*": ["layouts/*"],
-      "stores/*": ["stores/*"],
-      "types/*": ["types/*"],
-      "config/*": ["config/*"],
-      "hooks/*": ["hooks/*"],
-      "shared/*": ["shared/*"],
-      "models/*": ["models/*"],
-      "constants/*": ["constants/*"],
+      "components/*": ["src/components/*"],
+      "utils/*": ["src/utils/*"],
+      "layouts/*": ["src/layouts/*"],
+      "stores/*": ["src/stores/*"],
+      "types/*": ["src/types/*"],
+      "config/*": ["src/config/*"],
+      "hooks/*": ["src/hooks/*"],
+      "shared/*": ["src/shared/*"],
+      "models/*": ["src/models/*"],
+      "constants/*": ["src/constants/*"],
+      "export-import": ["src/export-import/index.ts"],
+      "export-import/*": ["src/export-import/*"],
+      "scripts/*": ["scripts/*"],
       "@ui/*": ["../../packages/ui/*"]
     }
   },
-  "include": ["popup", "utils", "options", "iframe", "content-scripts"],
-  "references": [
-    {
-      "path": "./tsconfig.node.json"
-    }
-  ]
+  "include": ["src"]
 }

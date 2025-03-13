@@ -7,6 +7,28 @@ import type {
   SupportedProviders,
 } from "models/provider";
 import type { IframeMessage } from "utils/message";
+import { isDev } from "scripts/utils";
+import browser from "webextension-polyfill";
+import { delay } from "utils/delay";
+
+if (isDev) {
+  const ws = new WebSocket("ws://localhost:8990");
+
+  ws.onmessage = (event) => {
+    const message = JSON.parse(event.data);
+
+    if (message.type === "reload") {
+      // The if statement is to avoid 'Extension context invalidated' error
+      // One call of this sendMessage is enough to do the HMR
+      // But since we are reloading the runtime,
+      // some content scripts will send the message when the context is already invalidated
+      if (browser.runtime?.id) {
+        browser.runtime.sendMessage({ type: "reload" });
+      }
+      window.location.reload();
+    }
+  };
+}
 
 // TODO : create a new injectable css to handle all the styling
 
@@ -14,7 +36,7 @@ const newDiv = document.createElement("div");
 newDiv.style.display = "flex";
 const hostname = window.location.hostname as ChatHost;
 let iframeMountPointParent: HTMLElement | null;
-const iframeUrl = `${extensionUrl}/iframe/index.html`;
+const iframeUrl = `${extensionUrl}/dist/iframe/index.html`;
 const iframe = document.createElement("iframe");
 let togglerButton: HTMLButtonElement | null = null;
 
@@ -22,7 +44,7 @@ const injectTogglerButton = () => {
   const img = document.createElement("img");
   img.style.width = "30px";
   img.style.height = "30px";
-  img.src = `${extensionUrl}/images/icon.svg`;
+  img.src = `${extensionUrl}/assets/images/icon.svg`;
 
   const button = document.createElement("button");
   const radius = "10px";
@@ -96,9 +118,9 @@ const isProviderEnabled = async (provider: ChatProvider) => {
 
 const injectIframe = async () => {
   if (await isProviderEnabled("chat-gpt")) {
-    iframeMountPointParent = document.querySelector(
-      "#__next > div.relative.z-0.flex.h-full.w-full.overflow-hidden > div.relative.flex.h-full.max-w-full.flex-1.flex-col.overflow-hidden",
-    );
+    await delay(1000);
+
+    iframeMountPointParent = document.querySelector("div:has(> main)");
 
     const main = iframeMountPointParent?.querySelector("main");
 
@@ -121,6 +143,8 @@ const injectIframe = async () => {
   }
 
   if (await isProviderEnabled("poe")) {
+    await delay(1000);
+
     // create div tag with 200px width
     newDiv.style.width = "250px";
     newDiv.style.height = "100%";
@@ -167,25 +191,15 @@ const injectIframe = async () => {
   }
 
   if (await isProviderEnabled("perplexity")) {
+    await delay(1200);
+
     // @ts-ignore
     newDiv.style =
       "position:sticky;top:0;right:0;width:auto;height:100vh;display:flex;";
 
-    iframeMountPointParent = document.querySelector(
-      "main > div > div > div + div",
-    );
+    iframeMountPointParent = document.querySelector("main > div > div");
 
     if (iframeMountPointParent) {
-      iframeMountPointParent.classList.add("flex", "relative");
-      const mainContainer = document.querySelector(
-        "main > div > div > div + div > div:first-child",
-      );
-
-      if (mainContainer) {
-        //@ts-ignore
-        mainContainer.style = "flex:1";
-      }
-
       iframeMountPointParent.append(newDiv);
 
       iframe.src = iframeUrl;

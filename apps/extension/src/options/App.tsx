@@ -1,12 +1,6 @@
 import Routes from "./routes";
-import { getLocalStorageValue } from "utils/storage";
 import { Toaster } from "react-hot-toast";
 import { useTheme } from "shared/hooks";
-
-(async () => {
-  const results = await getLocalStorageValue("snippets");
-  console.log(results);
-})();
 
 const App = () => {
   useTheme();

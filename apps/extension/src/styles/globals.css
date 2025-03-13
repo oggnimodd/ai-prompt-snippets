@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
+body {
   @apply min-h-screen text-base;
 }
 
@@ -10,7 +10,7 @@ html.dark {
   @apply text-white;
 }
 
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;

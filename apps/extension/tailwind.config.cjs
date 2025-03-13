@@ -6,9 +6,9 @@ module.exports = {
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
     "./layouts/**/*.{js,ts,jsx,tsx}",
-    "./popup/**/*.{js,ts,jsx,tsx}",
-    "./options/**/*.{js,ts,jsx,tsx}",
-    "./iframe/**/*.{js,ts,jsx,tsx}",
+    "./src//popup/**/*.{js,ts,jsx,tsx}",
+    "./src/options/**/*.{js,ts,jsx,tsx}",
+    "./src/iframe/**/*.{js,ts,jsx,tsx}",
     // NextUI spesific
     "../../node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],

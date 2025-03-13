@@ -1,5 +1,5 @@
 import { test, expect } from "../setup";
-import { DEFAULT_PROVIDERS } from "../../apps/extension/shared/settings/index";
+import { DEFAULT_PROVIDERS } from "../../apps/extension/src/shared/settings/index";
 
 test.beforeEach(async ({ page, extensionPages }) => {
   // A hack to make chrome object avalaible

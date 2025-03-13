@@ -1,6 +1,7 @@
 import { extensionUrl } from "utils/chrome";
 import type { PromptData, IframeMessage } from "utils/message";
 import type { ChatProvider } from "models/provider";
+import { waitForElement } from "utils/element";
 
 class Listener {
   private chatprovider: ChatProvider;
@@ -48,16 +49,23 @@ class Listener {
     );
   }
 
-  chatGPT() {
+  async chatGPT() {
     const promptField = document.querySelector(
       "#prompt-textarea",
     ) as HTMLTextAreaElement;
-    const submitButton = document.querySelector(
-      "form:has(textarea#prompt-textarea) button[data-testid*='send']",
-    ) as HTMLButtonElement;
 
-    this.setNativeValue(promptField, this.prompt);
-    this.submit(submitButton);
+    // Clean up the prompt field first
+    promptField.innerHTML = "";
+
+    const paragraph = document.createElement("p");
+    paragraph.innerHTML = this.prompt;
+    promptField.appendChild(paragraph);
+
+    const submitButton = await waitForElement("button[data-testid*='send']");
+
+    if (submitButton) {
+      this.submit(submitButton as HTMLButtonElement);
+    }
   }
 
   claude() {
@@ -82,12 +90,12 @@ class Listener {
     }, 100);
   }
 
-  poe() {
+  async poe() {
     const promptField = document.querySelector(
       "[class*='ChatMessageInputContainer_textArea'] textarea",
     ) as HTMLTextAreaElement;
     const submitButton = document.querySelector(
-      "[class*='sendButton']",
+      `button[data-button-send="true"]`,
     ) as HTMLButtonElement;
 
     if (submitButton.disabled) {
@@ -100,7 +108,7 @@ class Listener {
     this.submit(submitButton);
   }
 
-  perplexity() {
+  async perplexity() {
     const promptField =
       (document.querySelector(
         "textarea[placeholder*='follow']",
@@ -109,18 +117,14 @@ class Listener {
         "textarea[placeholder*='nything']",
       ) as HTMLTextAreaElement);
 
-    const submitButton =
-      (document.querySelector(
-        "button:has(svg[data-icon='arrow-right'])",
-      ) as HTMLButtonElement) ||
-      (document.querySelector(
-        "button:has(svg[data-icon='arrow-up'])",
-      ) as HTMLButtonElement);
-
-    submitButton.removeAttribute("disabled");
-
     promptField.value = this.prompt;
     promptField.dispatchEvent(new Event("input", { bubbles: true }));
+
+    const submitButton = (await waitForElement(
+      `button[aria-label="Submit"]`,
+    )) as HTMLButtonElement;
+
+    submitButton.removeAttribute("disabled");
 
     setTimeout(() => {
       this.submit(submitButton);

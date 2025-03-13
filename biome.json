@@ -74,7 +74,7 @@
   "javascript": {
     "formatter": {
       "semicolons": "always",
-      "trailingComma": "all",
+      "trailingCommas": "all",
       "quoteStyle": "double"
     }
   }
