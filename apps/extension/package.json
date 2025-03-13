@@ -4,8 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
+    "dev": "plasmo dev",
+    "build": "plasmo build",
+    "package": "plasmo package",
     "clean": "rm -rf .dist node_modules",
     "preview": "vite preview",
     "ladle:dev": "ladle serve",
@@ -24,6 +25,7 @@
     "framer-motion": "^10.16.4",
     "lucide-react": "^0.378.0",
     "nanoid": "^5.0.1",
+    "plasmo": "^0.90.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.46.2",
@@ -34,9 +36,8 @@
     "zustand": "^4.4.1"
   },
   "devDependencies": {
-    "@crxjs/vite-plugin": "2.0.0-beta.17",
-    "@types/file-saver": "^2.0.5",
     "@types/chrome": "^0.0.244",
+    "@types/file-saver": "^2.0.5",
     "@types/react": "^18.2.21",
     "@types/react-dom": "^18.2.7",
     "@vitejs/plugin-react": "^4.0.4",
@@ -46,5 +47,28 @@
     "vite": "^4.4.9",
     "vite-tsconfig-paths": "^4.2.0",
     "vitest": "^0.31.4"
+  },
+  "manifest": {
+    "manifest_version": 3,
+    "name": "Ai Prompt Snippets",
+    "version": "1.0.5",
+    "background": {
+      "service_worker": "background.ts",
+      "type": "module"
+    },
+    "host_permissions": [
+      "https://chatgpt.com/*",
+      "https://poe.com/*",
+      "https://claude.ai/*",
+      "https://www.perplexity.ai/*",
+      "https://gemini.google.com/app/*"
+    ],
+    "web_accessible_resources": [
+      {
+        "resources": ["icon.svg"],
+        "matches": ["<all_urls>"]
+      }
+    ],
+    "permissions": ["storage", "tabs"]
   }
 }

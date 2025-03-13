@@ -1,5 +1,5 @@
 import { test, expect } from "../setup";
-import type { Snippet } from "../../apps/extension/models/snippet";
+import type { Snippet } from "../../apps/extension/src/models/snippet";
 import { randomUUID as randomId } from "node:crypto";
 import delay from "delay";
 

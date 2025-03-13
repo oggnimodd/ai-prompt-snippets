@@ -17,7 +17,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "baseUrl": ".",
+    "baseUrl": "./src",
     "paths": {
       "components/*": ["components/*"],
       "utils/*": ["utils/*"],
@@ -32,7 +32,14 @@
       "@ui/*": ["../../packages/ui/*"]
     }
   },
-  "include": ["popup", "utils", "options", "iframe", "content-scripts"],
+  "include": [
+    ".plasmo/index.d.ts",
+    "src/popup",
+    "src/utils",
+    "src/options",
+    "src/iframe",
+    "src/content-scripts"
+  ],
   "references": [
     {
       "path": "./tsconfig.node.json"

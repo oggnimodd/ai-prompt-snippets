@@ -1,5 +1,5 @@
 import { expect, it, test } from "vitest";
-import { snippetSchema, type Snippet } from "../models/snippet";
+import { snippetSchema, type Snippet } from "../src/models/snippet";
 import { nanoid } from "nanoid";
 
 const correctSnippetExample: Snippet = {

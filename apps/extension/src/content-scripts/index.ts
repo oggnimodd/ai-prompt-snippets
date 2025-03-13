@@ -14,7 +14,7 @@ const newDiv = document.createElement("div");
 newDiv.style.display = "flex";
 const hostname = window.location.hostname as ChatHost;
 let iframeMountPointParent: HTMLElement | null;
-const iframeUrl = `${extensionUrl}/iframe/index.html`;
+const iframeUrl = `${extensionUrl}/tabs/iframe.html`;
 const iframe = document.createElement("iframe");
 let togglerButton: HTMLButtonElement | null = null;
 

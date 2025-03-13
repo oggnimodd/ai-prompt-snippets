@@ -22,7 +22,8 @@
       "**/public/workbox-*.js.map",
       "**/public/worker-*.js.map",
       "**/public/fallback-*.",
-      "**/.astro"
+      "**/.astro",
+      "**/.plasmo"
     ]
   },
   "linter": {
@@ -68,7 +69,8 @@
       "**/public/workbox-*.js.map",
       "**/public/worker-*.js.map",
       "**/public/fallback-*.",
-      "**/.astro"
+      "**/.astro",
+      "**/.plasmo"
     ]
   },
   "javascript": {
