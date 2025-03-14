@@ -66,11 +66,13 @@ export const test = base.extend<{
   },
   extensionPages: async ({ context, extensionId }, use) => {
     await use({
-      optionPage: createExtensionUrl(`${extensionId}/options/index.html#/`),
-      popupPage: createExtensionUrl(`${extensionId}/popup/index.html`),
-      panelPage: createExtensionUrl(`${extensionId}/iframe/index.html`),
+      optionPage: createExtensionUrl(
+        `${extensionId}/dist/options/index.html#/`,
+      ),
+      popupPage: createExtensionUrl(`${extensionId}/dist/popup/index.html`),
+      panelPage: createExtensionUrl(`${extensionId}/dist/iframe/index.html`),
       addSnippetPage: createExtensionUrl(
-        `${extensionId}/options/index.html#/add`,
+        `${extensionId}/dist/options/index.html#/add`,
       ),
     });
   },
