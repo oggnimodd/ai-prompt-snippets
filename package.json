@@ -7,7 +7,7 @@
     "prepare": "bun prepare.js",
     "pre-commit": "bunx lint-staged",
     "lint": "biome check .",
-    "lint:apply": "biome check --apply .",
+    "lint:apply": "biome check --write .",
     "format": "biome format .",
     "format:fix": "biome format --write .",
     "e2e": "playwright test",
