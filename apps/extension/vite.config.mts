@@ -32,6 +32,19 @@ export default defineConfig(({ command }) => ({
         popup: r("src/popup/index.html"),
         iframe: r("src/iframe/index.html"),
       },
+      // Silent next ui's warning about use client directive
+      onwarn: (warning, warn) => {
+        // Filter warnings that mention module-level directives
+        if (
+          warning.message.includes(
+            "Module level directives cause errors when bundled",
+          )
+        ) {
+          return;
+        }
+        // Otherwise, use default warning handler
+        warn(warning);
+      },
     },
   },
 }));

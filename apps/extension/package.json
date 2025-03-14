@@ -12,6 +12,7 @@
     "dev:web-firefox": "bun run build:web -- --mode development",
     "dev:js": "bun run build:js -- --mode development",
     "build": "cross-env NODE_ENV=production bun run clear && bun run build:web && bun run build:prepare && bun run build:background && bun run build:js",
+    "build:firefox": "cross-env NODE_ENV=production EXTENSION=firefox bun run clear && bun run build:web && bun run build:prepare && bun run build:background && bun run build:js",
     "build:prepare": "bun run scripts/prepare.ts",
     "build:background": "vite build --config ./vite.config.background.ts",
     "build:web": "vite build",

@@ -19,7 +19,10 @@
     "48": "./assets/images/icon-48.png",
     "128": "./assets/images/icon-128.png"
   },
-  "permissions": ["storage", "activeTab"],
+  "permissions": [
+    "storage",
+    "activeTab"
+  ],
   "host_permissions": [
     "https://chatgpt.com/*",
     "https://poe.com/*",
@@ -36,7 +39,9 @@
         "https://www.perplexity.ai/*",
         "https://gemini.google.com/app/*"
       ],
-      "js": ["dist/content-scripts/index.global.js"],
+      "js": [
+        "dist/content-scripts/index.global.js"
+      ],
       "all_frames": false,
       "run_at": "document_end"
     }
@@ -49,10 +54,12 @@
         "assets/images/icon-48.png",
         "assets/images/icon-128.png"
       ],
-      "matches": ["<all_urls>"]
+      "matches": [
+        "<all_urls>"
+      ]
     }
   ],
   "content_security_policy": {
-    "extension_pages": "script-src 'self' http://localhost:3303; object-src 'self'"
+    "extension_pages": "script-src 'self'; object-src 'self'"
   }
 }
