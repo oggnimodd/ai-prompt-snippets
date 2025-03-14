@@ -5,11 +5,11 @@ import packageJson from "./package.json";
 import { isDev, r } from "./scripts/utils";
 import { sharedConfig } from "./vite/shared-config";
 
-const wss = new WebSocketServer({ port: 8990 });
+// Create the WebSocketServer only in development mode.
+const wss = isDev ? new WebSocketServer({ port: 8990 }) : null;
 
-const broadcast = (data: {
-  type: string;
-}) => {
+const broadcast = (data: { type: string }) => {
+  if (!wss) return;
   wss.clients.forEach((client) => {
     if (client.readyState === WebSocket.OPEN) {
       client.send(JSON.stringify(data));
@@ -20,7 +20,18 @@ const broadcast = (data: {
 
 const plugins = sharedConfig.plugins ? [...sharedConfig.plugins] : [];
 
-// bundling the content script using Vite
+// Define the HMR plugin only for development.
+const hmrPlugin = {
+  name: "hmr",
+  closeBundle: {
+    order: "post" as const, // Assert literal type "post"
+    sequential: true,
+    async handler() {
+      broadcast({ type: "reload" });
+    },
+  },
+};
+
 export default defineConfig({
   plugins: [
     environment({
@@ -29,22 +40,11 @@ export default defineConfig({
       PORT: process.env.PORT || "3303",
     }),
     ...plugins,
-    {
-      name: "hmr",
-      closeBundle: {
-        order: "post",
-        sequential: true,
-        async handler() {
-          broadcast({ type: "reload" });
-        },
-      },
-    },
+    ...(isDev ? [hmrPlugin] : []), // Include only in development
   ],
   define: {
     __DEV__: isDev,
     __NAME__: JSON.stringify(packageJson.name),
-    // https://github.com/vitejs/vite/issues/9320
-    // https://github.com/vitejs/vite/issues/9186
   },
   build: {
     watch: isDev ? {} : undefined,
@@ -52,6 +52,7 @@ export default defineConfig({
     cssCodeSplit: false,
     emptyOutDir: false,
     sourcemap: isDev ? "inline" : false,
+    minify: false,
     lib: {
       entry: r("src/content-scripts/index.ts"),
       name: packageJson.name,

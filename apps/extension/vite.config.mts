@@ -21,6 +21,7 @@ export default defineConfig(({ command }) => ({
     outDir: r("extension/dist"),
     emptyOutDir: false,
     sourcemap: isDev ? "inline" : false,
+    minify: "terser",
     // https://developer.chrome.com/docs/webstore/program_policies/#:~:text=Code%20Readability%20Requirements
     terserOptions: {
       mangle: false,

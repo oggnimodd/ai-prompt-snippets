@@ -1,6 +1,6 @@
 import path from "node:path";
 
-export const isDev = process.env.NODE_ENV !== "production";
+export const isDev = process.env.NODE_ENV === "development";
 export const isFirefox = process.env.EXTENSION === "firefox";
 
 export const r = (...args: string[]) => path.resolve(__dirname, "..", ...args);
