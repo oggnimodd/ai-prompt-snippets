@@ -1,11 +1,6 @@
 ---
-const response = await fetch(
-  "https://api.github.com/repos/oggnimodd/ai-prompt-snippets/releases/latest",
-);
-const data = await response.json();
-const latestReleaseLink =
-  data.html_url ||
-  "https://github.com/oggnimodd/ai-prompt-snippets/releases/tag/v1.0.1";
+
+const latestReleaseLink = "https://github.com/oggnimodd/ai-prompt-snippets/releases/latest";
 
 interface Props {
   label: string;
